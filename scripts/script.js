@@ -5,28 +5,50 @@ var noErrorColor = "#ffffff";
 
 function validate() {
 
-    return checkName() & checkPassword() & checkAddress() & checkEmail() & checkState();
+    return checkEmail() & checkGender() & checkFirstName() & checkLastName() & checkPassword() & checkDOB();
 
 }
 
-function checkName() {
+function checkFirstName() {
     // Letter format for name
     var justLetters = /^[a-zA-Z]*$/;
     //Store the name field objects into variables ...
-    var name = document.forms["myForm"]["surname"];
+    var name = document.forms["myForm"]["first-name"];
     //Store the Confimation Message Object ...                
-    var message = document.getElementById('surnameConfirmMessage');
+    var message = document.getElementById('first-nameConfirmMessage');
 
     if (name.value == "") {
         name.style.backgroundColor = errorColour;
         message.style.color = errorColour;
-        message.innerHTML = "Enter a name!";
+        message.innerHTML = "You must enter a first name!";
         return false;
     } else if (!justLetters.test(name.value)) {
         name.style.backgroundColor = errorColour;
         message.style.color = errorColour;
-        message.innerHTML = "Enter your surname just using letters!";
-        console.log("not Valid");
+        message.innerHTML = "Enter your first name just using letters!";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function checkLastName() {
+    // Letter format for name
+    var justLetters = /^[a-zA-Z]*$/;
+    //Store the name field objects into variables ...
+    var name = document.forms["myForm"]["last-name"];
+    //Store the Confimation Message Object ...                
+    var message = document.getElementById('last-nameConfirmMessage');
+
+    if (name.value == "") {
+        name.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "You must enter a first name!";
+        return false;
+    } else if (!justLetters.test(name.value)) {
+        name.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "Enter your last name just using letters!";
         return false;
     } else {
         return true;
@@ -44,29 +66,6 @@ function resetErrorState(htmlElementName, confirmMessageID) {
     message.innerHTML = "";
 }
 
-function checkAddress() {
-    // Letter format for name
-    var NumbersLettersLetters = /^[\d]+\s[A-z]+\s[A-z]+$/;
-    //Store the name field objects into variables ...
-    var address = document.forms["myForm"]["address"];
-    //Store the Confimation Message Object ...                
-    var message = document.getElementById('addressConfirmMessage');
-
-    if (address.value == "") {
-        address.style.backgroundColor = errorColour;
-        message.style.color = errorColour;
-        message.innerHTML = "Enter an address.";
-        return false;
-    } else if (!NumbersLettersLetters.test(address.value)) {
-        address.style.backgroundColor = errorColour;
-        message.style.color = errorColour;
-        message.innerHTML = "Enter a valid address. Numbers Letters Letters!";
-        return false;
-    } else {
-        return true;
-    }
-}
-
 function checkEmail() {
     // Letter format for name
     var validEmail = /^[a-z][a-zA-Z0-9_.]*(\.[a-zA-Z][a-zA-Z0-9_.]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/;
@@ -78,7 +77,7 @@ function checkEmail() {
     if (email.value == "") {
         email.style.backgroundColor = errorColour;
         message.style.color = errorColour;
-        message.innerHTML = "Enter an email!";
+        message.innerHTML = "You must enter an email!";
         return false;
     } else if (!validEmail.test(email.value)) {
         email.style.backgroundColor = errorColour;
@@ -90,14 +89,37 @@ function checkEmail() {
     }
 }
 
-function checkState() {
-    //Store the state field objects into variables ...
-    var state = document.forms["myForm"]["state"];
+function checkDOB() {
+    // Letter format for name
+    var validDOB = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+    //Store the name field objects into variables ...
+    var dob = document.forms["myForm"]["dob"];
     //Store the Confimation Message Object ...                
-    var message = document.getElementById('stateConfirmMessage');
+    var message = document.getElementById('dobConfirmMessage');
 
-    if (state.value == "DEFAULT") {
-        message.innerHTML = "You must select a state!";
+    if (dob.value == "") {
+        dob.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "You must enter a date of birth!";
+        return false;
+    } else if (!dob.test(dob.value)) {
+        email.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "Date of birth needs to be in the format: dd/mm/yyyy";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function checkGender() {
+    //Store the state field objects into variables ...
+    var gender = document.forms["myForm"]["gender"];
+    //Store the Confimation Message Object ...                
+    var message = document.getElementById('genderConfirmMessage');
+
+    if (gender.value == "DEFAULT") {
+        message.innerHTML = "You must select a gender!";
         message.style.color = errorColour;
         return false;
     } else return true;
@@ -106,10 +128,10 @@ function checkState() {
 
 function checkPassword() {
     //Store the password field objects into variables ...
-    var pass1 = document.getElementById('pass1');
-    var pass2 = document.getElementById('pass2');    
+    var pass1 = document.getElementById('password1');
+    var pass2 = document.getElementById('password2');    
     //Store the Confimation Message Object ...                
-    var message = document.getElementById('confirmMessage');
+    var message = document.getElementById('passwordConfirmMessage');
 
     //Compare the values in the password field 
     //and the confirmation field
@@ -117,7 +139,7 @@ function checkPassword() {
         pass1.style.backgroundColor = errorColour;
         pass2.style.backgroundColor = errorColour;
         message.style.color = errorColour;
-        message.innerHTML = "Enter a password!";
+        message.innerHTML = "You must enter a password!";
         return false;
     } else if (pass1.value == pass2.value) {
         //The passwords match. 

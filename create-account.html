@@ -6,7 +6,7 @@
     <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Park Search - Login Page</title>
+    <title>Park Search - Create Account Page</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -16,11 +16,15 @@
 
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
 
-
     <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- JS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="text/javascript" src="scripts/script.js"></script>
+
 
 </head>
 
@@ -53,43 +57,58 @@
 
         <h3>Create an account</h3>
 
-        <form>
+        <form name="myForm" method="get">
             <div class="row">
                 <div class="two columns">
                     <label for="first-name">First Name</label>
-                    <input type="text" placeholder="John" id="first-name" /><br>
+                    <input type="text" placeholder="John" name="first-name" onkeypress="resetErrorState('first-name', 'first-nameConfirmMessage')" />
+                    <br>
+                    <span id="first-nameConfirmMessage"></span>
+
 
                     <label for="last-name">Last Name</label>
-                    <input type="text" placeholder="Citizen" id="last-name" /><br>
+                    <input type="text" placeholder="Citizen" name="last-name" onkeypress="resetErrorState('last-name', 'last-nameConfirmMessage')" />
+                    <br>
+                    <span id="last-nameConfirmMessage"></span>
 
                     <label for="dob">Date of Birth (dd/mm/yyyy)</label>
-                    <input type="text" placeholder="dd/mm/yyyy" id="dob" /><br>
+                    <input type="text" placeholder="dd/mm/yyyy" name="dob" onkeypress="resetErrorState('dob', 'dobConfirmMessage')"/>
+                    <br>
+                    <span id="dobConfirmMessage"></span>
 
                     <label for="email">Email</label>
-                    <input type="text" placeholder="email@example.com" id="email" /> <br>
+                    <input type="text" name="email" placeholder="email@example.com" name="email" onkeypress="resetErrorState('email', 'emailConfirmMessage')" />
+                    <br>
+                    <span id="emailConfirmMessage"></span>
 
                 </div>
 
                 <div class="two columns">
                     <label for="gender">Gender</label>
                     <select class="gender-select" name="gender" id="gender">
-                    <option value="" disabled selected style="display: none;">select</option>
+                    <option value="DEFAULT" disabled selected style="display: none;">select</option>
                     <option value="m">male</option>
                     <option value="f">female</option>
-                </select><br>
+                </select></select>
+                    <br>
+                    <span id="genderConfirmMessage"></span>
 
-                    <label for="gender">Password</label>
-                    <input type="password" placeholder="password" id="password1" /><br>
-                    <input type="password" placeholder="confirm password" id="password2" /><br>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="password" id="password1" onkeypress="resetErrorState('password', 'passwordConfirmMessage')" />
+                    <br>
 
+                    <input type="password" name="confirm-password" placeholder="confirm password" id="password2" onkeypress="resetErrorState('confirm-password', 'passwordConfirmMessage')" />
+                    <br>
+                    <span id="passwordConfirmMessage"></span>
 
+                    <br>
                     <input type="checkbox" name="subscribe" value="subscribe">Subscribe to the weekly Park Search newsletter to receive
                     <br>the latest updates about your favourite parks.
                 </div>
             </div>
 
             <div class="one column">
-                <input type="submit" value="Submit">
+                <input type="button" onclick="validate()" value="Submit">
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
             </div>
 
