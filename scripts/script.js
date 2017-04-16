@@ -43,7 +43,7 @@ function checkLastName() {
     if (name.value == "") {
         name.style.backgroundColor = errorColour;
         message.style.color = errorColour;
-        message.innerHTML = "You must enter a first name!";
+        message.innerHTML = "You must enter a last name!";
         return false;
     } else if (!justLetters.test(name.value)) {
         name.style.backgroundColor = errorColour;
