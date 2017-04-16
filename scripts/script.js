@@ -102,7 +102,7 @@ function checkDOB() {
         message.style.color = errorColour;
         message.innerHTML = "You must enter a date of birth!";
         return false;
-    } else if (!dob.test(dob.value)) {
+    } else if (!validDOB.test(dob.value)) {
         email.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "Date of birth needs to be in the format: dd/mm/yyyy";
