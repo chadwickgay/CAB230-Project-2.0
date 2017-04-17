@@ -137,24 +137,32 @@ function isValidDate(textToValidate) {
 }
 
 function checkDOB() {
-    //Store the name field objects into variables ...
+    //Store the DOB field objects into variables ...
     var dob = document.forms["myForm"]["dob"];
+    // oldest age allowed as valid DOB
+    var oldestAge = 120;
+    // current year
+    var currentYear = new Date().getFullYear();
     //Store the Confimation Message Object ...                
     var message = document.getElementById('dobConfirmMessage');
 
+    // If DOB field empty
     if (dob.value == "") {
         dob.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "You must enter a date of birth!";
         return false;
     }
+    
+    // Check for valid DOB
 	var validDob = isValidDate(dob.value);
-	if (validDob == false) {
+	
+    if (validDob == false) {
 		dob.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "Date of birth needs to be in the format: dd/mm/yyyy";
         return false;
-	} else if (validDob > (new Date().getFullYear() - 120) && validDob <= new Date().getFullYear()) {
+	} else if (validDob > (currentYear - oldestAge) && validDob <= currentYear) {
         return true;
     } else {
 		dob.style.backgroundColor = errorColour;
@@ -212,5 +220,3 @@ function checkPassword() {
         return false;
     }
 }
-
-//With onchange the error message disappears when you have finished typing, whereas with onkeypress it disappears as soon as you enter your first character.
