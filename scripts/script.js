@@ -9,6 +9,8 @@ function validate() {
 
 }
 
+// These functions aren't needed if we just use an update Regex query (see below)
+
 function isNumeric(textToValidate) {
 	return /^\d+$/.test(textToValidate);
 }
@@ -30,9 +32,25 @@ function isNumOfWords(textToValidate) {
 		}
 	}
 	return words.length;
-}
+} 
+
+// end uneeded functions
+
+
+// I have updated the checkFirstName so you can see it working / test it.
+// Seems simpler to use 1 func, rather than 4 to achieve same thing
 
 function checkFirstName() {
+    // updated Regex query to allow for spaces/hyphen/period as part of name 
+    validNameFormat = /^[a-zA-Z \,\.\'\-]+$/; 
+    
+    /* valid examples
+    
+    Mathias d'Arras
+    Martin Luther King, Jr.
+    Hector Sausage-Hausen
+    
+    */
     
     //Store the name field objects into variables ...
     var name = document.forms["myForm"]["first-name"];
@@ -44,7 +62,7 @@ function checkFirstName() {
         message.style.color = errorColour;
         message.innerHTML = "You must enter a first name!";
         return false;
-	} else if (isNumOfWords(name.value) <= 0) {
+	} else if (!validNameFormat.test(name.value)) {
         name.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "Enter your first name just using letters!";
