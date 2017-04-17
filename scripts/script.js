@@ -33,8 +33,7 @@ function isNumOfWords(textToValidate) {
 }
 
 function checkFirstName() {
-    // Letter format for name
-    var justLetters = /^[a-zA-Z]*$/;
+    
     //Store the name field objects into variables ...
     var name = document.forms["myForm"]["first-name"];
     //Store the Confimation Message Object ...                
@@ -56,8 +55,7 @@ function checkFirstName() {
 }
 
 function checkLastName() {
-    // Letter format for name
-    var justLetters = /^[a-zA-Z]*$/;
+
     //Store the name field objects into variables ...
     var name = document.forms["myForm"]["last-name"];
     //Store the Confimation Message Object ...                
