@@ -9,6 +9,29 @@ function validate() {
 
 }
 
+function isNumeric(textToValidate) {
+	return /^\d+$/.test(textToValidate);
+}
+
+function isAlphabeticOnly(textToValidate) {
+	return /^[a-zA-Z\-]+$/.test(textToValidate);
+}
+
+//returns the number of valid words in string.
+//returns the index (starts from 1) of first invalid word in sentence if any.
+function isNumOfWords(textToValidate) {
+	var words = textToValidate.split(' ');
+	if (textToValidate.length < 1 || words.length < 1) {
+		return 0;
+	}
+	for (var i = 0; i < words.length; i++) {
+		if (!isAlphabeticOnly(words[i])) {
+			return -1 * (i+1);
+		}
+	}
+	return words.length;
+}
+
 function checkFirstName() {
     // Letter format for name
     var justLetters = /^[a-zA-Z]*$/;
@@ -22,7 +45,7 @@ function checkFirstName() {
         message.style.color = errorColour;
         message.innerHTML = "You must enter a first name!";
         return false;
-    } else if (!justLetters.test(name.value)) {
+	} else if (isNumOfWords(name.value) <= 0) {
         name.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "Enter your first name just using letters!";
@@ -45,7 +68,7 @@ function checkLastName() {
         message.style.color = errorColour;
         message.innerHTML = "You must enter a last name!";
         return false;
-    } else if (!justLetters.test(name.value)) {
+	} else if (isNumOfWords(name.value) <= 0) {
         name.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "Enter your last name just using letters!";
@@ -89,9 +112,31 @@ function checkEmail() {
     }
 }
 
+//valid input: d[d]/m[m]/yyyy slashes(/) or dots(.) work.
+//must be full year as anything less can be confusing.
+//returns the year of birth if valid, else false.
+function isValidDate(textToValidate) {
+	var parts = textToValidate.split('/');
+	if (parts.length != 3) {
+		parts = textToValidate.split('.');
+	}
+	if (parts.length != 3) {
+		return false;
+	}
+	if (parts[2].length != 4 || !isNumeric(parts[2])) {
+		return false;
+	}
+	//months indexing begins at 0.
+	//if numbers are negative it goes previous year/month etc.
+	//so just a month checks works.
+	var date = new Date(parts[2], parts[1] - 1, parts[0]);
+	if (date && (date.getMonth() + 1) == parts[1]) {
+		return date.getFullYear();
+	}
+	return false;
+}
+
 function checkDOB() {
-    // Letter format for name
-    var validDOB = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
     //Store the name field objects into variables ...
     var dob = document.forms["myForm"]["dob"];
     //Store the Confimation Message Object ...                
@@ -102,13 +147,20 @@ function checkDOB() {
         message.style.color = errorColour;
         message.innerHTML = "You must enter a date of birth!";
         return false;
-    } else if (!validDOB.test(dob.value)) {
-        email.style.backgroundColor = errorColour;
+    }
+	var validDob = isValidDate(dob.value);
+	if (validDob == false) {
+		dob.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "Date of birth needs to be in the format: dd/mm/yyyy";
         return false;
-    } else {
+	} else if (validDob > (new Date().getFullYear() - 120) && validDob <= new Date().getFullYear()) {
         return true;
+    } else {
+		dob.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "You must enter a valid date of birth!";
+        return false;
     }
 }
 
