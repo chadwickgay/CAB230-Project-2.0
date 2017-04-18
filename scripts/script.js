@@ -110,10 +110,11 @@ function checkDOB() {
     var oldestAge = 123; // oldest age ever recorded
     // current year
     var currentYear = new Date().getFullYear();
-    //Store the Confimation Message Object ...                
+    // Store the Confimation Message Object ...                
     var message = document.getElementById('dobConfirmMessage');
-    //Split date into parts and get the year entered
+    // Split date into parts 
     var parts = dob.value.split('/');
+    // Retrieve the year entered
     var yearEntered = parts[2];
 
     // If DOB field empty
