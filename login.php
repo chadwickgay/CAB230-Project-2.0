@@ -38,7 +38,7 @@
 
         <h3>Sign into existing account</h3>
 
-        <form>
+        <form method="POST">
             <div class="row">
                 <div class="two columns">
                     <label for="email">Email</label>
