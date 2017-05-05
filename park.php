@@ -26,53 +26,24 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Page Navigation
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Page Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('includes/nav.inc'); ?>
+    <?php include('includes/nav.inc'); ?>
 
-        <!-- Main Content
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <div class="row">
+    <div class="row">
 
-            <div class="two columns">
+        <div class="one columns">
 
-                <div class="park-information">
+            <h3>Park information</h3>
 
-                    <h4>Information</h4>
+            <div class="park-location">
 
-                    <p><strong>Street: </strong>Goss Road</p>
-
-                    <p><strong>Suburb:</strong> Virginia</p>
-
-                    <p><strong>Average Rating: </strong>&#9733;&#9733;&#9733;</p>
-
-                </div>
-
-                <div>
-                    <h4>Reviews</h4>
-                    <div>
-                        <h5>John Smith &#9733; &#9733; &#9733;</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac leo sit amet lectus placerat feugiat ut id nunc. Vestibulum mattis augue dolor, ac elementum tellus luctus laoreet.</p>
-                    </div>
-                    <div>
-                        <h5>Jane Smith &#9733;&#9733;&#9733;&#9733;</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-
-                    <div>
-                        <h5>Billy Joe &#9733; &#9733; &#9733; &#9733; &#9733;</h5>
-                        <p>Pellentesque nisi dolor, facilisis non arcu at, convallis dapibus quam. Cras mattis velit quis nisi tempus lobortis. Cras feugiat ornare lorem, ac volutpat felis sodales et. Curabitur lobortis, nunc a dignissim malesuada.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="two columns">
-
-                <h4>Location</h4>
                 <div id="park-map"></div>
                 <script>
                     function initMap() {
@@ -91,27 +62,91 @@
                     }
 
                 </script>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap">
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap">
 
 
                 </script>
 
                 <br>
 
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="two columns">
+
+                <div class="park-information">
+
+                    <h4>A.R.C.HILL PARK</h4>
+
+                    <h5>Street:</h5>
+                    <p>Goss Road</p>
+
+                    <h5>Suburb:</h5>
+                    <p> Virginia</p>
+
+                    <h5>Average Rating: </h5>
+                    <p class="star">&#9733;&#9733;&#9733;</p>
+
+                </div>
+
+
+            </div>
+
+            <div class="two columns">
+
                 <?php include('includes/addReview.inc'); ?>
 
             </div>
+
         </div>
-        <!-- Footer
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('includes/footer.inc'); ?>
+        <div class="row">
+
+            <div class="one column">
+
+                <div class="park-reviews">
+                    <h4>Reviews</h4>
+                    <div>
+                        <h5>John Smith <span class="star">&#9733; &#9733; &#9733;</span></h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac leo sit amet lectus
+                            placerat feugiat ut id nunc. Vestibulum mattis augue dolor, ac elementum tellus luctus
+                            laoreet.</p>
+                    </div>
+                    <div>
+                        <h5>Jane Smith <span class="star">&#9733;&#9733;&#9733;&#9733;</span></h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <div>
+                        <h5>Billy Joe <span class="star">&#9733; &#9733; &#9733; &#9733; &#9733;</span></h5>
+                        <p>Pellentesque nisi dolor, facilisis non arcu at, convallis dapibus quam. Cras mattis velit
+                            quis
+                            nisi tempus lobortis. Cras feugiat ornare lorem, ac volutpat felis sodales et. Curabitur
+                            lobortis, nunc a dignissim malesuada.</p>
+                    </div>
+                </div>
+
+            </div>
 
 
+        </div>
 
-        <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
     </div>
+    <!-- Footer
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+    <?php include('includes/footer.inc'); ?>
+
+
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</div>
 
 </body>
 

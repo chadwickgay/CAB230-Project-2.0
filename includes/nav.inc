@@ -8,7 +8,6 @@
                 <li><a href="create-account.php">Create Account</a></li>
                 <li><a href="login.php">Login</a></li>
                 <li><a href="results.php">Results</a></li>
-                <li><a href="park.php">Park</a></li>
             </ul>
         </nav>
     </div>
