@@ -1,0 +1,10 @@
+<nav>
+    <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="browse.php">Browse</a></li>
+        <li><a href="create-account.php">Create Account</a></li>
+        <li><a href="login.php">Login</a></li>
+        <li><a href="results.php">Results</a></li>
+        <li><a href="park.php">Park</a></li>
+    </ul>
+</nav>

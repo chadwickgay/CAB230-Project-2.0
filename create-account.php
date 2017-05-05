@@ -39,16 +39,7 @@
             <div class="header">
                 <!-- FIX THIS -->
                 <h1>Park Search</h1>
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="browse.html">Browse</a></li>
-                        <li><a href="create-account.html">Create Account</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="results.html">Results</a></li>
-                        <li><a href="park.html">Park</a></li>
-                    </ul>
-                </nav>
+                <?php include('includes/nav.inc'); ?>
             </div>
         </header>
 
