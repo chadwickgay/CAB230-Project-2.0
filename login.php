@@ -6,7 +6,7 @@
     <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Park Search - Index Page</title>
+    <title>Park Search - Login Page</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -48,29 +48,38 @@
             </div>
         </header>
 
-
         <!-- Main Content
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <div id="hero-image">
-            <div>
-                <h2><strong>A simple, easy</strong><br/> way to find parks near you.</h2>
-                <a href="browse.html" class="button-hero">Get Started</a>
+        <h3>Sign into existing account</h3>
+
+        <form>
+            <div class="row">
+                <div class="two columns">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" placeholder="email address" />
+                </div>
+
+                <div class="two columns">
+                    <label for="gender">Password</label>
+                    <input type="password" id="gender" placeholder="password" />
+                </div>
             </div>
-        </div>
+
+            <div class="one column">
+                <input type="submit" value="Submit">
+                <p class="message">Not registered? <a href="create-account.html">Create an account</a></p>
+            </div>
+        </form>
 
 
         <!-- Footer
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <footer class="one column">
-            <p>Copyright &copy; Chadwick Gay | Tom Deakin | Kenneth Koefler</p>
-        </footer>
-
+        <?php include('includes/footer.inc'); ?>
 
         <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
     </div>
 
 
