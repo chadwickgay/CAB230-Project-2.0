@@ -42,10 +42,32 @@
 
     <h3>Create an account</h3>
 
-    <?php include('includes/createAccountForm.inc'); ?>
+    <?php
+    $errors = array();
+    if (isset($_POST['email'])) {
+        require 'includes/validate.inc';
+        validateEmail($errors, $_POST, 'email');
+        validateFirstName($errors, $_POST, 'first-name');
+        validateLastName($errors, $_POST, 'last-name');
+        if ($errors) {
+            ## want to put a red box around this output to highlight the errors
+            echo '<h5>Invalid, correct the following errors:</h5>';
+            foreach ($errors as $field => $error) {
+                echo "$error<br>";
+            }
+            // redisplay the form
+            include 'includes/accountForm.inc';
+        } else {
+            echo 'Form submitted successfully with no errors. Great success!';
+        }
+    } else {
+        include 'includes/accountForm.inc';
+    }
+    ?>
+
 
     <div class="one column">
-        <input type="button" onclick="validate()" value="Submit">
+
         <p class="message">Already registered? <a href="login.html">Sign In</a></p>
     </div>
 

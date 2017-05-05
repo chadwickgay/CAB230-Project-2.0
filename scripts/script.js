@@ -5,9 +5,13 @@ var noErrorColor = "#ffffff";
 
 function validate() {
 
-    return checkEmail("createAccount") & checkGender("createAccount") & checkFirstName("createAccount")
-        & checkLastName("createAccount") & checkPassword() & checkDOB("createAccount");
-
+    if (checkEmail("createAccount") & checkGender("createAccount") & checkFirstName("createAccount")
+        & checkLastName("createAccount") & checkPassword() & checkDOB("createAccount")){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
@@ -59,17 +63,6 @@ function checkLastName(formName) {
     } else {
         return true;
     }
-}
-
-function resetErrorState(htmlElementName, ErrID, formName) {
-    //Store the element name into variable 
-    var elementName = document.forms[formName][htmlElementName];
-    //Store the Error Message Object ...                
-    var message = document.getElementById(ErrID);
-
-    elementName.style.backgroundColor = noErrorColor;
-    message.style.color = noErrorColor;
-    message.innerHTML = "";
 }
 
 function checkEmail(formName) {
@@ -193,4 +186,15 @@ function checkPassword() {
         message.innerHTML = "Passwords Do Not Match!"
         return false;
     }
+}
+
+function resetErrorState(htmlElementName, ErrID, formName) {
+    //Store the element name into variable
+    var elementName = document.forms[formName][htmlElementName];
+    //Store the Error Message Object ...                
+    var message = document.getElementById(ErrID);
+
+    elementName.style.backgroundColor = noErrorColor;
+    message.style.color = noErrorColor;
+    message.innerHTML = "";
 }

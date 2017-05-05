@@ -1,4 +1,4 @@
-<form name="createAccount" method="POST">
+<form name="createAccount" method="POST" action="../Project/create-account.php">
     <div class="row">
         <div class="two columns">
             <label for="first-name">First Name</label>
@@ -6,7 +6,6 @@
                    onkeypress="resetErrorState('first-name', 'first-nameErr', 'createAccount')"/>
             <br>
             <span id="first-nameErr"></span>
-
 
             <label for="last-name">Last Name</label>
             <input type="text" placeholder="Citizen" name="last-name" id="last-name"
@@ -54,6 +53,13 @@
             <input type="checkbox" name="subscribe" value="subscribe">Subscribe to the weekly Park Search newsletter
             to receive
             <br>the latest updates about your favourite parks.
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="one column">
+            <input name="register" type="submit" value="Submit" onclick="return validate()" >
         </div>
     </div>
 
