@@ -26,41 +26,34 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Page Header
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Page Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <header>
-            <div class="header">
-                <!-- FIX THIS -->
-                <h1>Park Search</h1>
-                <?php include('includes/nav.inc'); ?>
-            </div>
-        </header>
+    <?php include('includes/nav.inc'); ?>
 
+    <!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <!-- Main Content
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-        <div id="hero-image">
-            <div>
-                <h2><strong>A simple, easy</strong><br/> way to find parks near you.</h2>
-                <a href="browse.html" class="button-hero">Get Started</a>
-            </div>
+    <div id="hero-image">
+        <div>
+            <h2><strong>A simple, easy</strong><br/> way to find parks near you.</h2>
+            <a href="browse.html" class="button-hero">Get Started</a>
         </div>
-
-
-        <!-- Footer
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-        <?php include('includes/footer.inc'); ?>
-
-
-        <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
     </div>
+
+
+    <!-- Footer
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+    <?php include('includes/footer.inc'); ?>
+
+
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+</div>
 
 
 </body>

@@ -32,16 +32,10 @@
 
     <div class="container">
 
-        <!-- Page Header
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <!-- Page Navigation
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <header>
-            <div class="header">
-                <!-- FIX THIS -->
-                <h1>Park Search</h1>
-                <?php include('includes/nav.inc'); ?>
-            </div>
-        </header>
+        <?php include('includes/nav.inc'); ?>
 
         <!-- Main Content
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
