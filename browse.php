@@ -16,7 +16,6 @@
 
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
 
-
     <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/normalize.css">
@@ -88,12 +87,9 @@
 
         <?php include('includes/footer.inc'); ?>
 
-
-
         <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     </div>
-
 
 </body>
 
