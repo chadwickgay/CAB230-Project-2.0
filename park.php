@@ -96,7 +96,31 @@
 
             <div class="two columns">
 
-                <?php include('includes/addReview.inc'); ?>
+                <?php
+                $errors = array();
+                if (isset($_POST['txtcomment'])) {
+                    require 'includes/validate.inc';
+                    validateReview($errors, $_POST, 'txtcomment');
+
+                    if ($errors) {
+                        ## want to put a red box around this output to highlight the errors
+                        echo '<div class="validation">';
+                        echo '<h5>Invalid submission, correct the following errors:</h5>';
+                        echo '<ul>';
+                        foreach ($errors as $field => $error) {
+                            echo "<li>$error</li>";
+                        }
+                        echo '</ul>';
+                        echo '</div>';
+                        // redisplay the form
+                        include 'includes/addReview.inc';
+                    } else {
+                        echo 'Form submitted successfully with no errors. Great success!';
+                    }
+                } else {
+                    include 'includes/addReview.inc';
+                }
+                ?>
 
             </div>
 

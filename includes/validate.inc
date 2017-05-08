@@ -24,6 +24,15 @@ function validateFirstName(&$errors, $field_list, $field_name) {
     }
 }
 
+function validateReview(&$errors, $field_list, $field_name) {
+    $pattern = '/^[a-zA-Z0-9 -]+$/';
+    if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
+        $errors[$field_name] = 'Review comment is required';
+    } else if (!preg_match($pattern, $field_list[$field_name])) {
+        $errors[$field_name] = 'Review comment can only be letters, numbers, hypens and spaces';
+    }
+}
+
 function validateLastName(&$errors, $field_list, $field_name) {
     $pattern = '/^[a-zA-Z -]+$/';
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {

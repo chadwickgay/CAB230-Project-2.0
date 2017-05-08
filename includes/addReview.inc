@@ -2,7 +2,7 @@
 
     <h4>Enter your review</h4>
 
-    <form method="POST">
+    <form method="POST" action="../Project/park.php">
 
         <div class="park-review">
 
@@ -20,7 +20,9 @@
                 <label for="rating1">&#9733;</label>
             </div>
             <br>
-            <textarea cols="50" rows="4" name="review-text" placeholder="Enter your review here."></textarea>
+            <textarea cols="50" rows="4" name="txtcomment" placeholder="Enter your review here."></textarea>
+
+
         </div>
         <input type="submit" value="Submit">
     </form>
