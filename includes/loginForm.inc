@@ -16,6 +16,8 @@
 
     <div class="one column">
         <input type="submit" value="Submit" onclick="return validateLogin()">
-        <p class="message">Not registered? <a href="create-account.html">Create an account</a></p>
+
     </div>
 </form>
+
+<p class="message">Not registered? <a href="create-account.php">Create an account</a></p>

@@ -64,3 +64,7 @@
     </div>
 
 </form>
+
+<div class="one column">
+    <p class="message">Already registered? <a href="login.php">Sign In</a></p>
+</div>

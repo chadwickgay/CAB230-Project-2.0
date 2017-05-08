@@ -65,10 +65,6 @@
     ?>
 
 
-    <div class="one column">
-        <p class="message">Already registered? <a href="login.html">Sign In</a></p>
-    </div>
-
     <!-- Footer
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
