@@ -35,7 +35,31 @@
 
         <h3>Sign into existing account</h3>
 
-        <?php include('includes/loginForm.inc'); ?>
+        <?php
+        $errors = array();
+        if (isset($_POST['email'])) {
+            require 'includes/validate.inc';
+            validateEmail($errors, $_POST, 'email');
+
+            if ($errors) {
+                ## want to put a red box around this output to highlight the errors
+                echo '<div class="validation">';
+                echo '<h5>Invalid submission, correct the following errors:</h5>';
+                echo '<ul>';
+                foreach ($errors as $field => $error) {
+                    echo "<li>$error</li>";
+                }
+                echo '</ul>';
+                echo '</div>';
+                // redisplay the form
+                include 'includes/loginForm.inc';
+            } else {
+                echo 'Form submitted successfully with no errors. Great success!';
+            }
+        } else {
+            include 'includes/loginForm.inc';
+        }
+        ?>
 
 
         <!-- Footer
