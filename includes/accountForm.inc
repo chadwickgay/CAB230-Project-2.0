@@ -59,7 +59,7 @@
 
     <div class="row">
         <div class="one column">
-            <input name="register" type="submit" value="Submit" onclick="return validate()" >
+            <input name="register" type="submit" value="Submit" onclick="return validateCreateAccount()" >
         </div>
     </div>
 

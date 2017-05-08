@@ -22,6 +22,11 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="text/javascript" src="scripts/script.js"></script>
+
+
 </head>
 
 <body>
@@ -38,24 +43,7 @@
 
         <h3>Sign into existing account</h3>
 
-        <form method="POST">
-            <div class="row">
-                <div class="two columns">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" placeholder="email address" />
-                </div>
-
-                <div class="two columns">
-                    <label for="gender">Password</label>
-                    <input type="password" id="gender" placeholder="password" />
-                </div>
-            </div>
-
-            <div class="one column">
-                <input type="submit" value="Submit">
-                <p class="message">Not registered? <a href="create-account.html">Create an account</a></p>
-            </div>
-        </form>
+        <?php include('includes/loginForm.inc'); ?>
 
 
         <!-- Footer

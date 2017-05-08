@@ -3,10 +3,20 @@ var successColour = "#66cc66";
 var errorColour = "#ff6666";
 var noErrorColor = "#ffffff";
 
-function validate() {
+function validateCreateAccount() {
 
-    if (checkEmail("createAccount") & checkGender("createAccount") & checkFirstName("createAccount")
-        & checkLastName("createAccount") & checkPassword() & checkDOB("createAccount")){
+    if (validateEmail("createAccount") & validateGender("createAccount") & validateFirstName("createAccount")
+        & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function validateLogin() {
+
+    if (validateEmail("login")){
         return true;
     }
     else {
@@ -15,10 +25,10 @@ function validate() {
 }
 
 
-function checkFirstName(formName) {
+function validateFirstName(formName) {
     // Format for valid name
     // Allows spaces/hyphen/period as part of name
-    validNameFormat = /^[a-zA-Z ,.'\-]+$/;
+    var validNameFormat = /^[a-zA-Z ,.'\-]+$/;
 
     //Store the name field objects into variables ...
     var name = document.forms[formName]["first-name"];
@@ -40,10 +50,10 @@ function checkFirstName(formName) {
     }
 }
 
-function checkLastName(formName) {
+function validateLastName(formName) {
     // Format for valid name
     // Allows spaces/hyphen/period as part of name
-    validNameFormat = /^[a-zA-Z \,\.\'\-]+$/;
+    var validNameFormat = /^[a-zA-Z \,\.\'\-]+$/;
 
     //Store the name field objects into variables ...
     var name = document.forms[formName]["last-name"];
@@ -65,7 +75,7 @@ function checkLastName(formName) {
     }
 }
 
-function checkEmail(formName) {
+function validateEmail(formName) {
     // Format for valid email address
     // Allows letters, numbers, hypens, underscores and periods in address
     // Must have word followed by @ domain name . com
@@ -91,7 +101,7 @@ function checkEmail(formName) {
     }
 }
 
-function checkDOB(formName) {
+function validateDOB(formName) {
     // Format for valid DOB
     // Checks basic format - e.g 01/01/2010 is valid. 
     // Checks number of days in month - e.g. 44/05/2017 is invalid.
@@ -137,7 +147,7 @@ function checkDOB(formName) {
     }
 }
 
-function checkGender(formName) {
+function validateGender(formName) {
     //Store the gender field objects into variables ...
     var gender = document.forms[formName]["gender"];
     //Store the Error Message Object ...                
@@ -153,10 +163,10 @@ function checkGender(formName) {
 
 }
 
-function checkPassword() {
+function validatePassword() {
     //Store the password field objects into variables ...
     var pass1 = document.getElementById('password1');
-    var pass2 = document.getElementById('password2');    
+    var pass2 = document.getElementById('password2');
     //Store the Error Message Object ...                
     var message = document.getElementById('passwordErr');
 
