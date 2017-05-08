@@ -51,10 +51,14 @@
         validateLastName($errors, $_POST, 'last-name');
         if ($errors) {
             ## want to put a red box around this output to highlight the errors
+            echo '<div class="validation">';
             echo '<h5>Invalid, correct the following errors:</h5>';
+            echo '<ul>';
             foreach ($errors as $field => $error) {
-                echo "$error<br>";
+                echo "<li>$error</li>";
             }
+            echo '</ul>';
+            echo '</div>';
             // redisplay the form
             include 'includes/accountForm.inc';
         } else {

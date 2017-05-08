@@ -18,7 +18,6 @@
     box-sizing: border-box;
 }
 
-
 /* Container
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -319,6 +318,21 @@ label>.label-body {
     font-weight: normal;
 }
 
+/* Errors
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.validation{
+
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    color: #D63301;
+    background-color: #FFCCBA;
+    padding: 10px;
+
+    width:93%;
+
+}
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -435,4 +449,9 @@ footer {
     text-align: center;
     margin-top: 10px;
 }
+
+
+
+
+
 

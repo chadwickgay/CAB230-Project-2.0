@@ -2,25 +2,25 @@
     <div class="row">
         <div class="two columns">
             <label for="first-name">First Name</label>
-            <input type="text" placeholder="John" name="first-name" id="first-name"
+            <input type="text" placeholder="John" name="first-name" id="first-name" value="<?= $_POST['first-name'] ?? ''; ?>"
                    onkeypress="resetErrorState('first-name', 'first-nameErr', 'createAccount')"/>
             <br>
             <span id="first-nameErr"></span>
 
             <label for="last-name">Last Name</label>
-            <input type="text" placeholder="Citizen" name="last-name" id="last-name"
+            <input type="text" placeholder="Citizen" name="last-name" id="last-name" value="<?= $_POST['last-name'] ?? ''; ?>"
                    onkeypress="resetErrorState('last-name', 'last-nameErr', 'createAccount')"/>
             <br>
             <span id="last-nameErr"></span>
 
             <label for="dob">Date of Birth (dd/mm/yyyy)</label>
-            <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy"
+            <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" value="<?= $_POST['dob'] ?? ''; ?>"
                    onkeypress="resetErrorState('dob', 'dobErr', 'createAccount')"/>
             <br>
             <span id="dobErr"></span>
 
             <label for="email">Email</label>
-            <input type="text" name="email" id="email" placeholder="email@example.com"
+            <input type="text" name="email" id="email" placeholder="email@example.com" value="<?= $_POST['email'] ?? ''; ?>"
                    onkeypress="resetErrorState('email', 'emailErr', 'createAccount')"/>
             <br>
             <span id="emailErr"></span>
