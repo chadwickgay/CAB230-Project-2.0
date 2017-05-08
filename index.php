@@ -36,7 +36,7 @@
     <div id="hero-image">
         <div>
             <h2><strong>A simple, easy</strong><br/> way to find parks near you.</h2>
-            <a href="browse.html" class="button-hero">Get Started</a>
+            <a href="browse.php" class="button-hero">Get Started</a>
         </div>
     </div>
 
