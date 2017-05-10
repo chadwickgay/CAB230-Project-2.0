@@ -24,6 +24,16 @@ function validateLogin() {
     }
 }
 
+function validateReview() {
+
+    if (validateComment("park-review")){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 
 function validateFirstName(formName) {
     // Format for valid name
@@ -45,7 +55,13 @@ function validateFirstName(formName) {
         message.style.color = errorColour;
         message.innerHTML = "Enter your first name just using letters!";
         return false;
-    } else {
+    } else if (name.value.length < 2 || name.value.length > 20){
+        name.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "First name must be between 2 and 20 characters long.";
+        return false;
+    }
+    else {
         return true;
     }
 }
@@ -70,7 +86,13 @@ function validateLastName(formName) {
         message.style.color = errorColour;
         message.innerHTML = "Enter your last name just using letters!";
         return false;
-    } else {
+    } else if (name.value.length < 2 || name.value.length > 20){
+        name.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "Last name must be between 2 and 20 characters long.";
+        return false;
+    }
+    else {
         return true;
     }
 }
@@ -207,4 +229,37 @@ function resetErrorState(htmlElementName, ErrID, formName) {
     elementName.style.backgroundColor = noErrorColor;
     message.style.color = noErrorColor;
     message.innerHTML = "";
+}
+
+
+// Finish this
+function validateComment(formName) {
+    // Format for valid comment
+    // Allows characters, numbers spaces/hyphen/period as part of comment
+    var validCommentFormat = /^[a-zA-Z0-9 ,.'-]+$/;
+
+    //Store the name field objects into variables ...
+    var comment = document.forms[formName]["txtcomment"];
+    //Store the Error Message Object ...                
+    var message = document.getElementById('txtcommentErr');
+
+    if (comment.value == "") {
+        comment.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "You must enter a comment!";
+        return false;
+    } else if (!validCommentFormat.test(comment.value)) {
+        comment.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "Enter your last name just using letters!";
+        return false;
+    } else if (comment.value.length < 2 || comment.value.length > 256){
+        comment.style.backgroundColor = errorColour;
+        message.style.color = errorColour;
+        message.innerHTML = "Comment must be between 2 and 256 characters long.";
+        return false;
+    }
+    else {
+        return true;
+    }
 }
