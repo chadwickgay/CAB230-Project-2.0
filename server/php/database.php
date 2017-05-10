@@ -11,4 +11,18 @@ try {
     echo $e->getMessage();
 }
 
+function populateSuburbMenu() {
+    global $pdo;
+    $result = $pdo->query('SELECT DISTINCT Suburb FROM parksearch.parks ORDER BY Suburb;');
+    echo('
+        <select name="suburb" class="suburb-select">
+        <option disabled selected style="...">select</option>
+    ');
+
+    foreach($result as $suburb) {
+        echo '<option value="' . $suburb['Suburb'] . '">' . $suburb['Suburb'] . '</option>';
+    }
+        echo '</select>';
+}
+
 ?>

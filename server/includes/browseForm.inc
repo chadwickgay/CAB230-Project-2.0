@@ -8,13 +8,7 @@
             <input type="text" placeholder="Central Park" id="park-name" /><br>
 
             <label for="suburb">Suburb</label>
-            <select class="suburb-select" name="suburb" id="suburb">
-                <option value="" disabled selected style="display: none;">select</option>
-                <option value="1">7TH BRIGADE PARK</option>
-                <option value="2">A. J. JONES RECREATION RESERVE</option>
-                <option value="3">A.R.C.HILL PARK</option>
-                <option value="4">ABBEVILLE STREET PARK</option>
-            </select><br>
+            <?php populateSuburbMenu();?> <br>
 
 
         </div>
