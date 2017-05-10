@@ -57,8 +57,9 @@ function showAllParks() {
 function searchQuery($parkName, $suburb) {
 
     global $pdo;
-    
+
     $stmt = "SELECT DISTINCT ParkCode, Name, Street, Suburb FROM Parks WHERE Name LIKE '$parkName' OR Suburb LIKE '$suburb'";
+
 
     try
     {

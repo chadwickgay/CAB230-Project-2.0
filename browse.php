@@ -43,11 +43,12 @@ include("server/PHP/master.php");
 
         <?php
 
-        $parkName = isset($_GET["park-name"]) ? $_GET["park-name"] : '';
-        $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
-        // $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
+            $parkName = isset($_GET["park-name"]) ? $_GET["park-name"] : '';
+            $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
+            // $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
 
-        searchQuery($parkName, $suburb);
+            searchQuery($parkName, $suburb);
+
 
         ?>
 

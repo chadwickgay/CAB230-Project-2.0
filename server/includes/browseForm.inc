@@ -1,4 +1,4 @@
-<form>
+<form method="GET" action="../Project/browse.php" name="browse">
 
     <div class="row">
 
