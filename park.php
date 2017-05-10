@@ -36,7 +36,57 @@ include("server/PHP/master.php");
 
     <!-- Main Content
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	
+	<?php
+		
+		function executeQuery($Query) {
+			try {
+				$db_name = 'parksearch';
+				$db_username = 'parkuser';
+				$db_password = 'password';
+				$db_host = "localhost";
+				$pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_username, $db_password);
+				return $pdo->query($Query);
+			} catch (PDOException $e) {
+				echo $e->getMessage();
+			}
+			return false;
+		}
 
+		function echoStars($numberOfStars) {
+			echo '<span class="star">';
+			if ($numberOfStars < 0) {
+				echo "No Rating";
+			} else {
+				for ($i = $numberOfStars; $i > 0; $i--) {
+					echo "&#9733;";
+				}
+				for ($i = 5 - $numberOfStars; $i > 0; $i--) {
+					echo "&#9734;";
+				}
+			}
+			echo '</span>';
+		}
+		
+		$ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
+		$Park = array('ID' => -1, 'RatingAvg' => -1);
+		$Parks = executeQuery("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM parks WHERE ParkCode=\"$ParkCode\"");
+		if ($Parks != false && $Parks->rowCount()) {
+			$temp = $Parks->fetch();
+			if (gettype($temp) == gettype(array())) {
+				$Park = array_merge($Park, $temp);
+				$ParkRatings = executeQuery("SELECT ROUND(Avg(Rating),0) FROM reviews WHERE ParkID={$Park['ID']}");
+				if ($ParkRatings != false && $ParkRatings->rowCount()) {
+					$temp = $ParkRatings->fetch();
+					if (ctype_digit($temp[0])) {
+						$Park['RatingAvg'] = intval($temp[0]);
+					}
+				}
+			}
+		}
+		
+	?>
+	
     <div class="row">
 
         <div class="one columns">
@@ -44,33 +94,29 @@ include("server/PHP/master.php");
             <h3>Park information</h3>
 
             <div class="park-location">
-
-                <div id="park-map"></div>
-                <script>
-                    function initMap() {
-                        var location = {
-                            lat: -27.38006149,
-                            lng: 153.0387005
-                        };
-                        var map = new google.maps.Map(document.getElementById('park-map'), {
-                            zoom: 14,
-                            center: location
-                        });
-                        var marker = new google.maps.Marker({
-                            position: location,
-                            map: map
-                        });
-                    }
-
-                </script>
-                <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap">
-
-
-                </script>
-
-                <br>
-
+				<?php if ($Park['ID'] > 0) { ?>
+					<div id="park-map"></div>
+					<script>
+						function initMap() {
+							var location = {
+								lat: <?php echo $Park['Latitude']; ?>,
+								lng: <?php echo $Park['Longitude']; ?>
+							};
+							var map = new google.maps.Map(document.getElementById('park-map'), {
+								zoom: 14,
+								center: location
+							});
+							var marker = new google.maps.Marker({
+								position: location,
+								map: map
+							});
+						}
+					</script>
+					<script
+						async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap">
+					</script>
+					<br>
+				<?php } ?>
             </div>
 
 
@@ -81,18 +127,25 @@ include("server/PHP/master.php");
             <div class="two columns">
 
                 <div class="park-information">
+					<?php
+						if ($Park['ID'] > 0) {
+							echo '<h4>'.$Park['Name'].'</h4>';
 
-                    <h4>A.R.C.HILL PARK</h4>
+							echo '<h5>Street:</h5>';
+							echo '<p>'.$Park['Street'].'</p>';
 
-                    <h5>Street:</h5>
-                    <p>Goss Road</p>
+							echo '<h5>Suburb:</h5>';
+							echo '<p>'.$Park['Suburb'].'</p>';
 
-                    <h5>Suburb:</h5>
-                    <p> Virginia</p>
-
-                    <h5>Average Rating: </h5>
-                    <p class="star">&#9733;&#9733;&#9733;</p>
-
+							echo '<h5>Average Rating:</h5>';
+							echo '<p>';
+							echoStars($Park['RatingAvg']);
+							echo '</p>';
+							
+						} else {
+							echo '<h4>Unknown Park.</h4>';
+						}
+					?>
                 </div>
 
 
@@ -136,24 +189,28 @@ include("server/PHP/master.php");
 
                 <div class="park-reviews">
                     <h4>Reviews</h4>
-                    <div>
-                        <h5>John Smith <span class="star">&#9733; &#9733; &#9733;</span></h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac leo sit amet lectus
-                            placerat feugiat ut id nunc. Vestibulum mattis augue dolor, ac elementum tellus luctus
-                            laoreet.</p>
-                    </div>
-                    <div>
-                        <h5>Jane Smith <span class="star">&#9733;&#9733;&#9733;&#9733;</span></h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-
-                    <div>
-                        <h5>Billy Joe <span class="star">&#9733; &#9733; &#9733; &#9733; &#9733;</span></h5>
-                        <p>Pellentesque nisi dolor, facilisis non arcu at, convallis dapibus quam. Cras mattis velit
-                            quis
-                            nisi tempus lobortis. Cras feugiat ornare lorem, ac volutpat felis sodales et. Curabitur
-                            lobortis, nunc a dignissim malesuada.</p>
-                    </div>
+					<?php
+						$Reviews = array();
+						if ($Park['ID'] > 0) {
+							$Reviews2 = executeQuery("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Desc FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=\"{$Park['ID']}\" ORDER BY Rating DESC");
+							if ($Reviews2 != false && $Reviews2->rowCount()) {
+								$Reviews = $Reviews2;
+							}
+						}
+						if (count($Reviews) <= 0) {
+							echo '<div><h5>No reviews have been submitted for this park.</h5></div>';
+						}
+						else {
+							foreach ($Reviews as $Review) {
+								echo '<div>';
+								echo '<h5>'.$Review['FirstName'].' '.$Review['LastName'].' ';
+								echoStars($Review['Rating']);
+								echo '</h5>';
+								echo '<p>'.$Review['Desc'].'</p>';
+								echo '</div>';
+							}
+						}
+					?>
                 </div>
 
             </div>
