@@ -1,3 +1,8 @@
+
+<?php
+include("server/PHP/master.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +39,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
         <h3>Search results</h3>
-        <form class="container">
+        <div class="container">
 
             <div class="row">
 
@@ -65,6 +70,37 @@
                 </div>
                 
                 <div class="one columns">
+
+                    <?php
+                    $pdo = new PDO('mysql:host=localhost;dbname=parksearch', 'parkuser', 'password');
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    try
+                    {
+                        $result = $pdo->query('SELECT ParkCode, Name, Street, Suburb '.
+                            'FROM Parks ' .
+                            'LIMIT 10');
+                    }
+                    catch (PDOException $e)
+                    {
+                        echo $e->getMessage();
+                    }
+
+                    echo '<table>';
+
+                    echo '<tr>';
+                    echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
+                    echo '</tr>';
+
+                    foreach ($result as $park)
+                    {
+
+                        echo "<td>{$park['ParkCode']}</td><td>{$park['Name']}</td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
+                        echo '</tr>';
+                    }
+                    echo '</table>';
+                    ?>
+
+                    <!--
                     
                     <br><br>
 
@@ -111,7 +147,7 @@
                 </div>
 				<br>
 			</div>
-		</form>
+		</div> -->
 
         <!-- Footer
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
