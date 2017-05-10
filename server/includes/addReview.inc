@@ -7,7 +7,6 @@
         <div class="park-review">
 
             <div class="rating">
-
                 <input type="radio" id="rating5" name="rating">
                 <label for="rating5"> &#9733;</label>
                 <input type="radio" id="rating4" name="rating">
@@ -22,7 +21,6 @@
             <br>
             <textarea cols="50" rows="4" name="txtcomment" placeholder="Enter your review here."></textarea>
             <span id="txtcommentErr"></span>
-
 
         </div>
         <input type="submit" value="Submit" onclick="return validateReview()">

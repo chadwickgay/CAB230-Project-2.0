@@ -5,12 +5,12 @@
         <div class="two columns">
 
             <label for="park-name">Park Name</label>
-            <input type="text" placeholder="Central Park" id="park-name" /><br>
+            <input type="text" placeholder="Central Park" id="park-name" />
+            <br>
 
             <label for="suburb">Suburb</label>
-            <?php populateSuburbMenu();?> <br>
-
-
+            <?php populateSuburbMenu();?>
+            <br>
         </div>
 
         <div class="two columns">
@@ -23,7 +23,8 @@
                 <option value="1">&#9733; &#9733; &#9733;</option>
                 <option value="1">&#9733; &#9733; &#9733; &#9733;</option>
                 <option value="1">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-            </select><br>
+            </select>
+            <br>
 
             <label for="near-me">Use current location</label>
             <button id="near-me">Find parks near me</button>

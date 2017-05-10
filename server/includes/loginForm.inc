@@ -2,8 +2,7 @@
     <div class="row">
         <div class="two columns">
             <label for="email">Email</label>
-            <input name="email" type="text" id="email" placeholder="email@example.com"
-                   onkeypress="resetErrorState('email', 'emailErr', 'login')"/>
+            <input name="email" type="text" id="email" placeholder="email@example.com" onkeypress="resetErrorState('email', 'emailErr', 'login')" />
             <br>
             <span id="emailErr"></span>
         </div>
