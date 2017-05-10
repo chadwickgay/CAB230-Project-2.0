@@ -32,7 +32,7 @@ include("server/PHP/master.php");
     <!-- Page Navigation
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-    <?php include('includes/nav.inc'); ?>
+    <?php include('server/includes/nav.inc'); ?>
 
     <!-- Main Content
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -103,7 +103,7 @@ include("server/PHP/master.php");
                 <?php
                 $errors = array();
                 if (isset($_POST['txtcomment'])) {
-                    require 'includes/validate.inc';
+                    require 'server/includes/validate.inc';
                     validateReview($errors, $_POST, 'txtcomment');
 
                     if ($errors) {
@@ -117,12 +117,12 @@ include("server/PHP/master.php");
                         echo '</ul>';
                         echo '</div>';
                         // redisplay the form
-                        include 'includes/addReview.inc';
+                        include 'server/includes/addReview.inc';
                     } else {
                         echo 'Form submitted successfully with no errors. Great success!';
                     }
                 } else {
-                    include 'includes/addReview.inc';
+                    include 'server/includes/addReview.inc';
                 }
                 ?>
 

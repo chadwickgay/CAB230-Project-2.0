@@ -32,7 +32,7 @@ include("server/PHP/master.php");
         <!-- Page Navigation
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('includes/nav.inc'); ?>
+        <?php include('server/includes/nav.inc'); ?>
 
         <!-- Main Content
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -151,7 +151,7 @@ include("server/PHP/master.php");
         <!-- Footer
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('includes/footer.inc'); ?>
+        <?php include('server/includes/footer.inc'); ?>
 
 
         <!-- End Document

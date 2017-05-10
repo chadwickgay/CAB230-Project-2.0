@@ -32,7 +32,7 @@ include("server/PHP/master.php");
         <!-- Page Navigation
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('includes/nav.inc'); ?>
+        <?php include('server/includes/nav.inc'); ?>
 
         <!-- Main Content
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -42,7 +42,7 @@ include("server/PHP/master.php");
         <?php
         $errors = array();
         if (isset($_POST['email'])) {
-            require 'includes/validate.inc';
+            require 'server/includes/validate.inc';
             validateEmail($errors, $_POST, 'email');
 
             if ($errors) {
@@ -56,12 +56,12 @@ include("server/PHP/master.php");
                 echo '</ul>';
                 echo '</div>';
                 // redisplay the form
-                include 'includes/loginForm.inc';
+                include 'server/includes/loginForm.inc';
             } else {
                 echo 'Form submitted successfully with no errors. Great success!';
             }
         } else {
-            include 'includes/loginForm.inc';
+            include 'server/includes/loginForm.inc';
         }
         ?>
 
@@ -69,7 +69,7 @@ include("server/PHP/master.php");
         <!-- Footer
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('includes/footer.inc'); ?>
+        <?php include('server/includes/footer.inc'); ?>
 
         <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

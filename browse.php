@@ -32,20 +32,20 @@ include("server/PHP/master.php");
         <!-- Page Navigation
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('includes/nav.inc'); ?>
+        <?php include('server/includes/nav.inc'); ?>
 
         <!-- Main Content
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
         <h3>Browse for parks</h3>
 
-        <?php include('includes/browseForm.inc'); ?>
+        <?php include('server/includes/browseForm.inc'); ?>
 
 
         <!-- Footer
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('includes/footer.inc'); ?>
+        <?php include('server/includes/footer.inc'); ?>
 
         <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
