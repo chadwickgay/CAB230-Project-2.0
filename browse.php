@@ -41,6 +41,16 @@ include("server/PHP/master.php");
 
         <?php include('server/includes/browseForm.inc'); ?>
 
+        <?php
+
+        $parkName = isset($_GET["park-name"]) ? $_GET["park-name"] : '';
+        $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
+        // $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
+
+        searchQuery($parkName, $suburb);
+
+        ?>
+
 
         <!-- Footer
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

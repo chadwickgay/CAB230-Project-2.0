@@ -53,4 +53,35 @@ function showAllParks(){
     }
     echo '</table>';
 }
+
+function searchQuery($parkName, $suburb){
+
+    global $pdo;
+
+    try
+    {
+        $result = $pdo->query("SELECT DISTINCT ParkCode, Name, Street, Suburb FROM Parks WHERE Name LIKE '%{$parkName}%' OR Suburb LIKE '%{$suburb}%'");
+    }
+    catch (PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+
+    echo '<table>';
+
+    echo '<tr>';
+    echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
+    echo '</tr>';
+
+        foreach ($result as $park)
+        {
+            echo "<td>{$park['ParkCode']}</td><td>{$park['Name']}</td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
+            echo '</tr>';
+        }
+
+    echo '</table>';
+
+
+
+}
 ?>
