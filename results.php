@@ -1,4 +1,3 @@
-
 <?php
 include("server/PHP/master.php");
 ?>
@@ -73,7 +72,7 @@ include("server/PHP/master.php");
 
                     <?php
                     $pdo = new PDO('mysql:host=localhost;dbname=parksearch', 'parkuser', 'password');
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
                     try
                     {
                         $result = $pdo->query('SELECT ParkCode, Name, Street, Suburb '.

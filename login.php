@@ -1,3 +1,7 @@
+<?php
+include("server/PHP/master.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

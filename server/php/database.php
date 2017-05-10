@@ -2,7 +2,7 @@
 
 $db_name = 'parksearch';
 $db_username = 'parkuser';
-$db_password = 'password#77';
+$db_password = 'password';
 $db_host = "localhost";
 
 try {
@@ -11,6 +11,6 @@ try {
     echo $e->getMessage();
 }
 
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
 
