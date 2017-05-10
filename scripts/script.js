@@ -241,7 +241,6 @@ function setErrorState(inputName, errorField){
 
     errorField.style.color = errorColour;
 
-
 }
 
 function resetErrorState(htmlElementName, ErrID, formName) {
