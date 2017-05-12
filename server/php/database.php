@@ -74,6 +74,10 @@ function searchQuery($parkName, $suburb) {
         echo $ex->getMessage();
     }
 
+    outputSearchResults($results);
+}
+
+function outputSearchResults($results){
     echo '<table>';
 
     echo '<tr>';
@@ -88,4 +92,6 @@ function searchQuery($parkName, $suburb) {
 
     echo '</table>';
 }
+
 ?>
+
