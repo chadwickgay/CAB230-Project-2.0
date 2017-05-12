@@ -58,8 +58,13 @@ function searchQuery($parkName, $suburb) {
 
     global $pdo;
 
+    // Add ratings to the search
+    // Join reviews table
+
     try {
-        $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb FROM parksearch.parks WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
+        $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb 
+                FROM parksearch.parks 
+                WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':suburb', $suburb);
         $query->bindParam(':name', $parkName);
@@ -77,7 +82,7 @@ function searchQuery($parkName, $suburb) {
 
     foreach ($results as $park)
     {
-        echo "<td>{$park['ParkCode']}</td><td>{$park['Name']}</td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
+        echo "<td>{$park['ParkCode']}</td><td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a></td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
         echo '</tr>';
     }
 

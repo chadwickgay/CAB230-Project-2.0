@@ -47,10 +47,12 @@ include("server/PHP/master.php");
 
             $parkName = isset($_GET["park-name"]) ? $_GET["park-name"] : '';
             $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
-            // $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
+            $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
 
             // Execute searchQuery to search for all user inputs
             searchQuery($parkName, $suburb);
+
+            echo $rating;
         }
 
         ?>
