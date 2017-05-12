@@ -58,16 +58,15 @@ function searchQuery($parkName, $suburb) {
 
     global $pdo;
 
-    $stmt = "SELECT DISTINCT ParkCode, Name, Street, Suburb FROM Parks WHERE Name LIKE '$parkName' OR Suburb LIKE '$suburb'";
-
-
-    try
-    {
-        $result = $pdo->query($stmt);
-    }
-    catch (PDOException $e)
-    {
-        echo $e->getMessage();
+    try {
+        $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb FROM parksearch.parks WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':suburb', $suburb);
+        $query->bindParam(':name', $parkName);
+        $query->execute();
+        $results = $query->fetchAll();
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
     }
 
     echo '<table>';
@@ -76,7 +75,7 @@ function searchQuery($parkName, $suburb) {
     echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
     echo '</tr>';
 
-    foreach ($result as $park)
+    foreach ($results as $park)
     {
         echo "<td>{$park['ParkCode']}</td><td>{$park['Name']}</td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
         echo '</tr>';
