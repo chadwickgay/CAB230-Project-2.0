@@ -49,10 +49,8 @@ include("server/PHP/master.php");
             $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
             $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
 
-            // Execute searchQuery to search for all user inputs
-            searchQuery($parkName, $suburb);
-
-            echo $rating;
+            // Execute searchForParks to search for all user inputs & output results to page
+            searchForParks($parkName, $suburb);
         }
 
         ?>

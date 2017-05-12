@@ -54,7 +54,7 @@ function showAllParks() {
     echo '</table>';
 }
 
-function searchQuery($parkName, $suburb) {
+function searchForParks($parkName, $suburb) {
 
     global $pdo;
 
@@ -70,11 +70,13 @@ function searchQuery($parkName, $suburb) {
         $query->bindParam(':name', $parkName);
         $query->execute();
         $results = $query->fetchAll();
+
+        // Call outputSearchResults to output results table
+        outputSearchResults($results);
+
     } catch (PDOException $ex) {
         echo $ex->getMessage();
     }
-
-    outputSearchResults($results);
 }
 
 function outputSearchResults($results){
