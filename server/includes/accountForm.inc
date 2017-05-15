@@ -1,4 +1,4 @@
-<form name="createAccount" method="POST" action="../Project/create-account.php">
+<form name="createAccount" method="POST" action="create-account.php">
     <div class="row">
         <div class="two columns">
             <label for="first-name">First Name</label>

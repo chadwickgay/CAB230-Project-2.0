@@ -1,4 +1,4 @@
-<form method="POST" action="../Project/login.php" name="login">
+<form method="POST" action="login.php" name="login">
     <div class="row">
         <div class="two columns">
             <label for="email">Email</label>

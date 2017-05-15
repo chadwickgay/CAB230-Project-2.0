@@ -2,7 +2,7 @@
 
     <h4>Enter your review</h4>
 
-    <form method="POST" action="../Project/park.php" name="park-review">
+    <form method="POST" action="park.php" name="park-review">
 
         <div class="park-review">
 

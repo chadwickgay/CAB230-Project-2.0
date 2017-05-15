@@ -223,7 +223,7 @@ include("server/PHP/master.php");
     <!-- Footer
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-    <?php include('includes/footer.inc'); ?>
+    <?php include('server/includes/footer.inc'); ?>
 
 
     <!-- End Document
