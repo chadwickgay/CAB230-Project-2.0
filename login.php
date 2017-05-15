@@ -22,7 +22,7 @@ include("server/PHP/master.php");
 
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script type="text/javascript" src="scripts/script.js"></script>
+    <script type="text/javascript" src="scripts/validation.js"></script>
 </head>
 
 <body>

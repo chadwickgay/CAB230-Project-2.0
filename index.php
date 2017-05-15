@@ -22,7 +22,6 @@ include("server/PHP/master.php");
 
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script type="text/javascript" src="scripts/script.js"></script>
 </head>
 
 <body>
