@@ -1,7 +1,7 @@
 /*
-* Name: validation.js
-* Purpose: Contains the functions related to form validation
-*/
+ * Name: validation.js
+ * Purpose: Contains the functions related to form validation
+ */
 
 // Colours to be used for input/error confirmation
 var successColour = "#66cc66";
@@ -9,32 +9,25 @@ var errorColour = "#ff6666";
 var noErrorColor = "#ffffff";
 
 function validateCreateAccount() {
-
-    if (validateEmail("createAccount") & validateGender("createAccount") & validateFirstName("createAccount")
-        & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount")) {
+    if (validateEmail("createAccount") & validateGender("createAccount") & validateFirstName("createAccount") & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount")) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
 
 function validateLogin() {
-
-    if (validateEmail("login")){
+    if (validateEmail("login")) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
 
 function validateReview() {
-
-    if (validateComment("park-review")){
+    if (validateComment("park-review")) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -43,8 +36,10 @@ function validateFirstName(formName) {
     // Format for valid name
     // Allows spaces/hyphen/period as part of name
     var validNameFormat = /^[a-zA-Z ,.'\-]+$/;
+    
     //Store the name field objects into variables ...
     var name = document.forms[formName]["first-name"];
+    
     //Store the Error Message Object ...                
     var message = document.getElementById('first-nameErr');
 
@@ -56,12 +51,11 @@ function validateFirstName(formName) {
         setErrorState(name, message);
         message.innerHTML = "Enter your first name just using letters!";
         return false;
-    } else if (name.value.length < 2 || name.value.length > 20){
+    } else if (name.value.length < 2 || name.value.length > 20) {
         setErrorState(name, message);
         message.innerHTML = "First name must be between 2 and 20 characters long.";
         return false;
-    }
-    else {
+    } else {
         return true;
     }
 }
@@ -73,6 +67,7 @@ function validateLastName(formName) {
 
     //Store the name field objects into variables ...
     var name = document.forms[formName]["last-name"];
+    
     //Store the Error Message Object ...                
     var message = document.getElementById('last-nameErr');
 
@@ -84,12 +79,11 @@ function validateLastName(formName) {
         setErrorState(name, message);
         message.innerHTML = "Enter your last name just using letters!";
         return false;
-    } else if (name.value.length < 2 || name.value.length > 20){
+    } else if (name.value.length < 2 || name.value.length > 20) {
         setErrorState(name, message);
         message.innerHTML = "Last name must be between 2 and 20 characters long.";
         return false;
-    }
-    else {
+    } else {
         return true;
     }
 }
@@ -99,9 +93,11 @@ function validateEmail(formName) {
     // Allows letters, numbers, hypens, underscores and periods in address
     // Must have word followed by @ domain name . com
     // Valid example - email@example.com
+    
     var validEmail = /^[a-z][a-zA-Z0-9_.-]*(\.[a-zA-Z][a-zA-Z0-9_.-]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/;
     //Store the email field objects into variables ...
     var email = document.forms[formName]["email"];
+    
     //Store the Error Message Object ...                
     var message = document.getElementById('emailErr');
 
@@ -127,14 +123,19 @@ function validateDOB(formName) {
 
     // store the DOB field objects into variables
     var dob = document.forms[formName]["dob"];
+    
     // oldest age allowed as valid DOB
     var oldestAge = 123; // oldest age ever recorded
+    
     // current year
     var currentYear = new Date().getFullYear();
+    
     // Store the Error Message Object ...                
     var message = document.getElementById('dobErr');
+    
     // Split date into parts 
     var parts = dob.value.split('/');
+    
     // Retrieve the year entered
     var yearEntered = parts[2];
 
@@ -164,6 +165,7 @@ function validateDOB(formName) {
 function validateGender(formName) {
     //Store the gender field objects into variables ...
     var gender = document.forms[formName]["gender"];
+    
     //Store the Error Message Object ...                
     var message = document.getElementById('genderErr');
 
@@ -181,6 +183,7 @@ function validatePassword() {
     //Store the password field objects into variables ...
     var pass1 = document.getElementById('password1');
     var pass2 = document.getElementById('password2');
+    
     //Store the Error Message Object ...                
     var message = document.getElementById('passwordErr');
 
@@ -219,6 +222,7 @@ function validateComment(formName) {
 
     //Store the name field objects into variables ...
     var comment = document.forms[formName]["txtcomment"];
+    
     //Store the Error Message Object ...                
     var message = document.getElementById('txtcommentErr');
 
@@ -230,20 +234,17 @@ function validateComment(formName) {
         setErrorState(comment, message);
         message.innerHTML = "Enter your last name just using letters!";
         return false;
-    } else if (comment.value.length < 2 || comment.value.length > 256){
+    } else if (comment.value.length < 2 || comment.value.length > 256) {
         setErrorState(comment, message);
         message.innerHTML = "Comment must be between 2 and 256 characters long.";
         return false;
-    }
-    else {
+    } else {
         return true;
     }
 }
 
-function setErrorState(inputName, errorField){
-
+function setErrorState(inputName, errorField) {
     inputName.style.backgroundColor = errorColour;
-
     errorField.style.color = errorColour;
 
 }
@@ -251,6 +252,7 @@ function setErrorState(inputName, errorField){
 function resetErrorState(htmlElementName, ErrID, formName) {
     //Store the element name into variable
     var elementName = document.forms[formName][htmlElementName];
+    
     //Store the Error Message Object ...                
     var message = document.getElementById(ErrID);
 

@@ -23,6 +23,7 @@ include("server/PHP/master.php");
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="scripts/map.js"></script>
+    <script type="text/javascript" src="scripts/google.js"></script>
 </head>
 
 <body>
@@ -96,24 +97,11 @@ include("server/PHP/master.php");
             <div class="park-location">
 				<?php if ($Park['ID'] > 0) { ?>
 					<div id="park-map"></div>
-					<script>
-						function initMap() {
-							var location = {
-								lat: <?php echo $Park['Latitude']; ?>,
-								lng: <?php echo $Park['Longitude']; ?>
-							};
-							var map = new google.maps.Map(document.getElementById('park-map'), {
-								zoom: 14,
-								center: location
-							});
-							var marker = new google.maps.Marker({
-								position: location,
-								map: map
-							});
-						}
-					</script>
-					<script
-						async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap">
+					<script>                        
+                        var latitude = <?php echo $Park['Latitude']; ?>;                        
+                        var longitude = <?php echo $Park['Longitude']; ?>;
+                        
+                        initMap(latitude, longitude);
 					</script>
 					<br>
 				<?php } ?>
