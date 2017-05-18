@@ -2,17 +2,17 @@
     <div class="row">
         <div class="two columns">
             <label for="first-name">First Name</label>
-            <input type="text" placeholder="John" name="first-name" id="first-name" value="" onkeypress="resetErrorState('first-name', 'first-nameErr', 'createAccount')" />
+            <input type="text" placeholder="John" name="first-name" id="first-name" value="<?php= $_POST['first-name'] ?? ''; ?>" onkeypress="resetErrorState('first-name', 'first-nameErr', 'createAccount')" />
             <br>
             <span id="first-nameErr"></span>
 
             <label for="last-name">Last Name</label>
-            <input type="text" placeholder="Smith" name="last-name" id="last-name" value="" onkeypress="resetErrorState('last-name', 'last-nameErr', 'createAccount')" />
+            <input type="text" placeholder="Smith" name="last-name" id="last-name" value="<?php= $_POST['last-name'] ?? ''; ?>" onkeypress="resetErrorState('last-name', 'last-nameErr', 'createAccount')" />
             <br>
             <span id="last-nameErr"></span>
 
             <label for="dob">Date of Birth (dd/mm/yyyy)</label>
-            <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" value="" onkeypress="resetErrorState('dob', 'dobErr', 'createAccount')" />
+            <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" value="<?php= $_POST['dob'] ?? ''; ?>" onkeypress="resetErrorState('dob', 'dobErr', 'createAccount')" />
             <br>
             <span id="dobErr"></span>
 
