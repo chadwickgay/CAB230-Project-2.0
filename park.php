@@ -23,7 +23,8 @@ include("server/PHP/master.php");
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="scripts/map.js"></script>
-    <script type="text/javascript" src="scripts/google.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap"></script>
+
 </head>
 
 <body>
@@ -37,7 +38,7 @@ include("server/PHP/master.php");
 
     <!-- Main Content
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-	
+
 	<?php
 
 		function echoStars($numberOfStars) {
@@ -54,7 +55,7 @@ include("server/PHP/master.php");
 			}
 			echo '</span>';
 		}
-		
+
 		$ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
 		$Park = array('ID' => -1, 'RatingAvg' => -1);
 		$Parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM parks WHERE ParkCode=:parkcode");
@@ -75,9 +76,9 @@ include("server/PHP/master.php");
 				}
 			}
 		}
-		
+
 	?>
-	
+
     <div class="row">
 
         <div class="one columns">
@@ -87,10 +88,13 @@ include("server/PHP/master.php");
             <div class="park-location">
 				<?php if ($Park['ID'] > 0) { ?>
 					<div id="park-map"></div>
-					<script>                        
-                        var latitude = <?php echo $Park['Latitude']; ?>;                        
+					<script>
+                        var latitude = <?php echo $Park['Latitude']; ?>;
                         var longitude = <?php echo $Park['Longitude']; ?>;
-                        
+
+                        alert(latitude);
+                        alert(longitude);
+
                         initMap(latitude, longitude);
 					</script>
 					<br>
@@ -119,7 +123,7 @@ include("server/PHP/master.php");
 							echo '<p>';
 							echoStars($Park['RatingAvg']);
 							echo '</p>';
-							
+
 						} else {
 							echo '<h4>Unknown Park.</h4>';
 						}
