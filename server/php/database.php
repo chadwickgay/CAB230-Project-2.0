@@ -146,7 +146,7 @@ function getParkLatLong($parkName, $suburb){
 
   // Add ratings to the search
   // Join reviews table
-	
+
   try {
       $sql = 'SELECT DISTINCT Name, Latitude, Longitude
               FROM parksearch.parks
@@ -160,19 +160,8 @@ function getParkLatLong($parkName, $suburb){
   } catch (PDOException $ex) {
       echo $ex->getMessage();
   }
-	
-	echo '<div id="results-map"></div>', 
-		'<script type="text/javascript">',
-		'var locations;';
-	
-	foreach ($results as $park) {
-		echo "locations.push({$park['Name']});\n",
-			"locations.push({$park['Latitude']});\n",
-			"locations.push({$park['Longitude']});\n";
-	}
-	
-	echo 'initResultsMap(locations);',
-		'</script>';
+
+  return $results;
 }
 
 function searchForParks($parkName, $suburb) {
@@ -183,7 +172,7 @@ function searchForParks($parkName, $suburb) {
     // Join reviews table
 
     try {
-        $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb, Latitude, Longitude
+        $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb
                 FROM parksearch.parks
                 WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
         $query = $pdo->prepare($sql);
@@ -198,10 +187,9 @@ function searchForParks($parkName, $suburb) {
     } catch (PDOException $ex) {
         echo $ex->getMessage();
     }
-	
 }
 
-function outputSearchResults($results) {
+function outputSearchResults($results){
     echo '<table>';
 
     echo '<tr>';
