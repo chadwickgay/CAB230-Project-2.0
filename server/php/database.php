@@ -1,24 +1,14 @@
 <?php
-global $db_name;
+
 $db_name = 'parksearch';
-global $db_username;
-//$db_username = 'root';
 $db_username = 'parkuser';
-global $db_password;
-//$db_password = '';
 $db_password = 'password';
-global $db_host;
 $db_host = "localhost";
 
 try {
-	global $pdo;
     $pdo = new PDO ("mysql:host=$db_host;dbname=$db_name", $db_username, $db_password);
 } catch (PDOException $e) {
     echo $e->getMessage();
-}
-
-function generate_uid() {
-	return uniqid('', true);
 }
 
 function populateSuburbMenu() {
@@ -92,6 +82,29 @@ function showAllParks() {
         echo '</tr>';
     }
     echo '</table>';
+}
+
+function getParkLatLong($parkName, $suburb){
+  global $pdo;
+
+  // Add ratings to the search
+  // Join reviews table
+
+  try {
+      $sql = 'SELECT DISTINCT Name, Latitude, Longitude
+              FROM parksearch.parks
+              WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
+      $query = $pdo->prepare($sql);
+      $query->bindParam(':suburb', $suburb);
+      $query->bindParam(':name', $parkName);
+      $query->execute();
+      $results = $query->fetchAll();
+
+  } catch (PDOException $ex) {
+      echo $ex->getMessage();
+  }
+
+  return $results;
 }
 
 function searchForParks($parkName, $suburb) {
