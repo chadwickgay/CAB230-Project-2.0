@@ -25,6 +25,36 @@ function populateSuburbMenu() {
         echo '</select>';
 }
 
+function getParksWithinRange($userLatitude, $userLongitude, $userDistance){
+  global $pdo;
+
+  try {
+      $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb, (
+        6371 * acos (
+          cos ( radians(:userLatitude) )
+          * cos( radians( Latitude ) )
+          * cos( radians( Longitude ) - radians(:userLongitude) )
+          + sin ( radians(:userLatitude) )
+          * sin( radians( Latitude ) )
+        )
+      ) AS distance
+              FROM parksearch.parks
+              HAVING distance < :userDistance';
+      $query = $pdo->prepare($sql);
+      $query->bindParam(':userLatitude', $userLatitude);
+      $query->bindParam(':userLongitude', $userLongitude);
+      $query->bindParam(':userDistance', $userDistance);
+      $query->execute();
+      $results = $query->fetchAll();
+
+      // Call outputSearchResults to output results table
+      outputSearchResults($results);
+
+  } catch (PDOException $ex) {
+      echo $ex->getMessage();
+  }
+}
+
 function showAllParks() {
     global $pdo;
 
@@ -62,8 +92,8 @@ function searchForParks($parkName, $suburb) {
     // Join reviews table
 
     try {
-        $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb 
-                FROM parksearch.parks 
+        $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb
+                FROM parksearch.parks
                 WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':suburb', $suburb);
@@ -96,4 +126,3 @@ function outputSearchResults($results){
 }
 
 ?>
-
