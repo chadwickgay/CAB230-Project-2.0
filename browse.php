@@ -22,7 +22,9 @@ include("server/PHP/master.php");
 
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script type="text/javascript" src="scripts/map.js"></script>
+  <script type="text/javascript" src="scripts/map.js"></script> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap"></script> 
+	
 </head>
 
 <body>
@@ -43,30 +45,29 @@ include("server/PHP/master.php");
 
         <?php
 
-
-
         if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating'])){
-
+			
             $parkName = isset($_GET["park-name"]) ? $_GET["park-name"] : '';
             $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
             $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
 
             // Execute searchForParks to search for all user inputs & output results to page
-            searchForParks($parkName, $suburb);
+            getParkLatLong($parkName, $suburb);
+			searchForParks($parkName, $suburb);
 
         }
 
-        if (isset($_GET['distance'])){
-            $userDistance = isset($_GET["distance"]) ? $_GET["distance"] : '';
-            $userLatitude=(isset($_GET['lat']))?$_GET['lat']:'';
-            $userLongitude=(isset($_GET['long']))?$_GET['long']:'';
+        //if (isset($_GET['distance'])){
+            //$userDistance = isset($_GET["distance"]) ? $_GET["distance"] : '';
+            //$userLatitude=(isset($_GET['lat']))?$_GET['lat']:'';
+            //$userLongitude=(isset($_GET['long']))?$_GET['long']:'';
 
-            echo $userDistance;
-            $userLatitude = '-27.4366260';
-            $userLongitude = '153.0588840';
+            //echo $userDistance;
+            //$userLatitude = '-27.4366260';
+            //$userLongitude = '153.0588840';
 
-            getParksWithinRange($userLatitude, $userLongitude, $userDistance);
-        }
+            //getParksWithinRange($userLatitude, $userLongitude, $userDistance);
+        //}
 
         ?>
 
