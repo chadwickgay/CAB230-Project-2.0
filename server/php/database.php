@@ -1,14 +1,24 @@
 <?php
-
+global $db_name;
 $db_name = 'parksearch';
+global $db_username;
+//$db_username = 'root';
 $db_username = 'parkuser';
+global $db_password;
+//$db_password = '';
 $db_password = 'password';
+global $db_host;
 $db_host = "localhost";
 
 try {
+	global $pdo;
     $pdo = new PDO ("mysql:host=$db_host;dbname=$db_name", $db_username, $db_password);
 } catch (PDOException $e) {
     echo $e->getMessage();
+}
+
+function generate_uid() {
+	return uniqid('', true);
 }
 
 function populateSuburbMenu() {

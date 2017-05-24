@@ -39,20 +39,6 @@ include("server/PHP/master.php");
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	
 	<?php
-		
-		function executeQuery($Query) {
-			try {
-				$db_name = 'parksearch';
-				$db_username = 'parkuser';
-				$db_password = 'password';
-				$db_host = "localhost";
-				$pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_username, $db_password);
-				return $pdo->query($Query);
-			} catch (PDOException $e) {
-				echo $e->getMessage();
-			}
-			return false;
-		}
 
 		function echoStars($numberOfStars) {
 			echo '<span class="star">';
@@ -71,12 +57,16 @@ include("server/PHP/master.php");
 		
 		$ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
 		$Park = array('ID' => -1, 'RatingAvg' => -1);
-		$Parks = executeQuery("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM parks WHERE ParkCode=\"$ParkCode\"");
+		$Parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM parks WHERE ParkCode=:parkcode");
+		$Parks->bindValue(':parkcode', $ParkCode);
+		$Parks->execute();
 		if ($Parks != false && $Parks->rowCount()) {
 			$temp = $Parks->fetch();
 			if (gettype($temp) == gettype(array())) {
 				$Park = array_merge($Park, $temp);
-				$ParkRatings = executeQuery("SELECT ROUND(Avg(Rating),0) FROM reviews WHERE ParkID={$Park['ID']}");
+				$ParkRatings = $pdo->prepare("SELECT ROUND(Avg(Rating),0) FROM reviews WHERE ParkID=:parkid");
+				$ParkRatings->bindValue(':parkid', $Park['ID']);
+				$ParkRatings->execute();
 				if ($ParkRatings != false && $ParkRatings->rowCount()) {
 					$temp = $ParkRatings->fetch();
 					if (ctype_digit($temp[0])) {
@@ -180,7 +170,9 @@ include("server/PHP/master.php");
 					<?php
 						$Reviews = array();
 						if ($Park['ID'] > 0) {
-							$Reviews2 = executeQuery("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Desc FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=\"{$Park['ID']}\" ORDER BY Rating DESC");
+							$Reviews2 = $pdo->prepare("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Desc FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=:parkid ORDER BY Rating DESC");
+							$Reviews2->bindValue(':parkid', $Park['ID']);
+							$Reviews2->execute();
 							if ($Reviews2 != false && $Reviews2->rowCount()) {
 								$Reviews = $Reviews2;
 							}
