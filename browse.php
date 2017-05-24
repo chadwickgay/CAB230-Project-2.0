@@ -22,7 +22,8 @@ include("server/PHP/master.php");
 
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script type="text/javascript" src="scripts/map.js"></script>
+  <script type="text/javascript" src="scripts/map.js"></script> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap"></script> 
 </head>
 
 <body>
@@ -43,10 +44,13 @@ include("server/PHP/master.php");
 
         <?php
 
-
-
         if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating'])){
 
+			echo '<div id="results-map"></div>', 
+				'<script type="text/javascript">', 
+				'initResultsMap(dummyLocations);', 
+				'</script>'; 
+			
             $parkName = isset($_GET["park-name"]) ? $_GET["park-name"] : '';
             $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
             $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
