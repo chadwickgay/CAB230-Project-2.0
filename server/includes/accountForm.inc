@@ -44,9 +44,9 @@
             <br>
             <span id="passwordErr"></span>
 
-            <br>
+            <!--br>
             <input type="checkbox" name="subscribe" value="subscribe">Subscribe to the weekly Park Search newsletter to receive
-            <br>the latest updates about your favourite parks.
+            <br>the latest updates about your favourite parks. -->
         </div>
 
     </div>
