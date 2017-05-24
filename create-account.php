@@ -1,7 +1,3 @@
-<?php
-include("server/PHP/master.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,6 +57,7 @@ include("server/PHP/master.php");
             // redisplay the form
             include 'server/includes/accountForm.inc';
         } else {
+			include("server/PHP/master.php");
             echo 'Form submitted successfully with no errors. Great success!';
         }
     } else {
