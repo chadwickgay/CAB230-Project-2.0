@@ -154,6 +154,7 @@ include("server/PHP/master.php");
 						}
 						submitReview($_SESSION['logged'], $Park['ID'], $_POST['txtcomment'], $Rating);
 						echo "Your review has been submitted.";
+						echo "<script>redirectToPage('/park.php?ParkCode=".$Park['ParkCode']."');</script>";
                     }
                 } else {
                     include 'server/includes/addReview.inc';
