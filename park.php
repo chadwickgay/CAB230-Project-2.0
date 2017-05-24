@@ -131,10 +131,10 @@ include("server/PHP/master.php");
 
                 <?php
                 $errors = array();
-                if (isset($_POST['txtcomment'])) {
+                if (isset($_POST['txtcomment']) && isset($_SESSION['logged'])) {
                     require 'server/includes/validate.inc';
                     validateReview($errors, $_POST, 'txtcomment');
-
+					
                     if ($errors) {
                         ## want to put a red box around this output to highlight the errors
                         echo '<div class="validation">';
@@ -148,7 +148,12 @@ include("server/PHP/master.php");
                         // redisplay the form
                         include 'server/includes/addReview.inc';
                     } else {
-                        echo 'Form submitted successfully with no errors. Great success!';
+						$Rating = 0;
+						if (isset($_POST['rating'])) {
+							$Rating = $_POST['rating'];
+						}
+						submitReview($_SESSION['logged'], $Park['ID'], $_POST['txtcomment'], $Rating);
+						echo "Your review has been submitted.";
                     }
                 } else {
                     include 'server/includes/addReview.inc';
@@ -168,7 +173,7 @@ include("server/PHP/master.php");
 					<?php
 						$Reviews = array();
 						if ($Park['ID'] > 0) {
-							$Reviews2 = $pdo->prepare("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Desc FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=:parkid ORDER BY Rating DESC");
+							$Reviews2 = $pdo->prepare("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Description FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=:parkid ORDER BY Rating DESC");
 							$Reviews2->bindValue(':parkid', $Park['ID']);
 							$Reviews2->execute();
 							if ($Reviews2 != false && $Reviews2->rowCount()) {
@@ -184,7 +189,7 @@ include("server/PHP/master.php");
 								echo '<h5>'.$Review['FirstName'].' '.$Review['LastName'].' ';
 								echoStars($Review['Rating']);
 								echo '</h5>';
-								echo '<p>'.$Review['Desc'].'</p>';
+								echo '<p>'.$Review['Description'].'</p>';
 								echo '</div>';
 							}
 						}

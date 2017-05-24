@@ -23,6 +23,27 @@ function generate_uid() {
 	return uniqid('', true);
 }
 
+function submitReview($UserID, $ParkID, $Description, $Rating) {
+	try {
+		global $pdo;
+		$stmt = $pdo->prepare("DELETE FROM parksearch.reviews WHERE UserID=:UserID");
+		$stmt->bindValue(':UserID', $UserID);
+		$stmt->execute();
+		$stmt = $pdo->prepare("INSERT INTO parksearch.reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
+		$stmt->bindValue(':ParkID', $ParkID);
+		$stmt->bindValue(':UserID', $UserID);
+		$stmt->bindValue(':Date', date('Y-m-d', time()));
+		$stmt->bindValue(':Rating', $Rating);
+		$stmt->bindValue(':Description', $Description);
+		$stmt->execute();
+		
+		return true;
+	} catch (PDOException $e) {
+		echo $e->getMessage();
+	}
+	return false;
+}
+
 function login($email, $password) {
 	try {
 		global $pdo;
