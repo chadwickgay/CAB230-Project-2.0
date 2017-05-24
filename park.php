@@ -92,9 +92,6 @@ include("server/PHP/master.php");
                         var latitude = <?php echo $Park['Latitude']; ?>;
                         var longitude = <?php echo $Park['Longitude']; ?>;
 
-                        alert(latitude);
-                        alert(longitude);
-
                         initMap(latitude, longitude);
 					</script>
 					<br>
