@@ -24,7 +24,7 @@ include("server/PHP/master.php");
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="scripts/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap"></script>
-
+	<script type="text/javascript" src="scripts/validation.js"></script>
 </head>
 
 <body>
@@ -38,7 +38,6 @@ include("server/PHP/master.php");
 
     <!-- Main Content
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
 	<?php
 
 		function echoStars($numberOfStars) {
@@ -55,7 +54,6 @@ include("server/PHP/master.php");
 			}
 			echo '</span>';
 		}
-
 		$ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
 		$Park = array('ID' => -1, 'RatingAvg' => -1);
 		$Parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM parks WHERE ParkCode=:parkcode");
@@ -91,7 +89,6 @@ include("server/PHP/master.php");
 					<script>
                         var latitude = <?php echo $Park['Latitude']; ?>;
                         var longitude = <?php echo $Park['Longitude']; ?>;
-
                         initMap(latitude, longitude);
 					</script>
 					<br>

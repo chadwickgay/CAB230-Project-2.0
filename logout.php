@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	unset($_SESSION['logged']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +10,7 @@
     <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Park Search - Login</title>
+    <title>Park Search - Logout</title>
     <meta name="description" content="">
     <meta name="author" content="Chadwick Gay">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,48 +38,7 @@
         <!-- Main Content
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <h3>Sign into existing account</h3>
-
-        <?php
-		session_start();
-		if (!isset($_SESSION['logged'])) {
-			$errors = array();
-			if (isset($_POST['email']) && isset($_POST['password'])) {
-				require 'server/includes/validate.inc';
-				validateEmail($errors, $_POST, 'email');
-				validateFieldNotEmpty($errors, $_POST, 'password');
-				if (sizeof($errors) <= 0) {
-					include("server/PHP/master.php");
-					if (login($_POST['email'], $_POST['password'])) {
-						
-					}
-					else {
-						$errors["invalid_login"] = "The Username and/or Password provided is incorrect.";
-					}
-				}
-				if ($errors) {
-					## want to put a red box around this output to highlight the errors
-					echo '<div class="validation">';
-					echo '<h5>Invalid submission, correct the following errors:</h5>';
-					echo '<ul>';
-					foreach ($errors as $field => $error) {
-						echo "<li>$error</li>";
-					}
-					echo '</ul>';
-					echo '</div>';
-					// redisplay the form
-					include 'server/includes/loginForm.inc';
-				} else {
-					echo 'You have successfully logged in!';
-				}
-			} else {
-				include 'server/includes/loginForm.inc';
-			}
-		} else {
-			echo 'You are already logged in!';
-		}
-        ?>
-
+        <h3>You have signed out</h3>
 
         <!-- Footer
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

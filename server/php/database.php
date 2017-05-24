@@ -1,14 +1,16 @@
 <?php
 
+global $db_host;
 global $db_name;
 global $db_username;
 global $db_password;
-global $db_host;
 
-$db_name = 'parksearch';
-$db_username = 'parkuser';
-$db_password = 'password';
 $db_host = "localhost";
+$db_name = 'parksearch';
+//$db_username = 'parkuser';
+//$db_password = 'password';
+$db_username = 'root';
+$db_password = '';
 
 try {
     global $pdo;
@@ -18,7 +20,31 @@ try {
 }
 
 function generate_uid() {
-    return uniqid('', true);
+	return uniqid('', true);
+}
+
+function login($email, $password) {
+	try {
+		global $pdo;
+		$stmt = $pdo->prepare('SELECT ID FROM parksearch.members WHERE Email=:email AND Password=SHA2(CONCAT(:password, Salt), 0)');
+		$stmt->bindValue(':email', $email);
+		$stmt->bindValue(':password', $password);
+		$stmt->execute();
+		if ($stmt->rowCount() > 0) {
+			$temp = $stmt->fetch();
+			if (ctype_digit($temp[0])) {
+				$id = intval($temp[0]);
+				if (session_status() == PHP_SESSION_NONE) {
+					session_start();
+				}
+				$_SESSION['logged'] = $id;
+				return true;
+			}
+		}
+	} catch (PDOException $e) {
+		echo $e->getMessage();
+	}
+	return false;
 }
 
 function populateSuburbMenu() {
