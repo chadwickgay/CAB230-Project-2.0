@@ -1,4 +1,4 @@
-<form method="POST" action="login.php" name="login">
+<form method="POST" action="login.php" name="login" onsubmit="return validateLogin();">
     <div class="row">
         <div class="two columns">
             <label for="email">Email</label>
@@ -9,12 +9,14 @@
 
         <div class="two columns">
             <label for="gender">Password</label>
-            <input type="password" id="password" placeholder="password" />
+            <input type="password" name="password" id="password" placeholder="password" />
+			<br>
+            <span id="passwordErr"></span>
         </div>
     </div>
 
     <div class="one column">
-        <input type="submit" value="Submit" onclick="return validateLogin()">
+        <input type="submit" value="Submit">
 
     </div>
 </form>

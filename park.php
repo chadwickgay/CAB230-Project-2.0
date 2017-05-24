@@ -24,6 +24,7 @@ include("server/PHP/master.php");
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="scripts/map.js"></script>
     <script type="text/javascript" src="scripts/google.js"></script>
+	<script type="text/javascript" src="scripts/validation.js"></script>
 </head>
 
 <body>

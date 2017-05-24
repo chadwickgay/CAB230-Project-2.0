@@ -60,20 +60,28 @@
         } else {
 			include("server/PHP/master.php");
 			
-			$stmt = $pdo->prepare('INSERT INTO parksearch.members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
-			$stmt->bindValue(':email', $_POST['email']);
-			$stmt->bindValue(':salt', generate_uid());
-			$stmt->bindValue(':password', $_POST['password']);
-			$stmt->bindValue(':firstname', $_POST['first-name']);
-			$stmt->bindValue(':lastname', $_POST['last-name']);
-			$tmp_dob = explode('/', $_POST['dob']);
-			$tmp_dob = ''.$tmp_dob[2].'-'.$tmp_dob[1].'-'.$tmp_dob[0];
-			$stmt->bindValue(':dob', $tmp_dob);
-			$stmt->bindValue(':genderid', $_POST['gender']);
-			$stmt->execute();
-			
-            echo 'Form submitted successfully with no errors. Great success!';
-			
+			try {
+				$stmt = $pdo->prepare('INSERT INTO parksearch.members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
+				$stmt->bindValue(':email', $_POST['email']);
+				$stmt->bindValue(':salt', generate_uid());
+				$stmt->bindValue(':password', $_POST['password']);
+				$stmt->bindValue(':firstname', $_POST['first-name']);
+				$stmt->bindValue(':lastname', $_POST['last-name']);
+				$tmp_dob = explode('/', $_POST['dob']);
+				$tmp_dob = ''.$tmp_dob[2].'-'.$tmp_dob[1].'-'.$tmp_dob[0];
+				$stmt->bindValue(':dob', $tmp_dob);
+				$stmt->bindValue(':genderid', $_POST['gender']);
+				$stmt->execute();
+				
+				if (login($_POST['email'], $_POST['password'])) {
+					echo 'Form submitted successfully with no errors. Great success!';
+				} else {
+					echo 'Internal Error #789h';
+				}
+			}  catch (PDOException $e) {
+				echo $e->getMessage();
+				echo 'Internal Error #b67d';
+			}
         }
     } else {
         include 'server/includes/accountForm.inc';

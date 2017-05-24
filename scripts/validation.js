@@ -32,6 +32,13 @@ function validateReview() {
     }
 }
 
+function redirectToLogin() {
+	var url = window.location.href;
+	url = url.substring(0, url.lastIndexOf('/'));
+	window.location.replace(url+'/login.php');
+	return false;
+}
+
 function validateFirstName(formName) {
     // Format for valid name
     // Allows spaces/hyphen/period as part of name
