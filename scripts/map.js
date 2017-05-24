@@ -2,6 +2,17 @@
  * Name: map.js
  * Purpose: Contains the functions and variables related to maps
  */
+ function getLocation() {
+     if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(redirectToPosition);
+     } else {
+         x.innerHTML = "Geolocation is not supported by this browser.";
+     }
+ }
+
+ function redirectToPosition(position) {
+     window.location='browse.php.php?lat='+position.coords.latitude+'&long='+position.coords.longitude;
+ }
 
 var dummyLocations = [
 	['Bondi Beach', -33.890542, 151.274856, 4],

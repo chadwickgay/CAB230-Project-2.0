@@ -45,6 +45,8 @@ include("server/PHP/master.php");
 
         <?php
 
+
+
         if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating'])){
 			echo '<div id="results-map"></div>',
 				'<script type="text/javascript">',
