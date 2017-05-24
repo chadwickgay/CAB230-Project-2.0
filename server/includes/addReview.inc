@@ -1,7 +1,11 @@
 <div class="park-review">
 
     <h4>Enter your review</h4>
-	<?php session_start(); ?>
+	<?php
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+	?>
     <form method="POST" action="park.php" name="park-review" onsubmit="<?php echo isset($_SESSION['logged']) ? 'return validateReview();' : 'return redirectToLogin();' ?>">
 		
         <div class="park-review">

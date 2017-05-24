@@ -33,9 +33,14 @@ function validateReview() {
 }
 
 function redirectToLogin() {
+	redirectToPage('/login.php');
+	return false;
+}
+
+function redirectToPage(page) {
 	var url = window.location.href;
 	url = url.substring(0, url.lastIndexOf('/'));
-	window.location.replace(url+'/login.php');
+	window.location.replace(url+page);
 	return false;
 }
 

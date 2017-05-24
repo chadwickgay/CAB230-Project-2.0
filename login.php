@@ -36,7 +36,9 @@
         <h3>Sign into existing account</h3>
 
         <?php
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		if (!isset($_SESSION['logged'])) {
 			$errors = array();
 			if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -47,8 +49,7 @@
 					include("server/PHP/master.php");
 					if (login($_POST['email'], $_POST['password'])) {
 						
-					}
-					else {
+					} else {
 						$errors["invalid_login"] = "The Username and/or Password provided is incorrect.";
 					}
 				}
@@ -66,6 +67,7 @@
 					include 'server/includes/loginForm.inc';
 				} else {
 					echo 'You have successfully logged in!';
+					echo "<script>redirectToPage('/');</script>";
 				}
 			} else {
 				include 'server/includes/loginForm.inc';
