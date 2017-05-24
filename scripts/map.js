@@ -1,18 +1,21 @@
 /*
  * Name: map.js
- * Purpose: Contains the functions and variables related to maps
+ * Purpose: Contains the functions related to maps
  */
-function getLocation() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(redirectToPosition);
-	} else {
-		x.innerHTML = "Geolocation is not supported by this browser.";
-	}
-}
+ function getLocation() {
+     if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(redirectToForm);
+     } else {
+         x.innerHTML = "Geolocation is not supported by this browser.";
+     }
+ }
 
-function redirectToPosition(position) {
-	window.location = 'browse.php.php?lat=' + position.coords.latitude + '&long=' + position.coords.longitude;
-}
+ function redirectToForm(position) {
+    document.getElementById('lat').value = position.coords.latitude;
+    document.getElementById('long').value = position.coords.longitude;
+
+    document.getElementById("distance").disabled = false;
+ }
 
 function showPosition(position) {
 	x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
@@ -53,16 +56,16 @@ function initResultsMap(locations) {
 }
 
 function initMap(lati, long) {
-	var location = {
-		lat: lati,
-		lng: long
-	};
-	var map = new google.maps.Map(document.getElementById('park-map'), {
-		zoom: 14,
-		center: location
-	});
-	var marker = new google.maps.Marker({
-		position: location,
-		map: map
-	});
+    var location = {
+        lat: lati,
+        lng: long
+    };
+    var map = new google.maps.Map(document.getElementById('park-map'), {
+        zoom: 14,
+        center: location
+    });
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
 }
