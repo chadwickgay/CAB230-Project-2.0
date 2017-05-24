@@ -1,7 +1,3 @@
-<?php
-include("server/PHP/master.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,6 +44,7 @@ include("server/PHP/master.php");
 				validateEmail($errors, $_POST, 'email');
 				validateFieldNotEmpty($errors, $_POST, 'password');
 				if (sizeof($errors) <= 0) {
+					include("server/PHP/master.php");
 					if (login($_POST['email'], $_POST['password'])) {
 						
 					}

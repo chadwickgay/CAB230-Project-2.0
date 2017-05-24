@@ -50,6 +50,7 @@ include("server/PHP/master.php");
 
             // Execute searchForParks to search for all user inputs & output results to page
             searchForParks($parkName, $suburb);
+
         }
 
         ?>
