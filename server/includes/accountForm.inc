@@ -28,10 +28,10 @@
             <label for="gender">Gender</label>
             <select class="gender-select" name="gender" id="gender">
                 <option value="DEFAULT" disabled selected style="display: none;">select</option>
-                <option value="m">Male</option>
-                <option value="f">Female</option>
-                <option value="o">Other</option>
-                <option value="u">Undisclosed</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
+                <option value="0">Undisclosed</option>
             </select>
             <br>
             <span id="genderErr"></span>

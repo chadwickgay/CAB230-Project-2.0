@@ -44,6 +44,7 @@
         validateLastName($errors, $_POST, 'last-name');
         validateGender($errors, $_POST, 'gender');
         validateDOB($errors, $_POST, 'dob');
+		validateFieldNotEmpty($errors, $_POST, 'password');
         if ($errors) {
             ## want to put a red box around this output to highlight the errors
             echo '<div class="validation">';
@@ -58,7 +59,21 @@
             include 'server/includes/accountForm.inc';
         } else {
 			include("server/PHP/master.php");
+			
+			$stmt = $pdo->prepare('INSERT INTO parksearch.members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
+			$stmt->bindValue(':email', $_POST['email']);
+			$stmt->bindValue(':salt', generate_uid());
+			$stmt->bindValue(':password', $_POST['password']);
+			$stmt->bindValue(':firstname', $_POST['first-name']);
+			$stmt->bindValue(':lastname', $_POST['last-name']);
+			$tmp_dob = explode('/', $_POST['dob']);
+			$tmp_dob = ''.$tmp_dob[2].'-'.$tmp_dob[1].'-'.$tmp_dob[0];
+			$stmt->bindValue(':dob', $tmp_dob);
+			$stmt->bindValue(':genderid', $_POST['gender']);
+			$stmt->execute();
+			
             echo 'Form submitted successfully with no errors. Great success!';
+			
         }
     } else {
         include 'server/includes/accountForm.inc';

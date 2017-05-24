@@ -15,6 +15,14 @@ if (isset($_POST['submit'])) { // check if the form is submitted
 
 ### Start of input validation functions ###
 
+function validateFieldNotEmpty(&$errors, $field_list, $field_name) {
+	if (!isset($field_list[$field_name]) || empty($field_list[$field_name]) || $field_list[$field_name] == 'NULL') {
+		$errors[$field_name] = 'required';
+		return false;
+	}
+	return true;
+}
+
 function validateFirstName(&$errors, $field_list, $field_name) {
     $pattern = '/^[a-zA-Z -]+$/';
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
