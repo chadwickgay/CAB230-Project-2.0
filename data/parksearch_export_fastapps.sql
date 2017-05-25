@@ -2318,7 +2318,6 @@ ALTER TABLE `parks`
 -- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
-  ADD PRIMARY KEY (`ParkID`),
   ADD KEY `ID_idx` (`UserID`);
 
 --
