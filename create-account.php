@@ -61,7 +61,7 @@
 			include("server/PHP/master.php");
 
 			try {
-				$stmt = $pdo->prepare('INSERT INTO parksearch.members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
+				$stmt = $pdo->prepare('INSERT INTO n9440488.members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
 				$stmt->bindValue(':email', $_POST['email']);
 				$stmt->bindValue(':salt', generate_uid());
 				$stmt->bindValue(':password', $_POST['password']);
