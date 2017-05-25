@@ -59,7 +59,7 @@
             include 'server/includes/accountForm.inc';
         } else {
 			include("server/PHP/master.php");
-			
+
 			try {
 				$stmt = $pdo->prepare('INSERT INTO parksearch.members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
 				$stmt->bindValue(':email', $_POST['email']);
@@ -72,9 +72,10 @@
 				$stmt->bindValue(':dob', $tmp_dob);
 				$stmt->bindValue(':genderid', $_POST['gender']);
 				$stmt->execute();
-				
+
 				if (login($_POST['email'], $_POST['password'])) {
-					echo 'Form submitted successfully with no errors. Great success!';
+          echo 'You have successfully logged in!';
+					echo "<script>redirectToPage('/');</script>";
 				} else {
 					echo 'Internal Error #789h';
 				}
