@@ -45,19 +45,26 @@ include("server/PHP/master.php");
         <?php
 
         if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating'])){
-
-			echo '<div id="results-map"></div>', 
-				'<script type="text/javascript">', 
-				'initResultsMap(dummyLocations);', 
-				'</script>'; 
-			
+            
             $parkName = isset($_GET["park-name"]) ? $_GET["park-name"] : '';
             $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
             $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
-
-            // Execute searchForParks to search for all user inputs & output results to page
+            
+            
+            $temp = json_encode(getParkLatLong($parkName, $suburb));
+            
+            echo '<script>',
+                "var locations = $temp;",
+                //'console.log(locations[0][0]);',
+                //'var test = JSON.parse(locations);',
+                '</script>';
+            
+			echo '<div id="results-map"></div>', 
+				'<script type="text/javascript">', 
+				'initResultsMap(locations);',
+				'</script>';
+            
             searchForParks($parkName, $suburb);
-
         }
 
         if (isset($_GET['distance'])){

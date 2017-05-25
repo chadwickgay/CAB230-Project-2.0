@@ -1,53 +1,62 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-  <head>
+
+<head>
     <meta name="viewport" content="width=device-width; height=device-height; user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title></title>
     <!-- <link rel="stylesheet" href="/master.css" type="text/css" media="screen" /> -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4"></script>
     <script>
-    var map;
-    function init() {
-      var mapOptions = {
-        zoom: 13,
-        center: {lat: -27.4697710, lng: 153.0251240},
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-      map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-      makeRequest('get_locations.php', function(data) {
-        var data = JSON.parse(data.responseText);
-        for (var i = 0; i < data.length; i++) {
-          displayLocation(data[i]);
+        var map;
+
+        function init() {
+            var mapOptions = {
+                zoom: 13,
+                center: {
+                    lat: -27.4697710,
+                    lng: 153.0251240
+                },
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+            makeRequest('get_locations.php', function (data) {
+                var data = JSON.parse(data.responseText);
+                for (var i = 0; i < data.length; i++) {
+                    displayLocation(data[i]);
+                }
+            });
         }
-      });
-    }
-    function makeRequest(url, callback) {
-      var request;
-      if (window.XMLHttpRequest) {
-        request = new XMLHttpRequest();
-      // IE7+, Firefox, Chrome, Opera, Safari
-      } else {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
-      // IE6, IE5
-      }
-      request.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-          callback(request);
+
+        function makeRequest(url, callback) {
+            var request;
+            if (window.XMLHttpRequest) {
+                request = new XMLHttpRequest();
+                // IE7+, Firefox, Chrome, Opera, Safari
+            } else {
+                request = new ActiveXObject("Microsoft.XMLHTTP");
+                // IE6, IE5
+            }
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    callback(request);
+                }
+            }
+            request.open("GET", url, true);
+            request.send();
         }
-      }
-      request.open("GET", url, true);
-      request.send();
-    }
-    function displayLocation(item) {
-    var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(item.Latitude, item.Longitude),
-        map: map
-    });
-}
-  </script>
+
+        function displayLocation(item) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(item.Latitude, item.Longitude),
+                map: map
+            });
+        }
+    </script>
 </head>
+
 <body onload="init();">
-  <div id="map_canvas" style="width:400px; height: 400px;"></div>
+    <div id="map_canvas" style="width:400px; height: 400px;"></div>
 </body>
+
 </html>

@@ -29,10 +29,30 @@ var dummyLocations = [
 	['Maroubra Beach', -33.950198, 151.259302, 1]
 ];
 
+function centreMap(locations) {
+    var latAvg = 0;
+    var lonAvg = 0;
+    var latLonCentre;
+    
+    for (i = 0; i < locations.length; i++) {
+        latAvg = latAvg + parseFloat(locations[i]['Latitude']);
+        lonAvg = lonAvg + parseFloat(locations[i]['Longitude']);
+    }
+    
+    latAvg = latAvg / locations.length;
+    lonAvg = lonAvg / locations.length;
+    
+    latLonCentre = [latAvg, lonAvg];
+    
+    return latLonCentre;
+}
+
 function initResultsMap(locations) {
+    var centredMarkers = centreMap(locations);
+    
 	var map = new google.maps.Map(document.getElementById('results-map'), {
-		zoom: 10,
-		center: new google.maps.LatLng(-33.92, 151.25),
+		zoom: 13,
+		center: new google.maps.LatLng(centredMarkers[0], centredMarkers[1]),
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
 
