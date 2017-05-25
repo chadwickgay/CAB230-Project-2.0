@@ -54,6 +54,7 @@ include("server/PHP/master.php");
 			}
 			echo '</span>';
 		}
+	
 		$ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
 		$Park = array('ID' => -1, 'RatingAvg' => -1);
 		$Parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM parks WHERE ParkCode=:parkcode");

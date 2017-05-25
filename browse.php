@@ -51,12 +51,10 @@ include("server/PHP/master.php");
             $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
             
             
-            $temp = json_encode(getParkLatLong($parkName, $suburb));
+            $encodedLocations = json_encode(getParkMapInfo($parkName, $suburb));
             
             echo '<script>',
-                "var locations = $temp;",
-                //'console.log(locations[0][0]);',
-                //'var test = JSON.parse(locations);',
+                "var locations = $encodedLocations;",
                 '</script>';
             
 			echo '<div id="results-map"></div>', 

@@ -1,25 +1,41 @@
 <?php
 
+/*
+ * ______ _____  ___ ______  ___  ___ _____ 
+ * | ___ \  ___|/ _ \|  _  \ |  \/  ||  ___|
+ * | |_/ / |__ / /_\ \ | | | | .  . || |__  
+ * |    /|  __||  _  | | | | | |\/| ||  __| 
+ * | |\ \| |___| | | | |/ /  | |  | || |___ 
+ * \_| \_\____/\_| |_/___/   \_|  |_/\____/ 
+ *
+ * To connect to the FastApps server, you need to replace all of the "parksearch.table"
+ * lines to the name of your database on the FastApps server, like this: "n9440488.table"
+ * I don't think that we're all going to need to do this, but if for some reason we do,
+ * make sure that you change it. Don't remove all of the stuff below, it's there so we can
+ * quickly switch between them since it's going to change every time one of us pushes to
+ * the repo.
+*/
+
 global $db_host;
 global $db_name;
 global $db_username;
 global $db_password;
 
-$db_host = "localhost"; // FastApps
-$db_name = "n9440488"; // FastApps
-$db_username = "n9440488"; // FastApps
-$db_password = "tomchadken"; // FastApps
+//$db_host = "localhost"; // FastApps
+//$db_name = "n9440488"; // FastApps: Tom
+//$db_username = "n9440488"; // FastApps: Tom
+//$db_password = "tomchadken"; // FastApps
 
-//$db_host = "localhost"; // Local
-//$db_name = 'parksearch'; // Local
-//$db_username = 'parkuser'; // Local: Tom/Chad
-//$db_password = 'password'; // Local: Tom/Chad
+$db_host = "localhost"; // Local
+$db_name = 'parksearch'; // Local
+$db_username = 'parkuser'; // Local: Tom/Chad
+$db_password = 'password'; // Local: Tom/Chad
 //$db_username = 'root'; // Local: Ken
 //$db_password = ''; // Local: Ken
 
 try {
     global $pdo;
-    $pdo = new PDO ("mysql:host=$db_host;dbname=n9440488", $db_username, $db_password);
+    $pdo = new PDO ("mysql:host=$db_host;dbname=$db_name", $db_username, $db_password);
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
@@ -31,10 +47,10 @@ function generate_uid() {
 function submitReview($UserID, $ParkID, $Description, $Rating) {
 	try {
 		global $pdo;
-		$stmt = $pdo->prepare("DELETE FROM n9440488.reviews WHERE UserID=:UserID");
+		$stmt = $pdo->prepare("DELETE FROM parksearch.reviews WHERE UserID=:UserID");
 		$stmt->bindValue(':UserID', $UserID);
 		$stmt->execute();
-		$stmt = $pdo->prepare("INSERT INTO n9440488.reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
+		$stmt = $pdo->prepare("INSERT INTO parksearch.reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
 		$stmt->bindValue(':ParkID', $ParkID);
 		$stmt->bindValue(':UserID', $UserID);
 		$stmt->bindValue(':Date', date('Y-m-d', time()));
@@ -52,7 +68,7 @@ function submitReview($UserID, $ParkID, $Description, $Rating) {
 function login($email, $password) {
 	try {
 		global $pdo;
-		$stmt = $pdo->prepare('SELECT ID FROM n9440488.members WHERE Email=:email AND Password=SHA2(CONCAT(:password, Salt), 0)');
+		$stmt = $pdo->prepare('SELECT ID FROM parksearch.members WHERE Email=:email AND Password=SHA2(CONCAT(:password, Salt), 0)');
 		$stmt->bindValue(':email', $email);
 		$stmt->bindValue(':password', $password);
 		$stmt->execute();
@@ -75,7 +91,7 @@ function login($email, $password) {
 
 function populateSuburbMenu() {
     global $pdo;
-    $result = $pdo->query('SELECT DISTINCT Suburb FROM n9440488.parks ORDER BY Suburb;');
+    $result = $pdo->query('SELECT DISTINCT Suburb FROM parksearch.parks ORDER BY Suburb;');
     echo('
         <select name="suburb" class="suburb-select">
         <option disabled selected style="...">select</option>
@@ -100,7 +116,7 @@ function getParksWithinRange($userLatitude, $userLongitude, $userDistance){
           * sin( radians( Latitude ) )
         )
       ) AS distance
-              FROM n9440488.parks
+              FROM parksearch.parks
               HAVING distance < :userDistance';
       $query = $pdo->prepare($sql);
       $query->bindParam(':userLatitude', $userLatitude);
@@ -146,15 +162,15 @@ function showAllParks() {
     echo '</table>';
 }
 
-function getParkLatLong($parkName, $suburb){
+function getParkMapInfo($parkName, $suburb){
   global $pdo;
 
   // Add ratings to the search
   // Join reviews table
 
   try {
-      $sql = 'SELECT DISTINCT Name, Latitude, Longitude
-              FROM n9440488.parks
+      $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude
+              FROM parksearch.parks
               WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
       $query = $pdo->prepare($sql);
       $query->bindParam(':suburb', $suburb);
@@ -178,7 +194,7 @@ function searchForParks($parkName, $suburb) {
 
     try {
         $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb
-                FROM n9440488.parks
+                FROM parksearch.parks
                 WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':suburb', $suburb);
