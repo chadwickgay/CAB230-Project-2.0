@@ -46,6 +46,10 @@
 }
 
 .three.columns {
+    width: 48%;
+}
+
+.four.columns {
     width: 24%;
 }
 
@@ -448,4 +452,11 @@ footer {
     background-color: #fff;
     text-align: center;
     margin-top: 10px;
+}
+
+/* Tools
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.hidden {
+    display: none;
 }

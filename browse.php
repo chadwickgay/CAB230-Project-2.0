@@ -54,8 +54,6 @@ if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating']
     $suburb = $_GET["suburb"];
     $results = searchParkBySuburb($suburb);
 
-    var_dump($results);
-
   } else if (isset($_GET['rating'])){
     $rating = $_GET["rating"];
     $results = searchParkByRating($rating);

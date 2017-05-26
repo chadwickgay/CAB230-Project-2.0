@@ -14,7 +14,9 @@ function redirectToForm(position) {
 	document.getElementById('lat').value = position.coords.latitude;
 	document.getElementById('long').value = position.coords.longitude;
 
-	document.getElementById("distance").disabled = false;
+	document.getElementById("distance-block").style.display = 'inline';
+	document.getElementById("distance").style.display = 'inline';
+	document.getElementById("get-location").style.display = 'none';
 }
 
 function showPosition(position) {
@@ -54,7 +56,7 @@ function initResultsMap(locations) {
 	for (i = 0; i < locations.length; i++) {
 		contentString = '<a href="park.php?ParkCode=' + locations[i][0].toString() + '">' + locations[i][1].toString() + '</a>';
 		console.log(contentString);
-		
+
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(locations[i][2], locations[i][3]),
 			map: map
