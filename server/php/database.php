@@ -1,12 +1,12 @@
 <?php
 
 /*
- * ______ _____  ___ ______   ___  ___ _____ 
+ * ______ _____  ___ ______   ___  ___ _____
  * | ___ \  ___|/ _ \|  _  \  |  \/  ||  ___|
- * | |_/ / |__ / /_\ \ | | |  | .  . || |__  
- * |    /|  __||  _  | | | |  | |\/| ||  __| 
- * | |\ \| |___| | | | |/ /   | |  | || |___ 
- * \_| \_\____/\_| |_/___/    \_|  |_/\____/ 
+ * | |_/ / |__ / /_\ \ | | |  | .  . || |__
+ * |    /|  __||  _  | | | |  | |\/| ||  __|
+ * | |\ \| |___| | | | |/ /   | |  | || |___
+ * \_| \_\____/\_| |_/___/    \_|  |_/\____/
  *
  * To connect to the FastApps server, you need to replace all of the "parksearch.table"
  * lines to the name of your database on the FastApps server, like this: "n9440488.table"
@@ -57,7 +57,7 @@ function submitReview($UserID, $ParkID, $Description, $Rating) {
 		$stmt->bindValue(':Rating', $Rating);
 		$stmt->bindValue(':Description', $Description);
 		$stmt->execute();
-		
+
 		return true;
 	} catch (PDOException $e) {
 		echo $e->getMessage();
@@ -103,11 +103,11 @@ function populateSuburbMenu() {
         echo '</select>';
 }
 
-function getParksWithinRange($userLatitude, $userLongitude, $userDistance){
+function searchParksByDistance($userLatitude, $userLongitude, $userDistance){
   global $pdo;
 
   try {
-      $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb, (
+      $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb, (
         6371 * acos (
           cos ( radians(:userLatitude) )
           * cos( radians( Latitude ) )
@@ -125,12 +125,11 @@ function getParksWithinRange($userLatitude, $userLongitude, $userDistance){
       $query->execute();
       $results = $query->fetchAll();
 
-      // Call outputSearchResults to output results table
-      outputSearchResults($results);
-
   } catch (PDOException $ex) {
       echo $ex->getMessage();
   }
+
+  return $results;
 }
 
 function showAllParks() {
@@ -162,27 +161,67 @@ function showAllParks() {
     echo '</table>';
 }
 
-function getParkMapInfo($parkName, $suburb){
-  global $pdo;
+function searchParkByName($parkName) {
 
-  // Add ratings to the search
-  // Join reviews table
+    global $pdo;
 
-  try {
-      $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude
-              FROM parks
-              WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
-      $query = $pdo->prepare($sql);
-      $query->bindParam(':suburb', $suburb);
-      $query->bindParam(':name', $parkName);
-      $query->execute();
-      $results = $query->fetchAll();
+    try {
+        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb
+                FROM parksearch.parks
+                WHERE Name LIKE CONCAT("%", :name, "%")';
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':name', $parkName);
+        $query->execute();
+        $results = $query->fetchAll();
 
-  } catch (PDOException $ex) {
-      echo $ex->getMessage();
-  }
 
-  return $results;
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+    }
+
+    return $results;
+}
+
+function searchParkBySuburb($suburb) {
+
+    global $pdo;
+
+    try {
+        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb
+                FROM parksearch.parks
+                WHERE Suburb LIKE CONCAT("%", :suburb, "%")';
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':suburb', $suburb);
+        $query->execute();
+        $results = $query->fetchAll();
+
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+    }
+
+    return $results;
+}
+
+function searchParkByRating($rating) {
+
+    global $pdo;
+
+    try {
+        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb, Rating
+                FROM parksearch.parks JOIN parksearch.reviews
+                WHERE parks.ID = reviews.ParkID
+                AND reviews.rating = :rating';
+
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':rating', $rating);
+        $query->execute();
+        $results = $query->fetchAll();
+
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+    }
+
+    return $results;
 }
 
 function searchForParks($parkName, $suburb) {
@@ -208,24 +247,46 @@ function searchForParks($parkName, $suburb) {
     } catch (PDOException $ex) {
         echo $ex->getMessage();
     }
-    
+
     return $results;
 }
 
 function outputSearchResults($results){
-    echo '<table>';
+    if (!empty($results)){
+      echo '<table>';
 
-    echo '<tr>';
-    echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
-    echo '</tr>';
+      echo '<tr>';
+      echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
+      echo '</tr>';
 
-    foreach ($results as $park)
-    {
-        echo "<td>{$park['ParkCode']}</td><td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a></td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
-        echo '</tr>';
+      foreach ($results as $park)
+      {
+          echo "<td>{$park['ParkCode']}</td><td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a></td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
+          echo '</tr>';
+      }
+
+      echo '</table>';
+    } else {
+      echo 'No parks found!';
     }
 
-    echo '</table>';
+}
+
+function displayMapResults($results){
+
+  if (!empty($results)){
+    $encodedLocations = json_encode($results);
+
+    echo '<script>',
+        "var locations = $encodedLocations;",
+        '</script>';
+
+  echo '<div id="results-map"></div>',
+  '<script type="text/javascript">',
+  'initResultsMap(locations);',
+  '</script>';
+  }
+
 }
 
 ?>

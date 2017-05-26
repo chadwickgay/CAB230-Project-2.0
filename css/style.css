@@ -46,7 +46,7 @@
 }
 
 .three.columns {
-    width: 30.6666666667%;
+    width: 24%;
 }
 
 
@@ -127,7 +127,7 @@ p {
 
 
 
-/* Header 
+/* Header
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 header {
@@ -245,7 +245,7 @@ input[type="button"]:focus {
 }
 
 
-/* Hero Image 
+/* Hero Image
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 #hero-image {
@@ -275,7 +275,7 @@ select {
     border-radius: 4px;
     box-shadow: none;
     box-sizing: border-box;
-    width: 400px;
+    width: 80%;
     color: grey;
 }
 
@@ -449,9 +449,3 @@ footer {
     text-align: center;
     margin-top: 10px;
 }
-
-
-
-
-
-

@@ -22,8 +22,8 @@ include("server/PHP/master.php");
 
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script type="text/javascript" src="scripts/map.js"></script> 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap"></script> 
+  <script type="text/javascript" src="scripts/map.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&callback=initMap"></script>
 </head>
 
 <body>
@@ -44,38 +44,35 @@ include("server/PHP/master.php");
 
         <?php
 
-        if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating'])){
-            
-            $parkName = isset($_GET["park-name"]) ? $_GET["park-name"] : '';
-            $suburb = isset($_GET["suburb"]) ? $_GET["suburb"] : '';
-            $rating = isset($_GET["rating"]) ? $_GET["rating"] : '';
-            
-            
-            $encodedLocations = json_encode(getParkMapInfo($parkName, $suburb));
-            
-            echo '<script>',
-                "var locations = $encodedLocations;",
-                '</script>';
-            
-			echo '<div id="results-map"></div>', 
-				'<script type="text/javascript">', 
-				'initResultsMap(locations);',
-				'</script>';
-            
-            searchForParks($parkName, $suburb);
-        }
+if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating']) || isset($_GET['distance'])){
+  if (isset($_GET['park-name'])){
+    $parkName = $_GET["park-name"];
+    $results = searchParkByName($parkName);
 
-        if (isset($_GET['distance'])){
-            $userDistance = isset($_GET["distance"]) ? $_GET["distance"] : '';
-            $userLatitude=(isset($_GET['lat']))?$_GET['lat']:'';
-            $userLongitude=(isset($_GET['long']))?$_GET['long']:'';
+  } else if (isset($_GET['suburb'])){
 
-            echo $userDistance;
-            $userLatitude = '-27.4366260';
-            $userLongitude = '153.0588840';
+    $suburb = $_GET["suburb"];
+    $results = searchParkBySuburb($suburb);
 
-            getParksWithinRange($userLatitude, $userLongitude, $userDistance);
-        }
+    var_dump($results);
+
+  } else if (isset($_GET['rating'])){
+    $rating = $_GET["rating"];
+    $results = searchParkByRating($rating);
+
+  } else if (isset($_GET['distance'])){
+    $userDistance = $_GET["distance"];
+    $userLatitude= $_GET['lat'];
+    $userLongitude= $_GET['long'];
+    $results = searchParksByDistance($userLatitude, $userLongitude, $userDistance);
+  }
+
+  // Display results page map with park markers
+  displayMapResults($results);
+
+  // Call outputSearchResults to output results table
+  outputSearchResults($results);
+}
 
         ?>
 
