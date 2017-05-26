@@ -15,15 +15,15 @@
         <div class="park-review">
 
             <div class="rating">
-                <input type="radio" id="rating5" name="rating" value=5 <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
+                <input type="checkbox" id="rating5" name="rating" value=5 onclick='checkboxDeselectOthers(this);' <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
                 <label for="rating5"> &#9733;</label>
-                <input type="radio" id="rating4" name="rating" value=4 <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
+                <input type="checkbox" id="rating4" name="rating" value=4 onclick='checkboxDeselectOthers(this);' <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
                 <label for="rating4">&#9733;</label>
-                <input type="radio" id="rating3" name="rating" value=3 <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
+                <input type="checkbox" id="rating3" name="rating" value=3 onclick='checkboxDeselectOthers(this);' <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
                 <label for="rating3">&#9733;</label>
-                <input type="radio" id="rating2" name="rating" value=2 <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
+                <input type="checkbox" id="rating2" name="rating" value=2 onclick='checkboxDeselectOthers(this);' <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
                 <label for="rating2">&#9733;</label>
-                <input type="radio" id="rating1" name="rating" value=1 <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
+                <input type="checkbox" id="rating1" name="rating" value=1 onclick='checkboxDeselectOthers(this);' <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>>
                 <label for="rating1">&#9733;</label>
             </div>
             <br>

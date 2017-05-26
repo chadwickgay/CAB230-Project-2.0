@@ -44,6 +44,15 @@ function redirectToPage(page) {
 	return false;
 }
 
+function checkboxDeselectOthers(currentElement) {
+	var radios = currentElement.parentNode.getElementsByTagName("input");
+	for (var i = 0; i < radios.length; i++) {
+		if (radios[i] != currentElement) {
+			radios[i].checked = false;
+		}
+	}
+}
+
 function validateFirstName(formName) {
     // Format for valid name
     // Allows spaces/hyphen/period as part of name
