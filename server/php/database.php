@@ -47,10 +47,10 @@ function generate_uid() {
 function submitReview($UserID, $ParkID, $Description, $Rating) {
 	try {
 		global $pdo;
-		$stmt = $pdo->prepare("DELETE FROM parksearch.reviews WHERE UserID=:UserID");
+		$stmt = $pdo->prepare("DELETE FROM reviews WHERE UserID=:UserID");
 		$stmt->bindValue(':UserID', $UserID);
 		$stmt->execute();
-		$stmt = $pdo->prepare("INSERT INTO parksearch.reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
+		$stmt = $pdo->prepare("INSERT INTO reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
 		$stmt->bindValue(':ParkID', $ParkID);
 		$stmt->bindValue(':UserID', $UserID);
 		$stmt->bindValue(':Date', date('Y-m-d', time()));
@@ -68,7 +68,7 @@ function submitReview($UserID, $ParkID, $Description, $Rating) {
 function login($email, $password) {
 	try {
 		global $pdo;
-		$stmt = $pdo->prepare('SELECT ID FROM parksearch.members WHERE Email=:email AND Password=SHA2(CONCAT(:password, Salt), 0)');
+		$stmt = $pdo->prepare('SELECT ID FROM members WHERE Email=:email AND Password=SHA2(CONCAT(:password, Salt), 0)');
 		$stmt->bindValue(':email', $email);
 		$stmt->bindValue(':password', $password);
 		$stmt->execute();
@@ -91,7 +91,7 @@ function login($email, $password) {
 
 function populateSuburbMenu() {
     global $pdo;
-    $result = $pdo->query('SELECT DISTINCT Suburb FROM parksearch.parks ORDER BY Suburb;');
+    $result = $pdo->query('SELECT DISTINCT Suburb FROM parks ORDER BY Suburb;');
     echo('
         <select name="suburb" class="suburb-select">
         <option disabled selected style="...">select</option>
@@ -116,7 +116,7 @@ function getParksWithinRange($userLatitude, $userLongitude, $userDistance){
           * sin( radians( Latitude ) )
         )
       ) AS distance
-              FROM parksearch.parks
+              FROM parks
               HAVING distance < :userDistance';
       $query = $pdo->prepare($sql);
       $query->bindParam(':userLatitude', $userLatitude);
@@ -170,7 +170,7 @@ function getParkMapInfo($parkName, $suburb){
 
   try {
       $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude
-              FROM parksearch.parks
+              FROM parks
               WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
       $query = $pdo->prepare($sql);
       $query->bindParam(':suburb', $suburb);
@@ -194,7 +194,7 @@ function searchForParks($parkName, $suburb) {
 
     try {
         $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb
-                FROM parksearch.parks
+                FROM parks
                 WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':suburb', $suburb);

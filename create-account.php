@@ -61,23 +61,31 @@
 			include("server/PHP/master.php");
 
 			try {
-				$stmt = $pdo->prepare('INSERT INTO n9440488.members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
+				$stmt = $pdo->prepare('SELECT Email FROM members WHERE Email=:email');
 				$stmt->bindValue(':email', $_POST['email']);
-				$stmt->bindValue(':salt', generate_uid());
-				$stmt->bindValue(':password', $_POST['password']);
-				$stmt->bindValue(':firstname', $_POST['first-name']);
-				$stmt->bindValue(':lastname', $_POST['last-name']);
-				$tmp_dob = explode('/', $_POST['dob']);
-				$tmp_dob = ''.$tmp_dob[2].'-'.$tmp_dob[1].'-'.$tmp_dob[0];
-				$stmt->bindValue(':dob', $tmp_dob);
-				$stmt->bindValue(':genderid', $_POST['gender']);
 				$stmt->execute();
-
-				if (login($_POST['email'], $_POST['password'])) {
-          echo 'You have successfully logged in!';
-					echo "<script>redirectToPage('/');</script>";
+				if ($stmt != false && $stmt->rowCount()) {
+					echo 'An account with this email address already exists!<br>';
+					echo "Email: \"".$_POST['email']."\"<br>";
 				} else {
-					echo 'Internal Error #789h';
+					$stmt = $pdo->prepare('INSERT INTO members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
+					$stmt->bindValue(':email', $_POST['email']);
+					$stmt->bindValue(':salt', generate_uid());
+					$stmt->bindValue(':password', $_POST['password']);
+					$stmt->bindValue(':firstname', $_POST['first-name']);
+					$stmt->bindValue(':lastname', $_POST['last-name']);
+					$tmp_dob = explode('/', $_POST['dob']);
+					$tmp_dob = ''.$tmp_dob[2].'-'.$tmp_dob[1].'-'.$tmp_dob[0];
+					$stmt->bindValue(':dob', $tmp_dob);
+					$stmt->bindValue(':genderid', $_POST['gender']);
+					$stmt->execute();
+
+					if (login($_POST['email'], $_POST['password'])) {
+			  echo 'You have successfully logged in!';
+						echo "<script>redirectToPage('/');</script>";
+					} else {
+						echo 'Internal Error #789h';
+					}
 				}
 			}  catch (PDOException $e) {
 				echo $e->getMessage();
