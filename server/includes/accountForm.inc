@@ -17,7 +17,7 @@
             <span id="dobErr"></span>
 
             <label for="email">Email</label>
-            <input type="text" name="email" id="email" placeholder="email@example.com" onkeypress="resetErrorState('email', 'emailErr', 'createAccount')" />
+            <input type="text" name="email" id="email" placeholder="email@example.com" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" onkeypress="resetErrorState('email', 'emailErr', 'createAccount')" />
             <!-- NEED TO REPOPULATE -->
             <br>
             <span id="emailErr"></span>
