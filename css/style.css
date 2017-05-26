@@ -50,7 +50,7 @@
 }
 
 .four.columns {
-    width: 24%;
+    width: 22%;
 }
 
 
@@ -279,7 +279,7 @@ select {
     border-radius: 4px;
     box-shadow: none;
     box-sizing: border-box;
-    width: 80%;
+    width: 90%;
     color: grey;
 }
 

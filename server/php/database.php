@@ -253,6 +253,7 @@ function searchForParks($parkName, $suburb) {
 
 function outputSearchResults($results){
     if (!empty($results)){
+      echo '<div class="row">';
       echo '<table>';
 
       echo '<tr>';
@@ -267,8 +268,10 @@ function outputSearchResults($results){
 
       echo '</table>';
     } else {
-      echo 'No parks found!';
+      echo '<p>No parks found!</p>';
     }
+    echo '</div>';
+
 
 }
 
@@ -276,6 +279,8 @@ function displayMapResults($results){
 
   if (!empty($results)){
     $encodedLocations = json_encode($results);
+
+    echo '<div class = "row">';
 
     echo '<script>',
         "var locations = $encodedLocations;",
@@ -286,6 +291,8 @@ function displayMapResults($results){
   'initResultsMap(locations);',
   '</script>';
   }
+
+      echo '</div>';
 
 }
 
