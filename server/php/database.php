@@ -207,10 +207,15 @@ function searchParkByRating($rating) {
     global $pdo;
 
     try {
-        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb, Rating
-                FROM parksearch.parks JOIN parksearch.reviews
-                WHERE parks.ID = reviews.ParkID
-                AND reviews.rating = :rating';
+        $sql = 'SELECT ParkCode, Name, Latitude, Longitude, Street, Suburb, AvgRating
+				FROM (
+				SELECT ROUND(Avg(Rating),0) AS AvgRating, ParkCode, Name, Latitude, Longitude, Street, Suburb
+				FROM parks JOIN reviews
+				WHERE parks.ID = reviews.ParkID
+				GROUP BY ParkCode
+				) result
+				WHERE AvgRating >= :rating
+				ORDER BY AvgRating ASC';
 
         $query = $pdo->prepare($sql);
         $query->bindParam(':rating', $rating);
