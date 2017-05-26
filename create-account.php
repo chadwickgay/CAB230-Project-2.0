@@ -44,7 +44,7 @@
         validateLastName($errors, $_POST, 'last-name');
         validateGender($errors, $_POST, 'gender');
         validateDOB($errors, $_POST, 'dob');
-		validateFieldNotEmpty($errors, $_POST, 'password');
+		    validatePassword($errors, $_POST, 'password');
         if ($errors) {
             ## want to put a red box around this output to highlight the errors
             echo '<div class="validation">';

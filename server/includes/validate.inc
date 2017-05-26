@@ -76,5 +76,8 @@ function validateDOB(&$errors, $field_list, $field_name) {
     }
 }
 
-
-
+function validatePassword(&$errors, $field_list, $field_name) {
+    if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
+        $errors[$field_name] = 'Password is required';
+}
+}

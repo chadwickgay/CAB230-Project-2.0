@@ -8,7 +8,7 @@
 	?>
 	<?php $ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : ""); ?>
     <form method="POST" action="park.php?ParkCode=<?php echo $ParkCode; ?>" name="park-review" onsubmit="<?php echo isset($_SESSION['logged']) ? 'return validateReview();' : 'return redirectToLogin();' ?>">
-		
+
         <div class="park-review">
 
             <div class="rating">
