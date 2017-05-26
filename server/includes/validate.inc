@@ -23,6 +23,13 @@ function validateFieldNotEmpty(&$errors, $field_list, $field_name) {
 	return true;
 }
 
+function posted_value($name) {
+	if(isset($_POST[$name])) {
+		return htmlspecialchars($_POST[$name]);
+	}
+	return NULL;
+}
+
 function validateFirstName(&$errors, $field_list, $field_name) {
     $pattern = '/^[a-zA-Z -]+$/';
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {

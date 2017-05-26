@@ -27,11 +27,11 @@
         <div class="two columns">
             <label for="gender">Gender</label>
             <select class="gender-select" name="gender" id="gender">
-                <option value="DEFAULT" disabled selected style="display: none;">select</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">Other</option>
-                <option value="0">Undisclosed</option>
+                <option selected value="DEFAULT" disabled style="display: none;">select</option>
+                <option <?php echo posted_value('gender') == 1 ? 'selected' : '' ?> value="1">Male</option>
+                <option <?php echo posted_value('gender') == 2 ? 'selected' : '' ?> value="2">Female</option>
+                <option <?php echo posted_value('gender') == 3 ? 'selected' : '' ?> value="3">Other</option>
+                <option <?php echo posted_value('gender') === 0 ? 'selected' : '' ?> value="0">Undisclosed</option>
             </select>
             <br>
             <span id="genderErr"></span>

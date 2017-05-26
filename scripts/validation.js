@@ -210,9 +210,11 @@ function validatePassword() {
 
     //Compare the values in the password field 
     //and the confirmation field
-    if (pass1.value == "") {
-        pass1.style.backgroundColor = errorColour;
-        pass2.style.backgroundColor = errorColour;
+    if (pass1.value == "" || pass2.value == "") {
+		if (pass1.value == "")
+			pass1.style.backgroundColor = errorColour;
+		if (pass2.value == "")
+			pass2.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "You must enter a password!";
         return false;
@@ -229,7 +231,10 @@ function validatePassword() {
         //The passwords do not match.
         //Set the color to the bad color and
         //notify the user.
+		pass1.style.backgroundColor = errorColour;
         pass2.style.backgroundColor = errorColour;
+		pass1.value = "";
+		pass2.value = "";
         message.style.color = errorColour;
         message.innerHTML = "Passwords Do Not Match!"
         return false;
