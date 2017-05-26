@@ -2,6 +2,9 @@
 
     <h4>Enter your review</h4>
 	<?php
+  if (!isset($_SESSION['logged'])) {
+    echo "You must be logged in to leave a review.";
+  }
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}

@@ -322,6 +322,12 @@ label>.label-body {
     font-weight: normal;
 }
 
+input[type='text'][disabled], textarea[disabled] {
+	background-color: #EBEBE4;
+}
+
+
+
 /* Errors
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -418,7 +424,6 @@ tr:hover {
     color: orange;
     font-size: 24px;
 }
-
 
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
