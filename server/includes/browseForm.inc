@@ -21,6 +21,7 @@
       <label for="rating">Park Rating</label>
       <select class="rating-select" name="rating" id="rating">
           <option value="" disabled selected style="display: none;">Select rating</option>
+          <option value="0">0</option>
           <option value="1">&#9733;</option>
           <option value="2">&#9733; &#9733;</option>
           <option value="3">&#9733; &#9733; &#9733;</option>
