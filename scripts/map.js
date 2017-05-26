@@ -64,7 +64,7 @@ function initResultsMap(locations) {
 
 		google.maps.event.addListener(marker, 'click', (function (marker, i) {
 			return function () {
-				infowindow.setContent(contentString);
+				infowindow.setContent('<a href="park.php?ParkCode=' + locations[i][0].toString() + '">' + locations[i][1].toString() + '</a>');
 				infowindow.open(map, marker);
 			}
 		})(marker, i));
