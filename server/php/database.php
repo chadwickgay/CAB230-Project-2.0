@@ -167,7 +167,7 @@ function searchParkByName($parkName) {
 
     try {
         $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb
-                FROM parksearch.parks
+                FROM parks
                 WHERE Name LIKE CONCAT("%", :name, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':name', $parkName);
@@ -188,7 +188,7 @@ function searchParkBySuburb($suburb) {
 
     try {
         $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb
-                FROM parksearch.parks
+                FROM parks
                 WHERE Suburb LIKE CONCAT("%", :suburb, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':suburb', $suburb);
