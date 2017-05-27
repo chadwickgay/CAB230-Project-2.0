@@ -204,7 +204,7 @@ include("server/PHP/database.php");
                 <div class="park-reviews" itemscope itemtype="http://schema.org/Review">
                     <?php
                     echo '<br /><hr />';
-                    echo '<h4 itemprop="itemReviewed">Reviews for ' . $Park['Name'] . '</h4>';
+                    echo '<h4 itemprop="itemReviewed">REVIEWS FOR ' . $Park['Name'] . '</h4>';
 
                     $Reviews = array();
                     if ($Park['ID'] > 0) {
