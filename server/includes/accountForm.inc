@@ -34,7 +34,7 @@
 
         <div class="two columns">
             <label for="gender">Gender</label>
-            <select class="gender-select" name="gender" id="gender">
+            <select class="gender-select" name="gender" id="gender" onChange="resetErrorState('gender', 'genderErr', 'createAccount')">
                 <option selected value="DEFAULT" disabled style="display: none;">select</option>
                 <option <?php echo posted_value('gender') == 1 ? 'selected' : '' ?> value="1">Male</option>
                 <option <?php echo posted_value('gender') == 2 ? 'selected' : '' ?> value="2">Female</option>
