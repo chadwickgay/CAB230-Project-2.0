@@ -226,7 +226,6 @@ include("server/PHP/database.php");
 
             </div>
 
-
         </div>
 
 
