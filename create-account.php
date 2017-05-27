@@ -21,6 +21,7 @@ include("server/PHP/formFunctions.php");
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" href="images/favicon.png?version=1">
 
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
