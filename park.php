@@ -54,7 +54,7 @@ include("server/PHP/master.php");
 			}
 			echo '</span>';
 		}
-	
+
 		$ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
 		$Park = array('ID' => -1, 'RatingAvg' => -1);
 		$Parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM parks WHERE ParkCode=:parkcode");
@@ -106,18 +106,22 @@ include("server/PHP/master.php");
                 <div class="park-information">
 					<?php
 						if ($Park['ID'] > 0) {
-							echo '<h4>'.$Park['Name'].'</h4>';
+              echo '<div itemscope itemtype="http://schema.org/Place">';
+
+              echo '<h4 itemprop="name">'.$Park['Name'].'</h4>';
 
 							echo '<h5>Street:</h5>';
-							echo '<p>'.$Park['Street'].'</p>';
+							echo '<p itemprop="address">'.$Park['Street'].'</p>';
 
 							echo '<h5>Suburb:</h5>';
-							echo '<p>'.$Park['Suburb'].'</p>';
+							echo '<p itemprop="address">'.$Park['Suburb'].'</p>';
 
 							echo '<h5>Average Rating:</h5>';
 							echo '<p>';
 							echoStars($Park['RatingAvg']);
 							echo '</p>';
+
+              echo '</div>';
 
 						} else {
 							echo '<h4>Unknown Park.</h4>';
@@ -135,7 +139,7 @@ include("server/PHP/master.php");
                 if (isset($_POST['txtcomment']) && isset($_SESSION['logged'])) {
                     require 'server/includes/validate.inc';
                     validateReview($errors, $_POST, 'txtcomment');
-					
+
                     if ($errors) {
                         ## want to put a red box around this output to highlight the errors
                         echo '<div class="validation">';
