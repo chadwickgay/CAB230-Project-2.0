@@ -1,39 +1,33 @@
 <form name="createAccount" method="POST" action="create-account.php">
     <div class="row">
         <div class="two columns">
-            <label for="first-name">First Name</label>
-            <input type="text" placeholder="John" name="first-name" id="first-name"
-                   value="<?php echo isset($_POST['first-name']) ? $_POST['first-name'] : ''; ?>"
-                   onkeypress="resetErrorState('first-name', 'first-nameErr', 'createAccount')"/>
-            <br>
-            <span id="first-nameErr"></span>
-
-            <label for="last-name">Last Name</label>
+			
+			<?php createInputField("text", "first-name", "First Name", "first-nameErr", "createAccount"); ?>
+			
+			<?php createLabel("last-name", "Last Name"); ?>
             <input type="text" placeholder="Smith" name="last-name" id="last-name"
-                   value="<?php echo isset($_POST['last-name']) ? $_POST['last-name'] : ''; ?>"
+                   <?php createPostedValue("last-name"); ?>
                    onkeypress="resetErrorState('last-name', 'last-nameErr', 'createAccount')"/>
             <br>
-            <span id="last-nameErr"></span>
+			<?php createErrorLabel("last-nameErr"); ?>
 
-            <label for="dob">Date of Birth (dd/mm/yyyy)</label>
+			<?php createLabel("dob", "Date of Birth (dd/mm/yyyy)"); ?>
             <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy"
-                   value="<?php echo isset($_POST['dob']) ? $_POST['dob'] : ''; ?>"
+                   <?php createPostedValue("dob"); ?>
                    onkeypress="resetErrorState('dob', 'dobErr', 'createAccount')"/>
             <br>
-            <span id="dobErr"></span>
+			<?php createErrorLabel("dobErr"); ?>
 
-            <label for="email">Email</label>
+			<?php createLabel("email", "Email"); ?>
             <input type="text" name="email" id="email" placeholder="email@example.com"
-                   value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>"
+                   <?php createPostedValue("email"); ?>
                    onkeypress="resetErrorState('email', 'emailErr', 'createAccount')"/>
-
             <br>
-            <span id="emailErr"></span>
-
+			<?php createErrorLabel("emailErr"); ?>
         </div>
 
         <div class="two columns">
-            <label for="gender">Gender</label>
+			<?php createLabel("gender", "Gender"); ?>
             <select class="gender-select" name="gender" id="gender">
                 <option selected value="DEFAULT" disabled style="display: none;">select</option>
                 <option <?php echo posted_value('gender') == 1 ? 'selected' : '' ?> value="1">Male</option>
@@ -42,9 +36,9 @@
                 <option <?php echo posted_value('gender') === 0 ? 'selected' : '' ?> value="0">Undisclosed</option>
             </select>
             <br>
-            <span id="genderErr"></span>
+			<?php createErrorLabel("genderErr"); ?>
 
-            <label for="password1">Password</label>
+			<?php createLabel("password1", "Password"); ?>
             <input type="password" name="password" id="password1" placeholder="password"
                    onkeypress="resetErrorState('password', 'passwordErr', 'createAccount')"/>
             <br>
@@ -52,10 +46,8 @@
             <input type="password" name="confirm-password" id="password2" placeholder="confirm password"
                    onkeypress="resetErrorState('confirm-password', 'passwordErr', 'createAccount')"/>
             <br>
-            <span id="passwordErr"></span>
-
+			<?php createErrorLabel("passwordErr"); ?>
         </div>
-
     </div>
 
     <div class="row">
