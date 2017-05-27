@@ -57,35 +57,3 @@
     </div>
 </div>
 
-
-<!--
-
-<form method="GET" action="browse.php" name="browse">
-
-    <div class="row">
-
-        <div class="two columns">
-
-
-
-            <br>
-        </div>
-
-        <div class="two columns">
-
-
-            <br>
-
-
-
-
-        </div>
-
-    </div>
-    <div class="one column">
-
-
-    </div>
-
-</form>
--->
