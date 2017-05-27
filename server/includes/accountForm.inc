@@ -1,57 +1,23 @@
 <form name="createAccount" method="POST" action="create-account.php">
     <div class="row">
         <div class="two columns">
-			<?php createInputField("text", "first-name", "First Name", "first-nameErr", "createAccount"); ?>
-			
-			<?php createLabel("last-name", "Last Name"); ?>
-            <input type="text" placeholder="Smith" name="last-name" id="last-name"
-                   <?php createPostedValue("last-name"); ?>
-                   onkeypress="resetErrorState('last-name', 'last-nameErr', 'createAccount')"/>
-            <br>
-			<?php createErrorLabel("last-nameErr"); ?>
-			
-			<?php createLabel("dob", "Date of Birth (dd/mm/yyyy)"); ?>
-            <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy"
-                   <?php createPostedValue("dob"); ?>
-                   onkeypress="resetErrorState('dob', 'dobErr', 'createAccount')"/>
-            <br>
-			<?php createErrorLabel("dobErr"); ?>
-
-			<?php createLabel("email", "Email"); ?>
-            <input type="text" name="email" id="email" placeholder="email@example.com"
-                   <?php createPostedValue("email"); ?>
-                   onkeypress="resetErrorState('email', 'emailErr', 'createAccount')"/>
-            <br>
-			<?php createErrorLabel("emailErr"); ?>
+			<?php 
+				createInputField("text", "", "first-name", "First Name", "John", "first-nameErr", "createAccount");
+				createInputField("text", "", "last-name", "Last Name", "Smith", "last-nameErr", "createAccount");
+				createInputField("text", "", "dob", "Date of Birth (dd/mm/yyyy)", "dd/mm/yyyy", "dobErr", "createAccount");
+				createInputField("text", "", "email", "Email", "johnsmith@example.com", "emailErr", "createAccount"); 
+			?>
         </div>
 
         <div class="two columns">
-			<?php createLabel("gender", "Gender"); ?>
-            <select class="gender-select" name="gender" id="gender">
-                <option selected value="DEFAULT" disabled style="display: none;">select</option>
-                <option <?php echo posted_value('gender') == 1 ? 'selected' : '' ?> value="1">Male</option>
-                <option <?php echo posted_value('gender') == 2 ? 'selected' : '' ?> value="2">Female</option>
-                <option <?php echo posted_value('gender') == 3 ? 'selected' : '' ?> value="3">Other</option>
-                <option <?php echo posted_value('gender') === 0 ? 'selected' : '' ?> value="0">Undisclosed</option>
-            </select>
-            <br>
-			<?php createErrorLabel("genderErr"); ?>
-			
-			<?php createLabel("password1", "Password"); ?>
-            <input type="password" name="password" id="password1" placeholder="password"
-                   onkeypress="resetErrorState('password', 'passwordErr', 'createAccount');
-                   resetErrorState('confirm-password', 'passwordErr', 'createAccount') "/>
-            <br>
-            <input type="password" name="confirm-password" id="password2" placeholder="confirm password"
-                   onkeypress="resetErrorState('password', 'passwordErr', 'createAccount');
-                   resetErrorState('confirm-password', 'passwordErr', 'createAccount') "/>
-            <br>
-			<?php createErrorLabel("passwordErr"); ?>
+			<?php 
+				createSelectField("gender", "gender-select", "gender", "Gender", ["Male", "Female", "Other", "Undisclosed"], ["1", "2", "3", "0"], "select", "genderErr");
+				createInputField("password", "password1", "password", "Password", "password", "passwordErr", "createAccount"); 
+				createInputField("password", "password2", "password", "Confirm Password", "confirm password", "passwordErr", "createAccount");
+			?> 
         </div>
     </div>
-
-
-
+	
     <div class="row">
         <div class="one column">
             <input name="register" type="submit" value="Submit" onclick="return validateCreateAccount()">
