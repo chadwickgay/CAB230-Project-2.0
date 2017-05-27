@@ -2,6 +2,7 @@
 
 $error = ""; // Initialize error as blank
 
+//Whatever includes this file will have all of these variables set if the POST contains submit
 if (isset($_POST['submit'])) { // check if the form is submitted
 
     $first_name = trim($_POST['first_name']);
@@ -15,6 +16,7 @@ if (isset($_POST['submit'])) { // check if the form is submitted
 
 ### Start of input validation functions ###
 
+//a helper function for ensuring that a field is not left blank
 function validateFieldNotEmpty(&$errors, $field_list, $field_name) {
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name]) || $field_list[$field_name] == 'NULL') {
         $errors[$field_name] = 'required';
@@ -23,6 +25,7 @@ function validateFieldNotEmpty(&$errors, $field_list, $field_name) {
     return true;
 }
 
+//a helper function for returning the POSTed value of a particular variable
 function posted_value($name) {
     if (isset($_POST[$name])) {
         return htmlspecialchars($_POST[$name]);
@@ -30,6 +33,7 @@ function posted_value($name) {
     return NULL;
 }
 
+//a helper function for validating any firstname input fields
 function validateFirstName(&$errors, $field_list, $field_name) {
     $pattern = '/^[a-zA-Z -]+$/';
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
@@ -39,6 +43,7 @@ function validateFirstName(&$errors, $field_list, $field_name) {
     }
 }
 
+//a helper function for validating the review description content
 function validateReview(&$errors, $field_list, $field_name) {
     $pattern = '/^[a-zA-Z0-9 :;.,_~\-?!@#\$%\^&\*\(\)]+$/';
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
@@ -48,6 +53,7 @@ function validateReview(&$errors, $field_list, $field_name) {
     }
 }
 
+//a helper function for validating any lastname input fields
 function validateLastName(&$errors, $field_list, $field_name) {
     $pattern = '/^[a-zA-Z -]+$/';
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
@@ -57,6 +63,7 @@ function validateLastName(&$errors, $field_list, $field_name) {
     }
 }
 
+//a helper function for validating any email fields
 function validateEmail(&$errors, $field_list, $field_name) {
     $pattern = '/^[a-z][a-zA-Z0-9_.-]*(\.[a-zA-Z][a-zA-Z0-9_.-]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/';
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
@@ -66,14 +73,15 @@ function validateEmail(&$errors, $field_list, $field_name) {
     }
 }
 
+//a helper function for ensuring the gender field has been filled
+//TODO -----------------------------check that this function still works
 function validateGender(&$errors, $field_list, $field_name) {
-
     if (!isset($field_list[$field_name]) == 'DEFAULT') {
         $errors[$field_name] = 'Gender is required';
-
     }
 }
 
+//a helper function for validating the date of birth field
 function validateDOB(&$errors, $field_list, $field_name) {
     $pattern = '/^(?:(?:31(\/)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/';
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
@@ -83,6 +91,7 @@ function validateDOB(&$errors, $field_list, $field_name) {
     }
 }
 
+//a helper function for validating that the password input field is valid
 function validatePassword(&$errors, $field_list, $field_name) {
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
         $errors[$field_name] = 'Password is required';

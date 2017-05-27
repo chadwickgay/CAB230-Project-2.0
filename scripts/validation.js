@@ -19,11 +19,31 @@ function validateCreateAccount() {
 
 // Calls all necessary validation functions for validation of login input
 function validateLogin() {
-    if (validateEmail("login")) {
+    if (validateEmail('login') && validateLoginPassword('login')) {
         return true;
     } else {
         return false;
     }
+}
+
+// Calls all neccessary validation functions if password is invalid.
+// returns boolean whether it is valid or not.
+function validateLoginPassword(formName) {
+    //Store the password field objects into variables ...
+    var passwordObj = document.forms[formName]["password"];
+
+    //Store the Error Message Object ...
+    var message = document.getElementById('passwordErr');
+
+    if (passwordObj.value == undefined || passwordObj.value == "") {
+        // If no selection has been made
+        message.innerHTML = "You must enter a password!";
+		setErrorState(passwordObj, message);
+        return false;
+    } else {
+        return true;
+    }
+
 }
 
 // Calls all necessary validation functions for validation of review input
