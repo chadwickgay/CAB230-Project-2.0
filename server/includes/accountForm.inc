@@ -46,11 +46,13 @@
 
             <label for="password1">Password</label>
             <input type="password" name="password" id="password1" placeholder="password"
-                   onkeypress="resetErrorState('password', 'passwordErr', 'createAccount')"/>
+                   onkeypress="resetErrorState('password', 'passwordErr', 'createAccount');
+                   resetErrorState('confirm-password', 'passwordErr', 'createAccount') "/>
             <br>
 
             <input type="password" name="confirm-password" id="password2" placeholder="confirm password"
-                   onkeypress="resetErrorState('confirm-password', 'passwordErr', 'createAccount')"/>
+                   onkeypress="resetErrorState('password', 'passwordErr', 'createAccount');
+                   resetErrorState('confirm-password', 'passwordErr', 'createAccount') "/>
             <br>
             <span id="passwordErr"></span>
 
