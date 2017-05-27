@@ -244,7 +244,7 @@ function validatePassword() {
 function validateComment(formName) {
     // Format for valid comment
     // Allows characters, numbers spaces/hyphen/period as part of comment
-    var validCommentFormat = /^[a-zA-Z0-9 ,.'-]+$/;
+    var validCommentFormat = /^[a-zA-Z0-9 :;.,_~\-?!@#\$%\^&\*\(\)]+$/;
 
     //Store the name field objects into variables ...
     var comment = document.forms[formName]["txtcomment"];
@@ -258,7 +258,7 @@ function validateComment(formName) {
         return false;
     } else if (!validCommentFormat.test(comment.value)) {
         setErrorState(comment, message);
-        message.innerHTML = "Enter your last name just using letters!";
+        message.innerHTML = "Your comment may not contain special programing characters or quotes!";
         return false;
     } else if (comment.value.length < 2 || comment.value.length > 256) {
         setErrorState(comment, message);
