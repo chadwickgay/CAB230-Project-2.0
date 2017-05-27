@@ -99,14 +99,13 @@ include("server/PHP/master.php");
 
         </div>
 
-        <div class="row">
+        <div class="row" itemscope itemtype="http://schema.org/Place">
 
             <div class="two columns">
 
                 <div class="park-information">
 					<?php
 						if ($Park['ID'] > 0) {
-              echo '<div itemscope itemtype="http://schema.org/Place">';
 
               echo '<h4 itemprop="name">'.$Park['Name'].'</h4>';
 
@@ -116,12 +115,10 @@ include("server/PHP/master.php");
 							echo '<h5>Suburb:</h5>';
 							echo '<p itemprop="address">'.$Park['Suburb'].'</p>';
 
-							echo '<h5>Average Rating:</h5>';
+							echo '<h5 itemprop="aggregateRating">Average Rating:</h5>';
 							echo '<p>';
 							echoStars($Park['RatingAvg']);
 							echo '</p>';
-
-              echo '</div>';
 
 						} else {
 							echo '<h4>Unknown Park.</h4>';
@@ -174,9 +171,10 @@ include("server/PHP/master.php");
 
             <div class="one column">
 
-                <div class="park-reviews">
-                    <h4>Reviews</h4>
+                <div class="park-reviews" itemscope itemtype="http://schema.org/Review">
 					<?php
+          echo '<h4 itemprop="name itemReviewed">Reviews for '.$Park['Name'].'</h4>';
+
 						$Reviews = array();
 						if ($Park['ID'] > 0) {
 							$Reviews2 = $pdo->prepare("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Description FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=:parkid ORDER BY Rating DESC");
@@ -192,10 +190,13 @@ include("server/PHP/master.php");
 						else {
 							foreach ($Reviews as $Review) {
 								echo '<div>';
-								echo '<h5>'.$Review['FirstName'].' '.$Review['LastName'].' ';
+								echo '<h5 itemprop="author">'.$Review['FirstName'].' '.$Review['LastName'].' ';
+                echo '</div>';
+                echo '</h5>';
+                echo '<div itemprop="reviewRating">';
 								echoStars($Review['Rating']);
-								echo '</h5>';
-								echo '<p>'.$Review['Description'].'</p>';
+                echo '</div>';
+								echo '<p itemprop="reviewBody">'.$Review['Description'].'</p>';
 								echo '</div>';
 							}
 						}
