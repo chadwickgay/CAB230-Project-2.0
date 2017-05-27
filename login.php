@@ -1,3 +1,7 @@
+<?php
+include("server/PHP/database.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,69 +27,68 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Page Navigation
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Header & Page Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('server/includes/nav.inc'); ?>
+    <?php include('server/includes/nav.inc'); ?>
 
-        <!-- Main Content
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <h3>Sign into existing account</h3>
+    <h3>Sign into existing account</h3>
 
-        <?php
-		if (session_status() == PHP_SESSION_NONE) {
-			session_start();
-		}
-		if (!isset($_SESSION['logged'])) {
-			$errors = array();
-			if (isset($_POST['email']) && isset($_POST['password'])) {
-				require 'server/includes/validate.inc';
-				validateEmail($errors, $_POST, 'email');
-				validateFieldNotEmpty($errors, $_POST, 'password');
-				if (sizeof($errors) <= 0) {
-					include("server/PHP/master.php");
-					if (login($_POST['email'], $_POST['password'])) {
-						
-					} else {
-						$errors["invalid_login"] = "The Username and/or Password provided is incorrect.";
-					}
-				}
-				if ($errors) {
-					## want to put a red box around this output to highlight the errors
-					echo '<div class="validation">';
-					echo '<h5>Invalid submission, correct the following errors:</h5>';
-					echo '<ul>';
-					foreach ($errors as $field => $error) {
-						echo "<li>$error</li>";
-					}
-					echo '</ul>';
-					echo '</div>';
-					// redisplay the form
-					include 'server/includes/loginForm.inc';
-				} else {
-					echo 'You have successfully logged in!';
-					echo "<script>redirectToPage('/');</script>";
-				}
-			} else {
-				include 'server/includes/loginForm.inc';
-			}
-		} else {
-			echo 'You are already logged in!';
-		}
-        ?>
+    <?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (!isset($_SESSION['logged'])) {
+        $errors = array();
+        if (isset($_POST['email']) && isset($_POST['password'])) {
+            require 'server/includes/validate.inc';
+            validateEmail($errors, $_POST, 'email');
+            validateFieldNotEmpty($errors, $_POST, 'password');
+            if (sizeof($errors) <= 0) {
+                if (login($_POST['email'], $_POST['password'])) {
+
+                } else {
+                    $errors["invalid_login"] = "The Username and/or Password provided is incorrect.";
+                }
+            }
+            if ($errors) {
+                ## want to put a red box around this output to highlight the errors
+                echo '<div class="validation">';
+                echo '<h5>Invalid submission, correct the following errors:</h5>';
+                echo '<ul>';
+                foreach ($errors as $field => $error) {
+                    echo "<li>$error</li>";
+                }
+                echo '</ul>';
+                echo '</div>';
+                // redisplay the form
+                include 'server/includes/loginForm.inc';
+            } else {
+                echo 'You have successfully logged in!';
+                echo "<script>redirectToPage('/');</script>";
+            }
+        } else {
+            include 'server/includes/loginForm.inc';
+        }
+    } else {
+        echo 'You are already logged in!';
+    }
+    ?>
 
 
-        <!-- Footer
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Footer
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('server/includes/footer.inc'); ?>
+    <?php include('server/includes/footer.inc'); ?>
 
-        <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    </div>
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</div>
 
 
 </body>

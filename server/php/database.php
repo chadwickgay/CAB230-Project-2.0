@@ -41,52 +41,52 @@ try {
 }
 
 function generate_uid() {
-	return uniqid('', true);
+    return uniqid('', true);
 }
 
 function submitReview($UserID, $ParkID, $Description, $Rating) {
-	try {
-		global $pdo;
-		$stmt = $pdo->prepare("DELETE FROM reviews WHERE UserID=:UserID");
-		$stmt->bindValue(':UserID', $UserID);
-		$stmt->execute();
-		$stmt = $pdo->prepare("INSERT INTO reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
-		$stmt->bindValue(':ParkID', $ParkID);
-		$stmt->bindValue(':UserID', $UserID);
-		$stmt->bindValue(':Date', date('Y-m-d', time()));
-		$stmt->bindValue(':Rating', $Rating);
-		$stmt->bindValue(':Description', $Description);
-		$stmt->execute();
+    try {
+        global $pdo;
+        $stmt = $pdo->prepare("DELETE FROM reviews WHERE UserID=:UserID");
+        $stmt->bindValue(':UserID', $UserID);
+        $stmt->execute();
+        $stmt = $pdo->prepare("INSERT INTO reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
+        $stmt->bindValue(':ParkID', $ParkID);
+        $stmt->bindValue(':UserID', $UserID);
+        $stmt->bindValue(':Date', date('Y-m-d', time()));
+        $stmt->bindValue(':Rating', $Rating);
+        $stmt->bindValue(':Description', $Description);
+        $stmt->execute();
 
-		return true;
-	} catch (PDOException $e) {
-		echo $e->getMessage();
-	}
-	return false;
+        return true;
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    return false;
 }
 
 function login($email, $password) {
-	try {
-		global $pdo;
-		$stmt = $pdo->prepare('SELECT ID FROM members WHERE Email=:email AND Password=SHA2(CONCAT(:password, Salt), 0)');
-		$stmt->bindValue(':email', $email);
-		$stmt->bindValue(':password', $password);
-		$stmt->execute();
-		if ($stmt->rowCount() > 0) {
-			$temp = $stmt->fetch();
-			if (ctype_digit($temp[0])) {
-				$id = intval($temp[0]);
-				if (session_status() == PHP_SESSION_NONE) {
-					session_start();
-				}
-				$_SESSION['logged'] = $id;
-				return true;
-			}
-		}
-	} catch (PDOException $e) {
-		echo $e->getMessage();
-	}
-	return false;
+    try {
+        global $pdo;
+        $stmt = $pdo->prepare('SELECT ID FROM members WHERE Email=:email AND Password=SHA2(CONCAT(:password, Salt), 0)');
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':password', $password);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $temp = $stmt->fetch();
+            if (ctype_digit($temp[0])) {
+                $id = intval($temp[0]);
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
+                }
+                $_SESSION['logged'] = $id;
+                return true;
+            }
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    return false;
 }
 
 function populateSuburbMenu() {
@@ -97,17 +97,17 @@ function populateSuburbMenu() {
         <option disabled selected style="...">select</option>
     ');
 
-    foreach($result as $suburb) {
+    foreach ($result as $suburb) {
         echo '<option value="' . $suburb['Suburb'] . '">' . $suburb['Suburb'] . '</option>';
     }
-        echo '</select>';
+    echo '</select>';
 }
 
-function searchParksByDistance($userLatitude, $userLongitude, $userDistance){
-  global $pdo;
+function searchParksByDistance($userLatitude, $userLongitude, $userDistance) {
+    global $pdo;
 
-  try {
-      $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb, (
+    try {
+        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb, (
         6371 * acos (
           cos ( radians(:userLatitude) )
           * cos( radians( Latitude ) )
@@ -118,31 +118,26 @@ function searchParksByDistance($userLatitude, $userLongitude, $userDistance){
       ) AS distance
               FROM parks
               HAVING distance < :userDistance';
-      $query = $pdo->prepare($sql);
-      $query->bindParam(':userLatitude', $userLatitude);
-      $query->bindParam(':userLongitude', $userLongitude);
-      $query->bindParam(':userDistance', $userDistance);
-      $query->execute();
-      $results = $query->fetchAll();
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':userLatitude', $userLatitude);
+        $query->bindParam(':userLongitude', $userLongitude);
+        $query->bindParam(':userDistance', $userDistance);
+        $query->execute();
+        $results = $query->fetchAll();
 
-  } catch (PDOException $ex) {
-      echo $ex->getMessage();
-  }
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+    }
 
-  return $results;
+    return $results;
 }
 
 function showAllParks() {
     global $pdo;
 
-    try
-    {
-        $result = $pdo->query('SELECT ParkCode, Name, Street, Suburb '.
-            'FROM Parks ' .
-            'LIMIT 10');
-    }
-    catch (PDOException $e)
-    {
+    try {
+        $result = $pdo->query('SELECT ParkCode, Name, Street, Suburb ' . 'FROM Parks ' . 'LIMIT 10');
+    } catch (PDOException $e) {
         echo $e->getMessage();
     }
 
@@ -152,8 +147,7 @@ function showAllParks() {
     echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
     echo '</tr>';
 
-    foreach ($result as $park)
-    {
+    foreach ($result as $park) {
 
         echo "<td>{$park['ParkCode']}</td><td>{$park['Name']}</td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
         echo '</tr>';
@@ -256,48 +250,42 @@ function searchForParks($parkName, $suburb) {
     return $results;
 }
 
-function outputSearchResults($results){
-    if (!empty($results)){
-      echo '<div class="row">';
-      echo '<table>';
+function outputSearchResults($results) {
+    if (!empty($results)) {
+        echo '<div class="row">';
+        echo '<table>';
 
-      echo '<tr>';
-      echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
-      echo '</tr>';
+        echo '<tr>';
+        echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
+        echo '</tr>';
 
-      foreach ($results as $park)
-      {
-          echo "<td>{$park['ParkCode']}</td><td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a></td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
-          echo '</tr>';
-      }
+        foreach ($results as $park) {
+            echo "<td>{$park['ParkCode']}</td><td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a></td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
+            echo '</tr>';
+        }
 
-      echo '</table>';
+        echo '</table>';
     } else {
-      echo '<p>No parks found!</p>';
+        echo '<p>No parks found!</p>';
     }
     echo '</div>';
 
 
 }
 
-function displayMapResults($results){
+function displayMapResults($results) {
 
-  if (!empty($results)){
-    $encodedLocations = json_encode($results);
+    if (!empty($results)) {
+        $encodedLocations = json_encode($results);
 
-    echo '<div class = "row">';
+        echo '<div class = "row">';
 
-    echo '<script>',
-        "var locations = $encodedLocations;",
-        '</script>';
+        echo '<script>', "var locations = $encodedLocations;", '</script>';
 
-  echo '<div id="results-map"></div>',
-  '<script type="text/javascript">',
-  'initResultsMap(locations);',
-  '</script>';
-  }
+        echo '<div id="results-map"></div>', '<script type="text/javascript">', 'initResultsMap(locations);', '</script>';
+    }
 
-      echo '</div>';
+    echo '</div>';
 
 }
 

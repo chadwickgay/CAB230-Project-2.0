@@ -1,6 +1,6 @@
 <?php
-	session_start();
-	unset($_SESSION['logged']);
+session_start();
+unset($_SESSION['logged']);
 ?>
 
 <!DOCTYPE html>
@@ -28,26 +28,26 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Page Navigation
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Header & Page Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('server/includes/nav.inc'); ?>
+    <?php include('server/includes/nav.inc'); ?>
 
-        <!-- Main Content
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <h3>You have signed out</h3>
+    <h3>You have signed out</h3>
 
-        <!-- Footer
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Footer
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('server/includes/footer.inc'); ?>
+    <?php include('server/includes/footer.inc'); ?>
 
-        <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    </div>
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</div>
 
 
 </body>
