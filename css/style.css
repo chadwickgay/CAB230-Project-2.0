@@ -21,6 +21,11 @@
 /* Container
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
+.row:after {
+    content: "";
+    display: table;
+    clear: both; }
+
 .container {
     width: 80%;
 }
@@ -456,3 +461,9 @@ footer {
 .hidden {
     display: none;
 }
+
+.center {
+    text-align: center;
+}
+
+

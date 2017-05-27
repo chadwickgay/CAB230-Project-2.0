@@ -264,10 +264,9 @@ function outputSearchResults($results) {
             echo "<td>{$park['ParkCode']}</td><td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a></td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
             echo '</tr>';
         }
-
         echo '</table>';
     } else {
-        echo '<p>No parks found!</p>';
+        echo '<h5 class="row center">NO PARKS FOUND...</h5>';
     }
     echo '</div>';
 
