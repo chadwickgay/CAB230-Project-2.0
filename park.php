@@ -10,8 +10,9 @@ include("server/PHP/database.php");
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
     <title>Park Search - Park</title>
-    <meta name="description" content="">
-    <meta name="author" content="Chadwick Gay">
+    <meta name="description" content="Website to search for parks located in Brisbane">
+    <meta name="keywords" content="Parks, Brisbane Parks, Recreation">
+    <meta name="author" content="Chadwick Gay, Tom Deakin & Kenneth Koefler">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS
@@ -203,7 +204,7 @@ include("server/PHP/database.php");
                 <div class="park-reviews" itemscope itemtype="http://schema.org/Review">
                     <?php
                     echo '<br /><hr />';
-                    echo '<h4 itemprop="itemReviewed">Reviews for ' . $Park['Name'] . '</h4>';
+                    echo '<h4 itemprop="itemReviewed">REVIEWS FOR ' . $Park['Name'] . '</h4>';
 
                     $Reviews = array();
                     if ($Park['ID'] > 0) {

@@ -10,8 +10,9 @@ include("server/PHP/database.php");
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
     <title>Park Search - Login</title>
-    <meta name="description" content="">
-    <meta name="author" content="Chadwick Gay">
+    <meta name="description" content="Website to search for parks located in Brisbane">
+    <meta name="keywords" content="Parks, Brisbane Parks, Recreation">
+    <meta name="author" content="Chadwick Gay, Tom Deakin & Kenneth Koefler">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS
@@ -48,7 +49,7 @@ include("server/PHP/database.php");
         if (isset($_POST['email']) && isset($_POST['password'])) {
             require 'server/includes/validate.inc';
             validateEmail($errors, $_POST, 'email');
-            validateFieldNotEmpty($errors, $_POST, 'password');
+            validatePassword($errors, $_POST, 'password');
             if (sizeof($errors) <= 0) {
                 if (login($_POST['email'], $_POST['password'])) {
 
@@ -57,7 +58,7 @@ include("server/PHP/database.php");
                 }
             }
             if ($errors) {
-                ## want to put a red box around this output to highlight the errors
+
                 echo '<div class="validation">';
                 echo '<h5>Invalid submission, correct the following errors:</h5>';
                 echo '<ul>';

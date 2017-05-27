@@ -24,7 +24,8 @@
 .row:after {
     content: "";
     display: table;
-    clear: both; }
+    clear: both;
+}
 
 .container {
     width: 80%;
@@ -325,6 +326,15 @@ label > .label-body {
 
 input[type='text'][disabled], textarea[disabled] {
     background-color: #EBEBE4;
+}
+
+fieldset {
+    border: 0px;
+}
+
+legend {
+    display: block;
+    font-weight: bold;
 }
 
 /* Errors

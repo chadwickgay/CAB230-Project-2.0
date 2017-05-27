@@ -11,8 +11,9 @@ include("server/PHP/formFunctions.php");
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
     <title>Park Search - Create Account</title>
-    <meta name="description" content="">
-    <meta name="author" content="Chadwick Gay">
+    <meta name="description" content="Website to search for parks located in Brisbane">
+    <meta name="keywords" content="Parks, Brisbane Parks, Recreation">
+    <meta name="author" content="Chadwick Gay, Tom Deakin & Kenneth Koefler">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS

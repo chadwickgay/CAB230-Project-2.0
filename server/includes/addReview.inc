@@ -1,9 +1,9 @@
 <div class="park-review">
 
-    <h4>Enter your review</h4>
+    <h4>ENTER YOUR REVIEW</h4>
     <?php
     if (!isset($_SESSION['logged'])) {
-        echo "You must be logged in to leave a review.";
+        echo "<p>You be logged in to leave a review.<p>";
     }
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -34,7 +34,7 @@
 					<label for="rating1">&#9733;</label>
 				</div>
 				<br>
-				<label for="txtcomment">Leave a review</label>
+				<label for="txtcomment">Enter review comments</label>
 				<textarea cols="50" rows="4" name="txtcomment" id="txtcomment"
 						  placeholder="Enter your review here." <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>></textarea>
 				<span id="txtcommentErr"></span>

@@ -8,6 +8,7 @@ var successColour = "#66cc66";
 var errorColour = "#ff6666";
 var noErrorColor = "#ffffff";
 
+// Calls all necessary validation functions for validation of account creation input
 function validateCreateAccount() {
     if (validateEmail("createAccount") & validateGender("createAccount") & validateFirstName("createAccount") & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount")) {
         return true;
@@ -16,6 +17,7 @@ function validateCreateAccount() {
     }
 }
 
+// Calls all necessary validation functions for validation of login input
 function validateLogin() {
     if (validateEmail("login")) {
         return true;
@@ -24,6 +26,7 @@ function validateLogin() {
     }
 }
 
+// Calls all necessary validation functions for validation of review input
 function validateReview() {
     if (validateComment("park-review")) {
         return true;
@@ -32,11 +35,13 @@ function validateReview() {
     }
 }
 
+// Redirects to login page
 function redirectToLogin() {
     redirectToPage('/login.php');
     return false;
 }
 
+// Redirects to page where page is a passed argument
 function redirectToPage(page) {
     var url = window.location.href;
     url = url.substring(0, url.lastIndexOf('/'));
@@ -44,6 +49,7 @@ function redirectToPage(page) {
     return false;
 }
 
+// Used to de-select checkboxes on submission of review
 function checkboxDeselectOthers(currentElement) {
     var radios = currentElement.parentNode.getElementsByTagName("input");
     for (var i = 0; i < radios.length; i++) {
@@ -65,6 +71,7 @@ function validateFirstName(formName) {
     var message = document.getElementById('first-nameErr');
 
     if (name.value == "") {
+        // If the field is blank
         setErrorState(name, message);
         message.innerHTML = "You must enter a first name!";
         return false;
@@ -93,6 +100,7 @@ function validateLastName(formName) {
     var message = document.getElementById('last-nameErr');
 
     if (name.value == "") {
+        // If the field is blank
         setErrorState(name, message);
         message.innerHTML = "You must enter a last name!";
         return false;
@@ -123,6 +131,7 @@ function validateEmail(formName) {
     var message = document.getElementById('emailErr');
 
     if (email.value == "") {
+        // If the field is blank
         setErrorState(email, message);
         message.innerHTML = "You must enter an email!";
         return false;
@@ -191,6 +200,7 @@ function validateGender(formName) {
     var message = document.getElementById('genderErr');
 
     if (gender.value == "DEFAULT") {
+        // If no selection has been made
         message.innerHTML = "You must select a gender!";
         message.style.color = errorColour;
         return false;
