@@ -45,10 +45,10 @@ CREATE TABLE `members` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parks`
+-- Table structure for table `items`
 --
 
-CREATE TABLE `parks` (
+CREATE TABLE `items` (
   `ID` int(11) NOT NULL,
   `ParkCode` varchar(5) NOT NULL,
   `Name` varchar(70) NOT NULL,
@@ -61,10 +61,10 @@ CREATE TABLE `parks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `parks`
+-- Dumping data for table `items`
 --
 
-INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
+INSERT INTO `items` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
 (1, 'D0228', '7TH BRIGADE PARK', 'HAMILTON RD', 'CHERMSIDE', '503826.69', '6971467.72', '-27.38006149', '153.03870050'),
 (2, 'D0021', 'A. J. JONES RECREATION RESERVE', 'CORNWALL ST', 'GREENSLOPES', '504302.76', '6957798.83', '-27.50346312', '153.04356360'),
 (3, 'D0696', 'A.R.C.HILL PARK', 'GOSS RD', 'VIRGINIA', '505521.79', '6970985.33', '-27.38441077', '153.05584590'),
@@ -464,7 +464,7 @@ INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `N
 (397, 'D1055', 'CATANIA STREET PARK', 'CATANIA ST SOUTH', 'WISHART', '509884.55', '6953080.14', '-27.54603382', '153.10011540'),
 (398, 'D0093', 'CATHEDRAL SQUARE', 'ANN ST', 'BRISBANE', '502873.65', '6962229.51', '-27.46346688', '153.02908390'),
 (399, 'D0683', 'CAVAY PLAYGROUND PARK', 'MORDEN RD', 'SUNNYBANK HILLS', '503904.89', '6949158.07', '-27.58147217', '153.03956330');
-INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
+INSERT INTO `items` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
 (400, 'D0012', 'CAWONGA PARK', 'LINCOLN ST', 'OXLEY', '497614.43', '6952152.78', '-27.55443990', '152.97583600'),
 (401, 'D0179', 'CECIL ROAD PARK', 'CECIL RD', 'BARDON', '498302.93', '6962984.75', '-27.45665053', '152.98282520'),
 (402, 'D1060', 'CELICA STREET PARK', 'CELICA ST', 'RUNCORN', '507470.41', '6946842.52', '-27.60236159', '153.07570260'),
@@ -865,7 +865,7 @@ INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `N
 (797, 'D2011', 'GLEN PARADE PARK (NO.6)', 'GLEN PDE', 'ASHGROVE', '498377.14', '6963782.83', '-27.44944553', '152.98357720'),
 (798, 'D1670', 'GLEN RETREAT ROAD PARK', 'FRASERS RD', 'MITCHELTON', '496943.10', '6967399.44', '-27.41679217', '152.96907440'),
 (799, 'D0881', 'GLENALWYN STREET PARK', 'GLENALWYN ST', 'HOLLAND PARK', '508335.95', '6956267.07', '-27.51727294', '153.08440860');
-INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
+INSERT INTO `items` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
 (800, 'D1047', 'GLENAVON STREET PARK', 'GLENAVON ST', 'BELMONT', '512083.58', '6959604.30', '-27.48711646', '153.12232310'),
 (801, 'D0421', 'GLENCAIRN AVENUE PARK', 'GLENCAIRN AVE', 'INDOOROOPILLY', '498405.19', '6957004.60', '-27.51063923', '152.98385220'),
 (802, 'D1800', 'GLENEAGLES CRESCENT PARK', 'ALBAN ST', 'OXLEY', '498728.68', '6949744.20', '-27.57399232', '152.98707300'),
@@ -1268,7 +1268,7 @@ INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `N
 (1199, 'D1903', 'LOGAN ROAD PARK (NO.2588)', 'LOGAN RD', 'EIGHT MILE PLNS', '509875.25', '6949251.17', '-27.58091966', '153.10015590'),
 (1200, 'D1915', 'LOGAN ROAD PARK (NO.2641)', 'LOGAN RD', 'EIGHT MILE PLNS', '509757.08', '6948779.39', '-27.58486129', '153.09885910'),
 (1201, 'D2593', 'LONE PINE PARK', 'JESMOND RD', 'FIG TREE POCKET', '497028.25', '6954703.72', '-27.53140910', '152.96990460');
-INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
+INSERT INTO `items` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
 (1202, 'D1629', 'LONGBILL PLACE PARK', 'LONGBILL PL', 'TAIGUM', '505072.40', '6976107.20', '-27.33817156', '153.05127950'),
 (1203, 'D1650', 'LONGLAND STREET PARK', 'STAFFORD RD', 'STAFFORD', '499879.04', '6968095.51', '-27.41051141', '152.99877640'),
 (1204, 'D1182', 'LONGTON COURT PARK (NO.100)', 'LONGTON CT', 'BURBANK', '516713.67', '6948301.95', '-27.58910352', '153.16934990'),
@@ -1666,7 +1666,7 @@ INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `N
 (1596, 'D0594', 'PORTER\'S PADDOCK PARK', 'STANTON RD', 'TINGALPA', '511225.06', '6960246.39', '-27.48132711', '153.11362630'),
 (1597, 'D1630', 'PORTSIDE PLACE PARK', 'PORTSIDE PL', 'BULIMBA', '505289.84', '6964558.72', '-27.44243147', '153.05352800'),
 (1598, 'D2692', 'PORTWINE STREET PARK', 'PORTWINE ST', 'MURARRIE', '509008.54', '6962681.40', '-27.45936040', '153.09117130');
-INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
+INSERT INTO `items` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
 (1599, 'D0792', 'POST OFFICE SQUARE', 'QUEEN ST', 'BRISBANE', '502706.77', '6961806.68', '-27.46728450', '153.02739600'),
 (1600, 'D1535', 'POWERHOUSE PARK', 'LAMINGTON ST', 'NEW FARM', '505352.01', '6961750.36', '-27.46778508', '153.05416940'),
 (1601, 'D0196', 'PRAED STREET PARK', 'MURRAY ST', 'RED HILL', '500367.55', '6964201.95', '-27.44566265', '153.00371930'),
@@ -2060,7 +2060,7 @@ INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `N
 (1989, 'D1252', 'TINCHI TAMBA WETLANDS RESERVE', 'WYAMPA RD', 'BALD HILLS', '503315.17', '6979963.44', '-27.30336208', '153.03350410'),
 (1990, 'D1252', 'TINCHI TAMBA WETLANDS RESERVE', 'WYAMPA RD', 'BALD HILLS', '504090.36', '6981429.93', '-27.29012052', '153.04133370'),
 (1991, 'D0065', 'TINGALPA CREEK RESERVE', 'TORONTO RD', 'CAPALABA WEST', '518287.60', '6957428.00', '-27.50669457', '153.18515970');
-INSERT INTO `parks` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
+INSERT INTO `items` (`ID`, `ParkCode`, `Name`, `Street`, `Suburb`, `Easting`, `Northing`, `Latitude`, `Longitude`) VALUES
 (1992, 'D1771', 'TIVOLI PLACE PARK', 'CENTENNIAL WAY', 'FOREST LAKE', '495645.13', '6943790.04', '-27.62993239', '152.95585820'),
 (1993, 'D1744', 'TODMAN STREET PARK', 'TODMAN ST', 'CARINA', '508750.92', '6960246.51', '-27.48134422', '153.08858170'),
 (1994, 'D1320', 'TOLLANA PLACE PARK', 'TOLLANA PL', 'INALA', '496719.43', '6948887.53', '-27.58391627', '152.96676140'),
@@ -2310,9 +2310,9 @@ ALTER TABLE `members`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `parks`
+-- Indexes for table `items`
 --
-ALTER TABLE `parks`
+ALTER TABLE `items`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -2331,9 +2331,9 @@ ALTER TABLE `reviews`
 ALTER TABLE `members`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
--- AUTO_INCREMENT for table `parks`
+-- AUTO_INCREMENT for table `items`
 --
-ALTER TABLE `parks`
+ALTER TABLE `items`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2215;
 --
 -- Constraints for dumped tables
@@ -2344,7 +2344,7 @@ ALTER TABLE `parks`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `UserID` FOREIGN KEY (`UserID`) REFERENCES `members` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ParkID` FOREIGN KEY (`ParkID`) REFERENCES `parks` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ParkID` FOREIGN KEY (`ParkID`) REFERENCES `items` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
