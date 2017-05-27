@@ -28,10 +28,10 @@ global $db_password;
 
 $db_host = "localhost";
 $db_name = 'parksearch';
-//$db_username = 'parkuser';
-//$db_password = 'password';
-$db_username = 'root';
-$db_password = '';
+$db_username = 'parkuser';
+$db_password = 'password';
+//$db_username = 'root';
+//$db_password = '';
 
 try {
     global $pdo;

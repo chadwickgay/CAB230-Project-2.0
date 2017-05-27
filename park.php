@@ -139,6 +139,13 @@ include("server/PHP/database.php");
                         echo '<h5>Suburb:</h5>';
                         echo '<p itemprop="address">' . $Park['Suburb'] . '</p>';
 
+                        echo '<div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">';
+
+                        echo '<p class="hidden" itemprop="latitude">' . $Park['Latitude'] . '</p>';
+                        echo '<p class="hidden" itemprop="longitude">' . $Park['Longitude'] . '</p>';
+
+                        echo '</div>';
+
                         echo '<h5>Average Rating:</h5>';
                         displayAggregateStars($Park['RatingAvg']);
 
