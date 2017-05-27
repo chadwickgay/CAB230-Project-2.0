@@ -34,7 +34,6 @@
             </div>
             <br>
             <textarea cols="50" rows="4" name="txtcomment"
-                      value="<?php echo isset($_POST['txtcomment']) ? $_POST['txtcomment'] : ''; ?>"
                       placeholder="Enter your review here." <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>></textarea>
             <span id="txtcommentErr"></span>
 

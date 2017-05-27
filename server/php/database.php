@@ -93,7 +93,7 @@ function populateSuburbMenu() {
     global $pdo;
     $result = $pdo->query('SELECT DISTINCT Suburb FROM items ORDER BY Suburb;');
     echo('
-        <select name="suburb" class="suburb-select">
+        <select name="suburb" class="suburb-select" id="suburb">
         <option disabled selected style="...">select</option>
     ');
 
@@ -260,6 +260,7 @@ function outputSearchResults($results) {
         echo '</tr>';
 
         foreach ($results as $park) {
+            echo '<tr>';
             echo "<td>{$park['ParkCode']}</td><td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a></td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
             echo '</tr>';
         }

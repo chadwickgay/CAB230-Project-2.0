@@ -213,8 +213,8 @@ include("server/PHP/database.php");
                         foreach ($Reviews as $Review) {
                             echo '<div>';
                             echo '<h5 itemprop="author">' . $Review['FirstName'] . ' ' . $Review['LastName'] . ' ';
-                            echo '</div>';
                             echo '</h5>';
+                            echo '</div>';
                             echo '<div>';
                             echoStars($Review['Rating']);
                             echo '</div>';

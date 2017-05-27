@@ -41,7 +41,7 @@ include("server/PHP/database.php");
 
     <?php
     function redisplayForm(&$errors) {
-        ## want to put a red box around this output to highlight the errors
+
         echo '<div class="validation">';
         echo '<h5>Invalid submission, correct the following errors:</h5>';
         echo '<ul>';
