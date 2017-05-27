@@ -81,7 +81,7 @@ include("server/PHP/database.php");
 
     $ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
     $Park = array('ID' => -1, 'RatingAvg' => -1);
-    $Parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM parks WHERE ParkCode=:parkcode");
+    $Parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM items WHERE ParkCode=:parkcode");
     $Parks->bindValue(':parkcode', $ParkCode);
     $Parks->execute();
     if ($Parks != false && $Parks->rowCount()) {

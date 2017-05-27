@@ -91,7 +91,7 @@ function login($email, $password) {
 
 function populateSuburbMenu() {
     global $pdo;
-    $result = $pdo->query('SELECT DISTINCT Suburb FROM parks ORDER BY Suburb;');
+    $result = $pdo->query('SELECT DISTINCT Suburb FROM items ORDER BY Suburb;');
     echo('
         <select name="suburb" class="suburb-select">
         <option disabled selected style="...">select</option>
@@ -116,7 +116,7 @@ function searchParksByDistance($userLatitude, $userLongitude, $userDistance) {
           * sin( radians( Latitude ) )
         )
       ) AS distance
-              FROM parks
+              FROM items
               HAVING distance < :userDistance';
         $query = $pdo->prepare($sql);
         $query->bindParam(':userLatitude', $userLatitude);
@@ -136,7 +136,7 @@ function showAllParks() {
     global $pdo;
 
     try {
-        $result = $pdo->query('SELECT ParkCode, Name, Street, Suburb ' . 'FROM Parks ' . 'LIMIT 10');
+        $result = $pdo->query('SELECT ParkCode, Name, Street, Suburb ' . 'FROM items ' . 'LIMIT 10');
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
@@ -161,7 +161,7 @@ function searchParkByName($parkName) {
 
     try {
         $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb
-                FROM parks
+                FROM items
                 WHERE Name LIKE CONCAT("%", :name, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':name', $parkName);
@@ -182,7 +182,7 @@ function searchParkBySuburb($suburb) {
 
     try {
         $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb
-                FROM parks
+                FROM items
                 WHERE Suburb LIKE CONCAT("%", :suburb, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':suburb', $suburb);
@@ -204,8 +204,8 @@ function searchParkByRating($rating) {
         $sql = 'SELECT ParkCode, Name, Latitude, Longitude, Street, Suburb, AvgRating
 				FROM (
 				SELECT ROUND(Avg(Rating),0) AS AvgRating, ParkCode, Name, Latitude, Longitude, Street, Suburb
-				FROM parks JOIN reviews
-				WHERE parks.ID = reviews.ParkID
+				FROM items JOIN reviews
+				WHERE items.ID = reviews.ParkID
 				GROUP BY ParkCode
 				) result
 				WHERE AvgRating >= :rating
@@ -232,7 +232,7 @@ function searchForParks($parkName, $suburb) {
 
     try {
         $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb
-                FROM parks
+                FROM items
                 WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':suburb', $suburb);
