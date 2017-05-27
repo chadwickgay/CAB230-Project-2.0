@@ -30,7 +30,7 @@ unset($_SESSION['logged']);
 
 <div class="container">
 
-    <!-- Page Navigation
+    <!-- Header & Page Navigation
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
     <?php include('server/includes/nav.inc'); ?>
