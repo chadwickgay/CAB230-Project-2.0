@@ -1,0 +1,17 @@
+Individual Items Page
+http://localhost/CAB230-Project-2.0/park.php?ParkCode=D1592
+================================================================================
+Check 247: Form missing fieldset and legend to group multiple checkbox buttons.
+Repair: Add a fieldset and legend element to the form for each group of checkbox buttons.
+Error Line 83, Column 53:
+
+<form method="POST" action="park.php?ParkCode=D1592" name="park-review"
+          onsubmit="return  ...
+
+Check 95: textarea element missing an associated label.
+Repair: Add a label element immediately before or after the textarea element. Set the for attribute value of the label element to the same value as the id attribute value of the textarea element. Add label text to the label element. Or, set the title attribute value to the textarea element to the label text. Or, add a label element that surrounds the textarea element and add label text.
+Error Line 106, Column 13:
+
+<textarea cols="50" rows="4" name="txtcomment"
+                      placeholder="Enter your review ...
+
