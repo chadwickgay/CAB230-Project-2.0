@@ -51,8 +51,10 @@ include("server/PHP/master.php");
 				for ($i = 5 - $numberOfStars; $i > 0; $i--) {
 					echo "&#9734;";
 				}
+        echo '</span>';
+        echo "<span><br> $numberOfStars</span> out of 5 stars";
 			}
-			echo '</span>';
+
 		}
 
 		$ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
@@ -115,7 +117,7 @@ include("server/PHP/master.php");
 							echo '<h5>Suburb:</h5>';
 							echo '<p itemprop="address">'.$Park['Suburb'].'</p>';
 
-							echo '<h5 itemprop="aggregateRating">Average Rating:</h5>';
+							echo '<h5>Average Rating:</h5>';
 							echo '<p>';
 							echoStars($Park['RatingAvg']);
 							echo '</p>';
@@ -193,7 +195,7 @@ include("server/PHP/master.php");
 								echo '<h5 itemprop="author">'.$Review['FirstName'].' '.$Review['LastName'].' ';
                 echo '</div>';
                 echo '</h5>';
-                echo '<div itemprop="reviewRating">';
+                echo '<div>';
 								echoStars($Review['Rating']);
                 echo '</div>';
 								echo '<p itemprop="reviewBody">'.$Review['Description'].'</p>';
