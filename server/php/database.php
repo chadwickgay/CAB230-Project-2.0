@@ -30,8 +30,8 @@ $db_host = "localhost";
 $db_name = 'parksearch';
 $db_username = 'parkuser';
 $db_password = 'password';
-$db_username = 'root';
-$db_password = '';
+//$db_username = 'root';
+//$db_password = '';
 
 //Whatever includes this file will have a sql database connection setup and ready to be used.
 try {
