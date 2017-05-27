@@ -1,5 +1,5 @@
 <?php
-include("server/PHP/master.php");
+include("server/PHP/database.php");
 ?>
 
 <!DOCTYPE html>

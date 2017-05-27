@@ -1,3 +1,7 @@
+<?php
+include("server/PHP/database.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +67,6 @@
         if ($errors) {
             redisplayForm($errors);
         } else {
-            include("server/PHP/master.php");
 
             try {
                 $stmt = $pdo->prepare('SELECT Email FROM members WHERE Email=:email');
