@@ -10,7 +10,7 @@
         </div>
 
         <div class="two columns">
-            <label for="gender">Password</label>
+            <label for="password">Password</label>
             <input type="password" name="password" id="password" placeholder="password"/>
             <br>
             <span id="passwordErr"></span>

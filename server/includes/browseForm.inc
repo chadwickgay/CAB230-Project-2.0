@@ -1,9 +1,9 @@
-<div clas="row">
+<div class="row">
     <div class="four columns">
         <form method="GET" action="browse.php" name="browse-name">
 
             <label for="park-name">Park Name</label>
-            <input type="text" name="park-name" placeholder="Enter park name"/>
+            <input type="text" name="park-name" id="park-name" placeholder="Enter park name"/>
             <input type="submit" value="Submit">
         </form>
     </div>
@@ -36,10 +36,10 @@
         <form method="GET" action="browse.php" name="browse-distance">
             <div id="get-location">
                 <label for="near-me">Use current location</label>
-                <button type="button" onclick="getLocation()">Use my location!</button>
+                <button type="button" id="near-me" onclick="getLocation()">Use my location!</button>
             </div>
             <div id="distance-block" class="hidden">
-                <label for="distance-select">Distance</label>
+                <label for="distance">Distance</label>
                 <select name="distance" id="distance">
                     <option value="" disabled selected style="display: none;">Select distance</option>
                     <option value="1">1 Km</option>
@@ -48,7 +48,7 @@
                     <option value="4">4 Km</option>
                     <option value="5">5 Km</option>
                 </select>
-                <input type="submit" value="Submit" id="distance submit">
+                <input type="submit" value="Submit" id="distance-submit">
             </div>
 
             <input type="hidden" name="lat" id="lat"/>
