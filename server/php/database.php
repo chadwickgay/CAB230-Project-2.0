@@ -26,12 +26,12 @@ global $db_password;
 //$db_username = "n9440488"; // FastApps: Tom
 //$db_password = "tomchadken"; // FastApps
 
-$db_host = "localhost"; // Local
-$db_name = 'parksearch'; // Local
-$db_username = 'parkuser'; // Local: Tom/Chad
-$db_password = 'password'; // Local: Tom/Chad
-//$db_username = 'root'; // Local: Ken
-//$db_password = ''; // Local: Ken
+$db_host = "localhost";
+$db_name = 'parksearch';
+//$db_username = 'parkuser';
+//$db_password = 'password';
+$db_username = 'root';
+$db_password = '';
 
 try {
     global $pdo;
