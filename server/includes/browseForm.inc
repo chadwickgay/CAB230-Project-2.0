@@ -20,7 +20,7 @@
         <form method="GET" action="browse.php" name="browse-rating">
             <label for="rating">Minimum Park Rating</label>
             <select class="rating-select" name="rating" id="rating">
-                <option value="" disabled selected style="display: none;">Select rating</option>
+                <option value="DEFAULT" class="hidden" disabled selected >Select rating</option>
                 <option value="0">0</option>
                 <option value="1">&#9733;</option>
                 <option value="2">&#9733; &#9733;</option>
@@ -41,7 +41,7 @@
             <div id="distance-block" class="hidden">
                 <label for="distance">Distance</label>
                 <select name="distance" id="distance">
-                    <option value="" disabled selected style="display: none;">Select distance</option>
+                    <option value="DEFAULT" disabled selected class="hidden">Select distance</option>
                     <option value="1">1 Km</option>
                     <option value="2">2 Km</option>
                     <option value="3">3 Km</option>

@@ -94,7 +94,7 @@ function populateSuburbMenu() {
     $result = $pdo->query('SELECT DISTINCT Suburb FROM items ORDER BY Suburb;');
     echo('
         <select name="suburb" class="suburb-select" id="suburb">
-        <option disabled selected style="...">select</option>
+        <option alue="DEFAULT" disabled selected class="hidden">select</option>
     ');
 
     foreach ($result as $suburb) {
