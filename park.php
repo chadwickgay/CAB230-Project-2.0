@@ -40,7 +40,27 @@ include("server/PHP/master.php");
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<?php
 
-		function echoStars($numberOfStars) {
+  function echoStars($numberOfStars) {
+    echo '<span class="star">';
+    if ($numberOfStars < 0) {
+      echo "No Rating";
+    } else {
+      for ($i = $numberOfStars; $i > 0; $i--) {
+        echo "&#9733;";
+      }
+      for ($i = 5 - $numberOfStars; $i > 0; $i--) {
+        echo "&#9734;";
+      }
+      echo '</span>';
+      echo "<div itemprop='reviewRating' itemscope itemtype='http://schema.org/Rating'>
+            <meta itemprop='worstRating' content='0'>
+            <span itemprop='ratingValue'>$numberOfStars</span> out of <span itemprop='bestRating'>5</span> stars
+            </div>";
+    }
+
+  }
+
+    function displayAggregateStars($numberOfStars) {
 			echo '<span class="star">';
 			if ($numberOfStars < 0) {
 				echo "No Rating";
@@ -52,7 +72,9 @@ include("server/PHP/master.php");
 					echo "&#9734;";
 				}
         echo '</span>';
-        echo "<span><br> $numberOfStars</span> out of 5 stars";
+        echo "<div>
+              <span>$numberOfStars</span> out of <span>5</span> stars
+              </div>";
 			}
 
 		}
@@ -101,11 +123,11 @@ include("server/PHP/master.php");
 
         </div>
 
-        <div class="row" itemscope itemtype="http://schema.org/Place">
+        <div class="row">
 
             <div class="two columns">
 
-                <div class="park-information">
+                <div class="park-information" itemscope itemtype="http://schema.org/Place">
 					<?php
 						if ($Park['ID'] > 0) {
 
@@ -118,9 +140,7 @@ include("server/PHP/master.php");
 							echo '<p itemprop="address">'.$Park['Suburb'].'</p>';
 
 							echo '<h5>Average Rating:</h5>';
-							echo '<p>';
-							echoStars($Park['RatingAvg']);
-							echo '</p>';
+							displayAggregateStars($Park['RatingAvg']);
 
 						} else {
 							echo '<h4>Unknown Park.</h4>';
@@ -175,7 +195,8 @@ include("server/PHP/master.php");
 
                 <div class="park-reviews" itemscope itemtype="http://schema.org/Review">
 					<?php
-          echo '<h4 itemprop="name itemReviewed">Reviews for '.$Park['Name'].'</h4>';
+          echo '<br /><hr />';
+          echo '<h4 itemprop="itemReviewed">Reviews for '.$Park['Name'].'</h4>';
 
 						$Reviews = array();
 						if ($Park['ID'] > 0) {
@@ -199,7 +220,6 @@ include("server/PHP/master.php");
 								echoStars($Review['Rating']);
                 echo '</div>';
 								echo '<p itemprop="reviewBody">'.$Review['Description'].'</p>';
-								echo '</div>';
 							}
 						}
 					?>
