@@ -16,18 +16,18 @@ if (isset($_POST['submit'])) { // check if the form is submitted
 ### Start of input validation functions ###
 
 function validateFieldNotEmpty(&$errors, $field_list, $field_name) {
-	if (!isset($field_list[$field_name]) || empty($field_list[$field_name]) || $field_list[$field_name] == 'NULL') {
-		$errors[$field_name] = 'required';
-		return false;
-	}
-	return true;
+    if (!isset($field_list[$field_name]) || empty($field_list[$field_name]) || $field_list[$field_name] == 'NULL') {
+        $errors[$field_name] = 'required';
+        return false;
+    }
+    return true;
 }
 
 function posted_value($name) {
-	if(isset($_POST[$name])) {
-		return htmlspecialchars($_POST[$name]);
-	}
-	return NULL;
+    if (isset($_POST[$name])) {
+        return htmlspecialchars($_POST[$name]);
+    }
+    return NULL;
 }
 
 function validateFirstName(&$errors, $field_list, $field_name) {
@@ -86,5 +86,5 @@ function validateDOB(&$errors, $field_list, $field_name) {
 function validatePassword(&$errors, $field_list, $field_name) {
     if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
         $errors[$field_name] = 'Password is required';
-}
+    }
 }

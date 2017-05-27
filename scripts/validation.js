@@ -33,24 +33,24 @@ function validateReview() {
 }
 
 function redirectToLogin() {
-	redirectToPage('/login.php');
-	return false;
+    redirectToPage('/login.php');
+    return false;
 }
 
 function redirectToPage(page) {
-	var url = window.location.href;
-	url = url.substring(0, url.lastIndexOf('/'));
-	window.location.replace(url+page);
-	return false;
+    var url = window.location.href;
+    url = url.substring(0, url.lastIndexOf('/'));
+    window.location.replace(url + page);
+    return false;
 }
 
 function checkboxDeselectOthers(currentElement) {
-	var radios = currentElement.parentNode.getElementsByTagName("input");
-	for (var i = 0; i < radios.length; i++) {
-		if (radios[i] != currentElement) {
-			radios[i].checked = false;
-		}
-	}
+    var radios = currentElement.parentNode.getElementsByTagName("input");
+    for (var i = 0; i < radios.length; i++) {
+        if (radios[i] != currentElement) {
+            radios[i].checked = false;
+        }
+    }
 }
 
 function validateFirstName(formName) {
@@ -211,10 +211,10 @@ function validatePassword() {
     //Compare the values in the password field
     //and the confirmation field
     if (pass1.value == "" || pass2.value == "") {
-		if (pass1.value == "")
-			pass1.style.backgroundColor = errorColour;
-		if (pass2.value == "")
-			pass2.style.backgroundColor = errorColour;
+        if (pass1.value == "")
+            pass1.style.backgroundColor = errorColour;
+        if (pass2.value == "")
+            pass2.style.backgroundColor = errorColour;
         message.style.color = errorColour;
         message.innerHTML = "You must enter a password!";
         return false;
@@ -231,10 +231,10 @@ function validatePassword() {
         //The passwords do not match.
         //Set the color to the bad color and
         //notify the user.
-		pass1.style.backgroundColor = errorColour;
+        pass1.style.backgroundColor = errorColour;
         pass2.style.backgroundColor = errorColour;
-		pass1.value = "";
-		pass2.value = "";
+        pass1.value = "";
+        pass2.value = "";
         message.style.color = errorColour;
         message.innerHTML = "Passwords Do Not Match!"
         return false;

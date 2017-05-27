@@ -22,67 +22,67 @@ include("server/PHP/master.php");
 
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script type="text/javascript" src="scripts/map.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&"></script>
+    <script type="text/javascript" src="scripts/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_iTOki0siv_6GfltBuY3oXx5mfeLaRZ4&"></script>
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Page Navigation
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Page Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('server/includes/nav.inc'); ?>
+    <?php include('server/includes/nav.inc'); ?>
 
-        <!-- Main Content
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <h3>Browse for parks</h3>
+    <h3>Browse for parks</h3>
 
-        <?php include('server/includes/browseForm.inc'); ?>
+    <?php include('server/includes/browseForm.inc'); ?>
 
-        <?php
+    <?php
 
-if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating']) || isset($_GET['distance'])){
-  if (isset($_GET['park-name'])){
-    $parkName = $_GET["park-name"];
-    $results = searchParkByName($parkName);
+    if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating']) || isset($_GET['distance'])) {
+        if (isset($_GET['park-name'])) {
+            $parkName = $_GET["park-name"];
+            $results = searchParkByName($parkName);
 
-  } else if (isset($_GET['suburb'])){
+        } else if (isset($_GET['suburb'])) {
 
-    $suburb = $_GET["suburb"];
-    $results = searchParkBySuburb($suburb);
+            $suburb = $_GET["suburb"];
+            $results = searchParkBySuburb($suburb);
 
-  } else if (isset($_GET['rating'])){
-    $rating = $_GET["rating"];
-    $results = searchParkByRating($rating);
+        } else if (isset($_GET['rating'])) {
+            $rating = $_GET["rating"];
+            $results = searchParkByRating($rating);
 
-  } else if (isset($_GET['distance'])){
-    $userDistance = $_GET["distance"];
-    $userLatitude= $_GET['lat'];
-    $userLongitude= $_GET['long'];
-    $results = searchParksByDistance($userLatitude, $userLongitude, $userDistance);
-  }
+        } else if (isset($_GET['distance'])) {
+            $userDistance = $_GET["distance"];
+            $userLatitude = $_GET['lat'];
+            $userLongitude = $_GET['long'];
+            $results = searchParksByDistance($userLatitude, $userLongitude, $userDistance);
+        }
 
-  // Display results page map with park markers
-  displayMapResults($results);
+        // Display results page map with park markers
+        displayMapResults($results);
 
-  // Call outputSearchResults to output results table
-  outputSearchResults($results);
-}
+        // Call outputSearchResults to output results table
+        outputSearchResults($results);
+    }
 
-        ?>
+    ?>
 
 
-        <!-- Footer
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Footer
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-        <?php include('server/includes/footer.inc'); ?>
+    <?php include('server/includes/footer.inc'); ?>
 
-        <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    </div>
+    <!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</div>
 
 </body>
 

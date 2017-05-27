@@ -53,7 +53,6 @@
     width: 22%;
 }
 
-
 /* Html & Body Styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -69,9 +68,8 @@ body {
 }
 
 hr {
-	border-top: 1px dashed #8c8b8b;
+    border-top: 1px dashed #8c8b8b;
 }
-
 
 /* Fonts
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -133,8 +131,6 @@ p {
     margin-top: 0;
 }
 
-
-
 /* Header
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -175,7 +171,6 @@ header nav ul li a {
     padding: 0 30px;
 }
 
-
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -187,7 +182,6 @@ a {
 a:hover {
     color: #0FA0CE;
 }
-
 
 /* Buttons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -227,8 +221,8 @@ input[type="button"]:focus {
 
 /* Park Page Button
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.park-review input{
-    float:right;
+.park-review input {
+    float: right;
 }
 
 /* Hero Page Button
@@ -252,7 +246,6 @@ input[type="button"]:focus {
     color: #fff;
 }
 
-
 /* Hero Image
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -267,7 +260,6 @@ input[type="button"]:focus {
     text-align: center;
     margin: 180px 0 50px 0;
 }
-
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -292,7 +284,7 @@ textarea {
     padding-top: 6px;
     padding-bottom: 6px;
     max-width: 100%;
-    width:100%;
+    width: 100%;
 }
 
 input[type="email"]:focus,
@@ -320,31 +312,29 @@ input[type="radio"] {
     margin: 10px;
 }
 
-label>.label-body {
+label > .label-body {
     display: inline-block;
     margin-left: .5rem;
     font-weight: normal;
 }
 
 input[type='text'][disabled], textarea[disabled] {
-	background-color: #EBEBE4;
+    background-color: #EBEBE4;
 }
-
-
 
 /* Errors
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-.validation{
+.validation {
 
     border: 1px solid;
     margin: 10px 0px;
-    padding:15px 10px 15px 50px;
+    padding: 15px 10px 15px 50px;
     color: #D63301;
     background-color: #FFCCBA;
     padding: 10px;
 
-    width:93%;
+    width: 93%;
 
 }
 
@@ -376,7 +366,6 @@ tr:hover {
     background-color: #d3d3d3;
 }
 
-
 /* Maps
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -391,7 +380,6 @@ tr:hover {
     width: 100%;
     background-color: grey;
 }
-
 
 /* Star Ratings
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -416,11 +404,11 @@ tr:hover {
     color: orange;
 }
 
-.rating input:checked~label {
+.rating input:checked ~ label {
     color: orange;
 }
 
-.rating:not(:checked)>label:hover~label {
+.rating:not(:checked) > label:hover ~ label {
     color: orange;
 }
 
@@ -451,7 +439,6 @@ ol,
 form {
     margin-bottom: 2.5rem;
 }
-
 
 /* Footer
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
