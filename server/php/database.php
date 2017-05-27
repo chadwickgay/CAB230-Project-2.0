@@ -33,17 +33,20 @@ $db_name = 'parksearch';
 $db_username = 'root';
 $db_password = '';
 
+//Whatever includes this file will have a sql database connection setup and ready to be used.
 try {
     global $pdo;
-    $pdo = new PDO ("mysql:host=$db_host;dbname=$db_name", $db_username, $db_password);
+    $pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_username, $db_password);
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
 
-function generate_uid() {
+//generates a random 64 char long string.
+function generate_rand_string() {
     return uniqid('', true);
 }
 
+//Inserts a review into the database with the given parameters
 function submitReview($UserID, $ParkID, $Description, $Rating) {
     try {
         global $pdo;
@@ -65,6 +68,8 @@ function submitReview($UserID, $ParkID, $Description, $Rating) {
     return false;
 }
 
+//Checks that the email and password matches an account on record and returns true if login was successful.
+//also starts a php session and sets the logged in session status.
 function login($email, $password) {
     try {
         global $pdo;
@@ -89,6 +94,7 @@ function login($email, $password) {
     return false;
 }
 
+//echos all the different suburbs present in the database enclosed in an option html tag
 function populateSuburbMenu() {
     global $pdo;
     $result = $pdo->query('SELECT DISTINCT Suburb FROM items ORDER BY Suburb;');
@@ -103,7 +109,9 @@ function populateSuburbMenu() {
     echo '</select>';
 }
 
+//returns all the parks that are within the distance from the given coordinates
 function searchParksByDistance($userLatitude, $userLongitude, $userDistance) {
+
     global $pdo;
 
     try {
@@ -132,29 +140,7 @@ function searchParksByDistance($userLatitude, $userLongitude, $userDistance) {
     return $results;
 }
 
-function showAllParks() {
-    global $pdo;
-
-    try {
-        $result = $pdo->query('SELECT ParkCode, Name, Street, Suburb ' . 'FROM items ' . 'LIMIT 10');
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-
-    echo '<table>';
-
-    echo '<tr>';
-    echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
-    echo '</tr>';
-
-    foreach ($result as $park) {
-
-        echo "<td>{$park['ParkCode']}</td><td>{$park['Name']}</td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
-        echo '</tr>';
-    }
-    echo '</table>';
-}
-
+//gets all the parks containing the string given as part of its name.
 function searchParkByName($parkName) {
 
     global $pdo;
@@ -176,6 +162,7 @@ function searchParkByName($parkName) {
     return $results;
 }
 
+//gets all the parks containing the string given as part of its suburb.
 function searchParkBySuburb($suburb) {
 
     global $pdo;
@@ -196,6 +183,7 @@ function searchParkBySuburb($suburb) {
     return $results;
 }
 
+//gets all parks that have an average rating equal to or greater than the rating value given.
 function searchParkByRating($rating) {
 
     global $pdo;
@@ -223,6 +211,7 @@ function searchParkByRating($rating) {
     return $results;
 }
 
+//gets all the parks containing the 1st string given as part of its name and 2nd as part of its suburb.
 function searchForParks($parkName, $suburb) {
 
     global $pdo;
@@ -250,6 +239,7 @@ function searchForParks($parkName, $suburb) {
     return $results;
 }
 
+//a helper function for rendering the search results from sql queries on a html page.
 function outputSearchResults($results) {
     if (!empty($results)) {
         echo '<div class="row">';
@@ -273,6 +263,7 @@ function outputSearchResults($results) {
 
 }
 
+//renders the google map results in a new google map widget
 function displayMapResults($results) {
 
     if (!empty($results)) {

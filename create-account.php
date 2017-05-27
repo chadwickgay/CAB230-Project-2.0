@@ -81,7 +81,7 @@ include("server/PHP/formFunctions.php");
                 } else {
                     $stmt = $pdo->prepare('INSERT INTO members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
                     $stmt->bindValue(':email', $_POST['email']);
-                    $stmt->bindValue(':salt', generate_uid());
+                    $stmt->bindValue(':salt', generate_rand_string());
                     $stmt->bindValue(':password', $_POST['password']);
                     $stmt->bindValue(':firstname', $_POST['first-name']);
                     $stmt->bindValue(':lastname', $_POST['last-name']);
