@@ -44,10 +44,12 @@
 		echo "<span id=\"$errorSpanID\"></span>";
 	}
 
+	// Create the star ratings field on the addReview.inc and park.php pages
 	function createRatingsField() {
 		$minRating = 1;
 		for ($i = 5; $i >= $minRating; $i--) {
-			echo "<input type=\"checkbox\" id=\"rating".$i."\" name=\"rating\" value=\"$i\" onclick='checkboxDeselectOthers(this)'>";
+			echo "<input type=\"checkbox\" id=\"rating".$i."\" name=\"rating\" value=\"$i\" onclick='checkboxDeselectOthers(this);'";
+			echo isset($_SESSION['logged']) ? '' : ' disabled>';
 			createLabel("rating".$i, "&#9733;");
 		}
 	}
