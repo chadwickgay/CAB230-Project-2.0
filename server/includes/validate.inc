@@ -56,6 +56,15 @@ function validateLastName(&$errors, $field_list, $field_name) {
     }
 }
 
+function validatePostcode(&$errors, $field_list, $field_name) {
+    $pattern = '/^[0-9]{4}/';
+    if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
+        $errors[$field_name] = 'Postcode is required';
+    } else if (!preg_match($pattern, $field_list[$field_name])) {
+        $errors[$field_name] = 'Postcode must be a valid Australian format e.g. 4000 or 3000';
+    }
+}
+
 //a helper function for validating any email fields
 function validateEmail(&$errors, $field_list, $field_name) {
     $pattern = '/^[a-z][a-zA-Z0-9_.-]*(\.[a-zA-Z][a-zA-Z0-9_.-]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/';

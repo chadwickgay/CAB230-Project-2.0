@@ -10,7 +10,8 @@ var noErrorColor = "#ffffff";
 
 // Calls all necessary validation functions for validation of account creation input
 function validateCreateAccount() {
-    if (validateEmail("createAccount") & validateGender("createAccount") & validateFirstName("createAccount") & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount")) {
+    if (validateEmail("createAccount") & validateGender("createAccount") & validateFirstName("createAccount")
+        & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount") & validatePostcode("createAccount")) {
         return true;
     } else {
         return false;
@@ -131,6 +132,31 @@ function validateLastName(formName) {
     } else if (name.value.length < 2 || name.value.length > 20) {
         setErrorState(name, message);
         message.innerHTML = "Last name must be between 2 and 20 characters long.";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function validatePostcode(formName) {
+    // Format for valid name
+    // Allows spaces/hyphen/period as part of name
+    var validPostode = /^[0-9]{4}/;
+
+    //Store the name field objects into variables ...
+    var postcode = document.forms[formName]["postcode"];
+
+    //Store the Error Message Object ...                
+    var message = document.getElementById('postcodeErr');
+
+    if (postcode.value == "") {
+        // If the field is blank
+        setErrorState(postcode, message);
+        message.innerHTML = "You must enter a postcode!";
+        return false;
+    } else if (!validPostode.test(postcode.value)) {
+        setErrorState(postcode, message);
+        message.innerHTML = "Enter a valid Australian postcode!";
         return false;
     } else {
         return true;

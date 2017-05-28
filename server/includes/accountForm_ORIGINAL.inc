@@ -22,6 +22,13 @@
             <br>
             <span id="dobErr"></span>
 
+            <label for="postcode">Last Name</label>
+            <input type="text" placeholder="Postcode" name="postcode" id="postcode"
+                   value="<?php echo isset($_POST['postcode']) ? $_POST['postcode'] : ''; ?>"
+                   onkeypress="resetErrorState('postcode', 'postcodeErr', 'createAccount')"/>
+            <br>
+            <span id="postcode"></span>
+
             <label for="email">Email</label>
             <input type="text" name="email" id="email" placeholder="email@example.com"
                    value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>"

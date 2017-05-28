@@ -2,17 +2,19 @@
     <div class="row">
         <div class="two columns">
 			<?php 
-				createInputField("text", "", "first-name", "First Name", "John", "first-nameErr", "createAccount");
-				createInputField("text", "", "last-name", "Last Name", "Smith", "last-nameErr", "createAccount");
-				createInputField("text", "", "dob", "Date of Birth (dd/mm/yyyy)", "dd/mm/yyyy", "dobErr", "createAccount");
-				createInputField("text", "", "email", "Email", "johnsmith@example.com", "emailErr", "createAccount"); 
+				createInputField("text", "first-name", "first-name", "First Name", "John", "first-nameErr", "createAccount");
+				createInputField("text", "last-name", "last-name", "Last Name", "Smith", "last-nameErr", "createAccount");
+				createInputField("text", "dob", "dob", "Date of Birth (dd/mm/yyyy)", "dd/mm/yyyy", "dobErr", "createAccount");
+                createInputField("text", "postcode", "postcode", "Postcode", "Postcode", "postcodeErr", "createAccount");
+
 			?>
         </div>
 
         <div class="two columns">
 			<?php 
 				createSelectField("gender", "gender-select", "gender", "Gender", ["Male", "Female", "Other", "Undisclosed"], ["1", "2", "3", "0"], "select", "genderErr");
-				createInputField("password", "password1", "password", "Password", "password", "passwordErr", "createAccount"); 
+                createInputField("text", "email", "email", "Email", "johnsmith@example.com", "emailErr", "createAccount");
+				createInputField("password", "password1", "password", "Password", "password", "passwordErr", "createAccount");
 				createInputField("password", "password2", "passwordConfirm", "Confirm Password", "confirm password", "passwordErr", "createAccount");
 			?> 
         </div>

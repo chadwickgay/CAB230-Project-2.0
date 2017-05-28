@@ -58,6 +58,7 @@ include("server/PHP/formFunctions.php");
         validateGender($errors, $_POST, 'gender');
         validateDOB($errors, $_POST, 'dob');
         validateCreatePassword($errors, $_POST, 'password', 'passwordConfirm');
+        validatePostcode($errors, $_POST, 'postcode', 'postcodeConfirm');
 
         if ($errors) {
             redisplayForm($errors);
