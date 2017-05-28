@@ -124,9 +124,11 @@ function searchParksByDistance($userLatitude, $userLongitude, $userDistance) {
           + sin ( radians(:userLatitude) )
           * sin( radians( Latitude ) )
         )
-      ) AS distance
-              FROM items
-              HAVING distance < :userDistance';
+      ) AS distance,(SELECT ROUND(Avg(Rating),0) AS AvgRating) AS AvgRating
+              FROM items LEFT JOIN reviews ON items.ID = reviews.ParkID
+              GROUP BY ParkCode
+              HAVING distance < :userDistance
+              ORDER BY Name ASC';
         $query = $pdo->prepare($sql);
         $query->bindParam(':userLatitude', $userLatitude);
         $query->bindParam(':userLongitude', $userLongitude);
@@ -147,9 +149,13 @@ function searchParkByName($parkName) {
     global $pdo;
 
     try {
-        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb
-                FROM items
-                WHERE Name LIKE CONCAT("%", :name, "%")';
+
+        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb, AvgRating 
+                FROM (SELECT ParkCode, Name, Latitude, Longitude, Street, Suburb, ROUND(Avg(Rating),0) AS AvgRating
+                      FROM items LEFT JOIN reviews ON items.ID = reviews.ParkID
+                      GROUP BY ParkCode) result
+                WHERE Name LIKE CONCAT("%", :name, "%")
+                ORDER By Name ASC';
         $query = $pdo->prepare($sql);
         $query->bindParam(':name', $parkName);
         $query->execute();
@@ -169,8 +175,10 @@ function searchParkBySuburb($suburb) {
     global $pdo;
 
     try {
-        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb
-                FROM items
+        $sql = 'SELECT DISTINCT ParkCode, Name, Latitude, Longitude, Street, Suburb, AvgRating 
+                FROM (SELECT ParkCode, Name, Latitude, Longitude, Street, Suburb, ROUND(Avg(Rating),0) AS AvgRating
+                      FROM items LEFT JOIN reviews ON items.ID = reviews.ParkID
+                      GROUP BY ParkCode) result
                 WHERE Suburb LIKE CONCAT("%", :suburb, "%")';
         $query = $pdo->prepare($sql);
         $query->bindParam(':suburb', $suburb);
@@ -247,12 +255,20 @@ function outputSearchResults($results) {
         echo '<table>';
 
         echo '<tr>';
-        echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th>';
+        echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th><th>Rating</th>';
         echo '</tr>';
 
         foreach ($results as $park) {
             echo '<tr>';
-            echo "<td>{$park['ParkCode']}</td><td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a></td><td>{$park['Street']}</td><td>{$park['Suburb']}</td>";
+            echo "<td>{$park['ParkCode']}</td>";
+            echo "<td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a>";
+            echo "</td><td>{$park['Street']}</td>";
+            echo "<td>{$park['Suburb']}</td>";
+            if ($park['AvgRating'] == NULL){
+                echo "<td>No Rating</td>";
+            } else {
+                echo "<td>{$park['AvgRating']}</td>";
+            }
             echo '</tr>';
         }
         echo '</table>';
