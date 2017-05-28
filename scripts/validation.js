@@ -20,7 +20,7 @@ function validateCreateAccount() {
 
 // Calls all necessary validation functions for validation of login input
 function validateLogin() {
-    if (validateEmail('login') & validateLoginPassword('login')) {
+    if (validateEmail("login") & validateLoginPassword("login")) {
         return true;
     } else {
         return false;
@@ -182,7 +182,7 @@ function validateEmail(formName) {
         emailMessage.innerHTML = "You must enter an email!";
         return false;
     } else if (!validEmail.test(email.value)) {
-        setErrorState(email, message);
+        setErrorState(email, emailMessage);
         emailMessage.innerHTML = "Email needs to be in the format email@example.com!";
         return false;
     } else {

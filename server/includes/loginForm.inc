@@ -1,25 +1,31 @@
-<form method="POST" action="login.php" name="login" onsubmit="return validateLogin();">
+<form method="POST" action="login.php" name="login">
     <div class="row">
         <div class="two columns">
+            <!--
             <label for="email">Email</label>
             <input name="email" type="text" id="email" placeholder="email@example.com"
                    value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>"
                    onkeypress="resetErrorState('email', 'emailErr', 'login')"/>
             <br>
             <span id="emailErr"></span>
+            -->
+            <?php createInputField('text', 'email@example.com', 'email', 'email', 'Email', 'emailErr', 'login'); ?>
         </div>
 
         <div class="two columns">
+            <!--
             <label for="password">Password</label>
             <input type="password" name="password" id="password" placeholder="password"
                    onkeypress="resetErrorState('password', 'passwordErr', 'login')"/>
             <br>
             <span id="passwordErr"></span>
+            -->
+            <?php createInputField('password', 'password', 'password', 'password', 'Password', 'passwordErr', 'login'); ?>
         </div>
     </div>
 
     <div class="one column">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" onclick="return validateLogin()">
 
     </div>
 </form>
