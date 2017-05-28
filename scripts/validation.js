@@ -10,8 +10,8 @@ var noErrorColor = "#ffffff";
 
 // Calls all necessary validation functions for validation of account creation input
 function validateCreateAccount() {
-    if (/*validateEmail("createAccount") & validateGender("createAccount") & */validateFirstName("createAccount")/*
-        & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount") & validatePostcode("createAccount")*/) {
+    if (validateEmail("createAccount") & validateGender("createAccount") & validateFirstName("createAccount")
+        & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount") & validatePostcode("createAccount")) {
         return true;
     } else {
         return false;
@@ -174,16 +174,16 @@ function validateEmail(formName) {
     var email = document.forms[formName]["email"];
 
     //Store the Error Message Object ...                
-    var message = document.getElementById('emailErr');
+    var emailMessage = document.getElementById('emailErr');
 
     if (email.value == "") {
         // If the field is blank
-        setErrorState(email, message);
-        message.innerHTML = "You must enter an email!";
+        setErrorState(email, emailMessage);
+        emailMessage.innerHTML = "You must enter an email!";
         return false;
     } else if (!validEmail.test(email.value)) {
         setErrorState(email, message);
-        message.innerHTML = "Email needs to be in the format email@example.com!";
+        emailMessage.innerHTML = "Email needs to be in the format email@example.com!";
         return false;
     } else {
         return true;
@@ -247,6 +247,8 @@ function validateGender(formName) {
 
     if (gender.value == "DEFAULT") {
         // If no selection has been made
+        gender.style.borderColor = errorColour;
+        gender.style.borderWidth = "medium";
         message.innerHTML = "You must select a gender!";
         message.style.color = errorColour;
         return false;
@@ -268,18 +270,22 @@ function validatePassword() {
     //and the confirmation field
     if (pass1.value == "" || pass2.value == "") {
         if (pass1.value == "")
-            pass1.style.backgroundColor = errorColour;
+            pass1.style.borderColor = errorColour;
+            pass1.style.borderWidth = "medium";
         if (pass2.value == "")
-            pass2.style.backgroundColor = errorColour;
-        message.style.color = errorColour;
-        message.innerHTML = "You must enter a password!";
-        return false;
+            pass2.style.borderColor = errorColour;
+            pass2.style.borderWidth = "medium";
+            message.style.color = errorColour;
+            message.innerHTML = "You must enter a password!";
+            return false;
     } else if (pass1.value == pass2.value) {
         //The passwords match.
         //Set the color to the good color and inform
         //the user that they have entered the correct password
-        pass1.style.backgroundColor = successColour;
-        pass2.style.backgroundColor = successColour;
+        pass1.style.borderColor = successColour;
+        pass1.style.borderWidth = "medium";
+        pass2.style.borderColor = successColour;
+        pass2.style.borderWidth = "medium"
         message.style.color = successColour;
         message.innerHTML = "Passwords Match!"
         return true;
@@ -287,8 +293,10 @@ function validatePassword() {
         //The passwords do not match.
         //Set the color to the bad color and
         //notify the user.
-        pass1.style.backgroundColor = errorColour;
-        pass2.style.backgroundColor = errorColour;
+        pass1.style.borderColor = errorColour;
+        pass1.style.borderWidth = "medium";
+        pass2.style.borderColor = errorColour;
+        pass2.style.borderWidth = "medium";
         pass1.value = "";
         pass2.value = "";
         message.style.color = errorColour;
