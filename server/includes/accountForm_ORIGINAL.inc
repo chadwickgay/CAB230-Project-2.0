@@ -5,8 +5,17 @@
 			<input type="text" placeholder="John" name="first-name" id="first-name"
                    value="<?php echo isset($_POST['first-name']) ? $_POST['first-name'] : ''; ?>"
                    onkeypress="resetErrorState('first-name', 'first-nameErr', 'createAccount')"/>
+
             <br>
             <span id="first-nameErr"></span>
+
+            <label for='John'>First Name</label>
+            <input type='text' id='first-name' name='first-name' placeholder='John'
+                   value='' onKeyPress='first-name', 'first-nameErr', 'createAccount' />
+            <br>
+            <span for='first-name'</span>
+
+
 
             <label for="last-name">Last Name</label>
             <input type="text" placeholder="Smith" name="last-name" id="last-name"

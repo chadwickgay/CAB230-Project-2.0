@@ -10,8 +10,8 @@ var noErrorColor = "#ffffff";
 
 // Calls all necessary validation functions for validation of account creation input
 function validateCreateAccount() {
-    if (validateEmail("createAccount") & validateGender("createAccount") & validateFirstName("createAccount")
-        & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount") & validatePostcode("createAccount")) {
+    if (/*validateEmail("createAccount") & validateGender("createAccount") & */validateFirstName("createAccount")/*
+        & validateLastName("createAccount") & validatePassword() & validateDOB("createAccount") & validatePostcode("createAccount")*/) {
         return true;
     } else {
         return false;

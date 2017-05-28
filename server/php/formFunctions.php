@@ -7,7 +7,7 @@
 
 	// Create an error tag using the HTML span tag
 	function createErrorLabel($for) {
-		echo "<span for='$for'</span>";
+		echo "<span id=\"$for\"</span>";
 	}
 
 	// Create and assign the value attribute with the appropriate POST name
@@ -20,14 +20,13 @@
 	}
 	
 	// Create an input field with appropriate attributes for a HTML5 form
-	function createInputField($type, $id, $name, $labelName, $placeholder, $error, $formName) {
+	function createInputField($type, $placeholder, $name, $id, $labelName, $error, $formName) {
 		createLabel($placeholder, $labelName);
 		$value = createPostedValue($name);
-		echo "<input type='$type' id='$id' name='$name' ",
-			 "placeholder='$placeholder' value='$value' ",
-			 "onKeyPress='$name', '$error', '$formName' />";
+		echo "<input type=\"$type\" placeholder=\"$placeholder\" name=\"$name\" id=\"$id\" value=\"$value\" ",
+			 "onkeypress=\"resetErrorState($name, $error, $formName)\" />";
 		echo "<br>";
-		createErrorLabel($name);
+		createErrorLabel($error);
 	}
 
 	// Create an option list with the select tag and appropriate attributes
