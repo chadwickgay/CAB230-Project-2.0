@@ -11,7 +11,8 @@
 
         <div class="two columns">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="password"/>
+            <input type="password" name="password" id="password" placeholder="password"
+                   onkeypress="resetErrorState('password', 'passwordErr', 'login')"/>
             <br>
             <span id="passwordErr"></span>
         </div>

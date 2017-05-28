@@ -5,7 +5,7 @@
 
 // Colours to be used for input/error confirmation
 var successColour = "#66cc66";
-var errorColour = "#ff6666";
+var errorColour = "#cc0000";
 var noErrorColor = "#ffffff";
 
 // Calls all necessary validation functions for validation of account creation input
@@ -19,7 +19,7 @@ function validateCreateAccount() {
 
 // Calls all necessary validation functions for validation of login input
 function validateLogin() {
-    if (validateEmail('login') && validateLoginPassword('login')) {
+    if (validateEmail('login') & validateLoginPassword('login')) {
         return true;
     } else {
         return false;
@@ -300,7 +300,8 @@ function validateComment(formName) {
 }
 
 function setErrorState(inputName, errorField) {
-    inputName.style.backgroundColor = errorColour;
+    inputName.style.borderColor = errorColour;
+    inputName.style.borderWidth = "medium";
     errorField.style.color = errorColour;
 
 }
@@ -312,7 +313,8 @@ function resetErrorState(htmlElementName, ErrID, formName) {
     //Store the Error Message Object ...                
     var message = document.getElementById(ErrID);
 
-    elementName.style.backgroundColor = noErrorColor;
+    elementName.style.borderColor = '#D1D1D1';
+    elementName.style.borderWidth = "thin";
     message.style.color = noErrorColor;
     message.innerHTML = "";
 }
