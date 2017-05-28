@@ -50,7 +50,8 @@ function generate_rand_string() {
 function submitReview($UserID, $ParkID, $Description, $Rating) {
     try {
         global $pdo;
-        $stmt = $pdo->prepare("DELETE FROM reviews WHERE UserID=:UserID");
+        $stmt = $pdo->prepare("DELETE FROM reviews WHERE UserID=:UserID AND ParkID=:ParkID");
+        $stmt->bindValue(':ParkID', $ParkID);
         $stmt->bindValue(':UserID', $UserID);
         $stmt->execute();
         $stmt = $pdo->prepare("INSERT INTO reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
