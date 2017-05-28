@@ -1,22 +1,31 @@
 <form name="createAccount" method="POST" action="create-account.php">
     <div class="row">
         <div class="two columns">
-			<?php 
-				createInputField("text", "first-name", "first-name", "First Name", "John", "first-nameErr", "createAccount");
-				createInputField("text", "last-name", "last-name", "Last Name", "Smith", "last-nameErr", "createAccount");
-				createInputField("text", "dob", "dob", "Date of Birth (dd/mm/yyyy)", "dd/mm/yyyy", "dobErr", "createAccount");
-                createInputField("text", "postcode", "postcode", "Postcode", "Postcode", "postcodeErr", "createAccount");
+			<?php
+
+            $genderOptions = array("Undisclosed", "Male", "Female", "Other");
+
+            createInputField('text', 'John', 'first-name', 'first-name', 'First Name', 'first-nameErr', 'createAccount');
+            createInputField('text', 'Smith', 'last-name', 'last-name', 'Last Name', 'last-nameErr', 'createAccount');
+            createInputField('text', 'dd/mm/yyyy', 'dob', 'dob', 'Date of Birth (dd/mm/yyyy)', 'dobErr', 'createAccount');
+            createInputField('text', 'Postcode', 'postcode', 'postcode', 'Postcode', 'postcodeErr', 'createAccount');
+
+
+
 
 			?>
         </div>
 
         <div class="two columns">
-			<?php 
-				createSelectField("gender", "gender-select", "gender", "Gender", ["Male", "Female", "Other", "Undisclosed"], ["1", "2", "3", "0"], "select", "genderErr");
-                createInputField("text", "email", "email", "Email", "johnsmith@example.com", "emailErr", "createAccount");
-				createInputField("password", "password1", "password", "Password", "password", "passwordErr", "createAccount");
-				createInputField("password", "password2", "passwordConfirm", "Confirm Password", "confirm password", "passwordErr", "createAccount");
-			?> 
+			<?php
+            createSelectField('gender', 'Gender', 'gender', 'genderErr', $genderOptions, 'createAccount');
+            createInputField('text', 'email@example.com', 'email', 'email', 'Email', 'emailErr', 'createAccount');
+            createInputField('password', 'password', 'password', 'password1', 'Password', 'passwordErr', 'createAccount');
+            createInputField('password', 'confirm password', 'confirm-password', 'password2', 'Confirm Password', 'confirmPasswordErr', 'createAccount');
+            ?>
+
+
+
         </div>
     </div>
 	

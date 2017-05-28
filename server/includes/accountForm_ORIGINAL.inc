@@ -22,7 +22,7 @@
             <br>
             <span id="dobErr"></span>
 
-            <label for="postcode">Last Name</label>
+            <label for="postcode">Postcode</label>
             <input type="text" placeholder="Postcode" name="postcode" id="postcode"
                    value="<?php echo isset($_POST['postcode']) ? $_POST['postcode'] : ''; ?>"
                    onkeypress="resetErrorState('postcode', 'postcodeErr', 'createAccount')"/>
@@ -41,8 +41,8 @@
 
         <div class="two columns">
             <label for="gender">Gender</label>
-            <select class="gender-select" name="gender" id="gender">
-                <option selected value="DEFAULT" disabled style="display: none;">select</option>
+            <select name="gender" id="gender">
+                <option selected value="DEFAULT" class="hidden">select</option>
                 <option <?php echo posted_value('gender') == 1 ? 'selected' : '' ?> value="1">Male</option>
                 <option <?php echo posted_value('gender') == 2 ? 'selected' : '' ?> value="2">Female</option>
                 <option <?php echo posted_value('gender') == 3 ? 'selected' : '' ?> value="3">Other</option>
