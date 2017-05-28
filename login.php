@@ -39,7 +39,7 @@ include("server/PHP/database.php");
         if (isset($_POST['email']) && isset($_POST['password'])) {
             require 'server/includes/validate.inc';
             validateEmail($errors, $_POST, 'email');
-            validatePassword($errors, $_POST, 'password');
+            validateLoginPassword($errors, $_POST, 'password');
             if (sizeof($errors) <= 0) {
                 if (login($_POST['email'], $_POST['password'])) {
 
