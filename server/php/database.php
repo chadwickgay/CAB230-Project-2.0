@@ -264,7 +264,7 @@ function outputSearchResults($results) {
             echo "<td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a>";
             echo "</td><td>{$park['Street']}</td>";
             echo "<td>{$park['Suburb']}</td>";
-            if ($park['AvgRating'] == NULL){
+            if ($park['AvgRating'] == NULL) {
                 echo "<td>No Rating</td>";
             } else {
                 echo "<td>{$park['AvgRating']}</td>";
@@ -297,7 +297,7 @@ function displayMapResults($results) {
 
 }
 
-function createAccount($email, $firstName, $lastName, $dob, $gender){
+function createAccount($email, $firstName, $lastName, $dob, $gender) {
     global $pdo;
 
     try {

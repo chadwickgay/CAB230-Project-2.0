@@ -39,7 +39,7 @@ function validateLoginPassword(formName) {
     if (passwordObj.value == undefined || passwordObj.value == "") {
         // If no selection has been made
         message.innerHTML = "You must enter a password!";
-		setErrorState(passwordObj, message);
+        setErrorState(passwordObj, message);
         return false;
     } else {
         return true;
@@ -271,13 +271,13 @@ function validatePassword() {
     if (pass1.value == "" || pass2.value == "") {
         if (pass1.value == "")
             pass1.style.borderColor = errorColour;
-            pass1.style.borderWidth = "medium";
+        pass1.style.borderWidth = "medium";
         if (pass2.value == "")
             pass2.style.borderColor = errorColour;
-            pass2.style.borderWidth = "medium";
-            message.style.color = errorColour;
-            message.innerHTML = "You must enter a password!";
-            return false;
+        pass2.style.borderWidth = "medium";
+        message.style.color = errorColour;
+        message.innerHTML = "You must enter a password!";
+        return false;
     } else if (pass1.value == pass2.value) {
         //The passwords match.
         //Set the color to the good color and inform

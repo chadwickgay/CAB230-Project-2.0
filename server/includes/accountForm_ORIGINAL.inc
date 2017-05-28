@@ -2,7 +2,7 @@
     <div class="row">
         <div class="two columns">
             <label for="first-name">First Name</label>
-			<input type="text" placeholder="John" name="first-name" id="first-name"
+            <input type="text" placeholder="John" name="first-name" id="first-name"
                    value="<?php echo isset($_POST['first-name']) ? $_POST['first-name'] : ''; ?>"
                    onkeypress="resetErrorState('first-name', 'first-nameErr', 'createAccount')"/>
             <br>

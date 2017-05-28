@@ -10,7 +10,7 @@ unset($_SESSION['logged']);
     <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <?php include('server/includes/head.inc'); ?>
-	<title>Park Search - Logout</title>
+    <title>Park Search - Logout</title>
 </head>
 
 <body>

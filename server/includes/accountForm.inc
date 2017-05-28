@@ -1,7 +1,7 @@
 <form name="createAccount" method="POST" action="create-account.php">
     <div class="row">
         <div class="two columns">
-			<?php
+            <?php
 
             $genderOptions = array("Undisclosed", "Male", "Female", "Other");
 
@@ -11,13 +11,11 @@
             createInputField('text', 'Postcode', 'postcode', 'postcode', 'Postcode', 'postcodeErr', 'createAccount');
 
 
-
-
-			?>
+            ?>
         </div>
 
         <div class="two columns">
-			<?php
+            <?php
             createSelectField('gender', 'Gender', 'gender', 'genderErr', $genderOptions, 'createAccount');
             createInputField('text', 'email@example.com', 'email', 'email', 'Email', 'emailErr', 'createAccount');
             createInputField('password', 'password', 'password', 'password1', 'Password', 'passwordErr', 'createAccount');
@@ -25,10 +23,9 @@
             ?>
 
 
-
         </div>
     </div>
-	
+
     <div class="row">
         <div class="one column">
             <input name="register" type="submit" value="Submit" onclick="return validateCreateAccount()">

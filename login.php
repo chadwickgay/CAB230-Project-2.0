@@ -10,7 +10,7 @@ include("server/PHP/database.php");
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <?php include('server/includes/head.inc'); ?>
     <title>Park Search - Login</title>
-	
+
     <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="scripts/validation.js"></script>

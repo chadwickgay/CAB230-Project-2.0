@@ -102,10 +102,9 @@ function validateLoginPassword(&$errors, $field_list, $password) {
 
 //a helper function for validating that only valid passwords can be created
 function validateCreatePassword(&$errors, $field_list, $password, $passwordConfirm) {
-    if (!isset($field_list[$password]) || empty($field_list[$password]) || !isset($field_list[$passwordConfirm])
-        || empty($field_list[$passwordConfirm])) {
+    if (!isset($field_list[$password]) || empty($field_list[$password]) || !isset($field_list[$passwordConfirm]) || empty($field_list[$passwordConfirm])) {
         $errors[$password] = 'Password & Confirm Password are required';
-    } else if ($field_list[$password] != $field_list[$passwordConfirm]){
+    } else if ($field_list[$password] != $field_list[$passwordConfirm]) {
         $errors[$password] = 'Password & Confirm Password must match';
     }
 }
