@@ -38,23 +38,23 @@ include("server/PHP/database.php");
     if (isset($_GET['park-name']) || isset($_GET['suburb']) || isset($_GET['rating']) || isset($_GET['distance'])) {
         echo '<h3>Search Results</h3>';
         if (isset($_GET['park-name'])) {
-            $parkName = $_GET["park-name"];
+            $parkName = sanitizeInput($_GET["park-name"]);
             echo "<p>Search by name containing: \"$parkName\"</p>";
             $results = searchParkByName($parkName);
 
         } else if (isset($_GET['suburb'])) {
 
-            $suburb = $_GET["suburb"];
+            $suburb = sanitizeInput($_GET["suburb"]);
             echo "<p>Search by suburb: \"$suburb\"</p>";
             $results = searchParkBySuburb($suburb);
 
         } else if (isset($_GET['rating'])) {
-            $rating = $_GET["rating"];
+            $rating = sanitizeInput($_GET["rating"]);
             echo "<p>Search by minimum rating: \"$rating\"</p>";
             $results = searchParkByRating($rating);
 
         } else if (isset($_GET['distance'])) {
-            $userDistance = $_GET["distance"];
+            $userDistance = sanitizeInput($_GET["distance"]);
             $userLatitude = $_GET['lat'];
             $userLongitude = $_GET['long'];
             $results = searchParksByDistance($userLatitude, $userLongitude, $userDistance);

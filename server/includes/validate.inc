@@ -5,10 +5,10 @@ $error = ""; // Initialize error as blank
 //Whatever includes this file will have all of these variables set if the POST contains submit
 if (isset($_POST['submit'])) { // check if the form is submitted
 
-    $first_name = trim($_POST['first_name']);
-    $last_name = trim($_POST['last_name']);
-    $dob = trim($_POST['dob']);
-    $email = trim($_POST['email']);
+    $first_name = sanitizeInput($_POST['first_name']);
+    $last_name = sanitizeInput($_POST['last_name']);
+    $dob = sanitizeInput($_POST['dob']);
+    $email = sanitizeInput($_POST['email']);
     $gender = $_POST['gender'];
     $password = $_POST['password'];
     $passwordConfirm = $_POST['password'];
@@ -105,4 +105,9 @@ function validateCreatePassword(&$errors, $field_list, $password, $passwordConfi
     } else if ($field_list[$password] != $field_list[$passwordConfirm]){
         $errors[$password] = 'Password & Confirm Password must match';
     }
+}
+
+// a helper method used to santize user input to prevent XSS
+function sanitizeInput($input) {
+    return htmlspecialchars(trim($input));
 }
