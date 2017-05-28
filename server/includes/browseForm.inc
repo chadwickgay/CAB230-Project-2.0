@@ -47,6 +47,11 @@
                     <option value="3">3 Km</option>
                     <option value="4">4 Km</option>
                     <option value="5">5 Km</option>
+                    <option value="10">10 Km</option>
+                    <option value="15">15 Km</option>
+                    <option value="25">25 Km</option>
+                    <option value="50">50 Km</option>
+                    <option value="100">100 Km</option>
                 </select>
                 <input type="submit" value="Submit" id="distance-submit">
             </div>
