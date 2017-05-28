@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) { // check if the form is submitted
     $email = trim($_POST['email']);
     $gender = $_POST['gender'];
     $password = $_POST['password'];
+    $passwordConfirm = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 }
 
@@ -92,8 +93,10 @@ function validateDOB(&$errors, $field_list, $field_name) {
 }
 
 //a helper function for validating that the password input field is valid
-function validatePassword(&$errors, $field_list, $field_name) {
-    if (!isset($field_list[$field_name]) || empty($field_list[$field_name])) {
-        $errors[$field_name] = 'Password is required';
+function validatePassword(&$errors, $field_list, $password, $passwordConfirm) {
+    if (!isset($field_list[$password]) || empty($field_list[$password]) || !isset($field_list[$passwordConfirm]) || empty($field_list[$passwordConfirm])) {
+        $errors[$password] = 'Password & Confirm Password are required';
+    } else if ($field_list[$password] != $field_list[$passwordConfirm]){
+        $errors[$password] = 'Password & Confirm Password must match';
     }
 }

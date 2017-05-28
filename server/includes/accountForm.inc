@@ -13,7 +13,7 @@
 			<?php 
 				createSelectField("gender", "gender-select", "gender", "Gender", ["Male", "Female", "Other", "Undisclosed"], ["1", "2", "3", "0"], "select", "genderErr");
 				createInputField("password", "password1", "password", "Password", "password", "passwordErr", "createAccount"); 
-				createInputField("password", "password2", "password", "Confirm Password", "confirm password", "passwordErr", "createAccount");
+				createInputField("password", "password2", "passwordConfirm", "Confirm Password", "confirm password", "passwordErr", "createAccount");
 			?> 
         </div>
     </div>
