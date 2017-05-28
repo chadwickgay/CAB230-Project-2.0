@@ -49,49 +49,28 @@ include("server/PHP/formFunctions.php");
     require 'server/includes/validate.inc';
 
     $errors = array();
+
     if (isset($_POST['email'])) {
+
         validateEmail($errors, $_POST, 'email');
         validateFirstName($errors, $_POST, 'first-name');
         validateLastName($errors, $_POST, 'last-name');
         validateGender($errors, $_POST, 'gender');
         validateDOB($errors, $_POST, 'dob');
         validateCreatePassword($errors, $_POST, 'password', 'passwordConfirm');
+
         if ($errors) {
             redisplayForm($errors);
         } else {
 
-            try {
-                $stmt = $pdo->prepare('SELECT Email FROM members WHERE Email=:email');
-                $stmt->bindValue(':email', $_POST['email']);
-                $stmt->execute();
-                if ($stmt != false && $stmt->rowCount()) {
-                    $errors['email'] = "An account with this email address already exists!<br>Email: \"" . $_POST['email'] . "\"";
-                    $errors['password'] = "Please re-enter your password.";
-                    redisplayForm($errors);
-                } else {
-                    $stmt = $pdo->prepare('INSERT INTO members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
-                    $stmt->bindValue(':email', $_POST['email']);
-                    $stmt->bindValue(':salt', generate_rand_string());
-                    $stmt->bindValue(':password', $_POST['password']);
-                    $stmt->bindValue(':firstname', $_POST['first-name']);
-                    $stmt->bindValue(':lastname', $_POST['last-name']);
-                    $tmp_dob = explode('/', $_POST['dob']);
-                    $tmp_dob = '' . $tmp_dob[2] . '-' . $tmp_dob[1] . '-' . $tmp_dob[0];
-                    $stmt->bindValue(':dob', $tmp_dob);
-                    $stmt->bindValue(':genderid', $_POST['gender']);
-                    $stmt->execute();
+            $email = sanitizeInput($_POST['email']);
+            $firstName = sanitizeInput($_POST['first-name']);
+            $lastName = sanitizeInput($_POST['last-name']);
+            $dob = sanitizeInput($_POST['dob']);
+            $gender = $_POST['gender'];
 
-                    if (login($_POST['email'], $_POST['password'])) {
-                        echo 'You have successfully logged in!';
-                        echo "<script>redirectToPage('/');</script>";
-                    } else {
-                        echo 'Internal Error #789h';
-                    }
-                }
-            } catch (PDOException $e) {
-                echo $e->getMessage();
-                echo 'Internal Error #b67d';
-            }
+            createAccount($email, $firstName, $lastName, $dob, $gender);
+
         }
     } else {
         include 'server/includes/accountForm.inc';

@@ -158,7 +158,7 @@ include("server/PHP/database.php");
                     validateReview($errors, $_POST, 'txtcomment');
 
                     if ($errors) {
-                        ## want to put a red box around this output to highlight the errors
+
                         echo '<div class="validation">';
                         echo '<h5>Invalid submission, correct the following errors:</h5>';
                         echo '<ul>';
@@ -170,11 +170,21 @@ include("server/PHP/database.php");
                         // redisplay the form
                         include 'server/includes/addReview.inc';
                     } else {
-                        $Rating = 0;
+
+                        $rating = 0;
+
                         if (isset($_POST['rating'])) {
-                            $Rating = $_POST['rating'];
+                            // Sanitize input
+                            $rating = sanitizeInput($_POST['rating']);
                         }
-                        submitReview($_SESSION['logged'], $Park['ID'], $_POST['txtcomment'], $Rating);
+
+                        // Sanitize input
+                        $reviewComment = sanitizeInput($_POST['txtcomment']);
+                        $logged = $_SESSION['logged'];
+                        $parkID = $Park['ID'];
+
+                        submitReview($logged, $parkID, $reviewComment, $rating);
+
                         echo "Your review has been submitted.";
                         echo "<script>redirectToPage('/park.php?ParkCode=" . $Park['ParkCode'] . "');</script>";
                     }
@@ -197,6 +207,7 @@ include("server/PHP/database.php");
                     echo '<h4 itemprop="itemReviewed">REVIEWS FOR ' . $Park['Name'] . '</h4>';
 
                     $Reviews = array();
+
                     if ($Park['ID'] > 0) {
                         $Reviews2 = $pdo->prepare("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Description FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=:parkid ORDER BY Rating DESC");
                         $Reviews2->bindValue(':parkid', $Park['ID']);

@@ -5,25 +5,18 @@ $error = ""; // Initialize error as blank
 //Whatever includes this file will have all of these variables set if the POST contains submit
 if (isset($_POST['submit'])) { // check if the form is submitted
 
-    $first_name = sanitizeInput($_POST['first_name']);
-    $last_name = sanitizeInput($_POST['last_name']);
+    $firstName = sanitizeInput($_POST['first-name']);
+    $lastName = sanitizeInput($_POST['last-name']);
     $dob = sanitizeInput($_POST['dob']);
     $email = sanitizeInput($_POST['email']);
     $gender = $_POST['gender'];
     $password = $_POST['password'];
     $passwordConfirm = $_POST['password'];
+    $reviewComment = sanitizeInput($_POST['txtcomment']);
 }
 
 ### Start of input validation functions ###
 
-//a helper function for ensuring that a field is not left blank
-function validateFieldNotEmpty(&$errors, $field_list, $field_name) {
-    if (!isset($field_list[$field_name]) || empty($field_list[$field_name]) || $field_list[$field_name] == 'NULL') {
-        $errors[$field_name] = 'required';
-        return false;
-    }
-    return true;
-}
 
 //a helper function for returning the POSTed value of a particular variable
 function posted_value($name) {
@@ -100,7 +93,8 @@ function validateLoginPassword(&$errors, $field_list, $password) {
 
 //a helper function for validating that only valid passwords can be created
 function validateCreatePassword(&$errors, $field_list, $password, $passwordConfirm) {
-    if (!isset($field_list[$password]) || empty($field_list[$password]) || !isset($field_list[$passwordConfirm]) || empty($field_list[$passwordConfirm])) {
+    if (!isset($field_list[$password]) || empty($field_list[$password]) || !isset($field_list[$passwordConfirm])
+        || empty($field_list[$passwordConfirm])) {
         $errors[$password] = 'Password & Confirm Password are required';
     } else if ($field_list[$password] != $field_list[$passwordConfirm]){
         $errors[$password] = 'Password & Confirm Password must match';

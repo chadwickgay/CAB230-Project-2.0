@@ -38,10 +38,17 @@ include("server/PHP/database.php");
         $errors = array();
         if (isset($_POST['email']) && isset($_POST['password'])) {
             require 'server/includes/validate.inc';
+
+            // validate format of email and password
             validateEmail($errors, $_POST, 'email');
             validateLoginPassword($errors, $_POST, 'password');
+
+            $password = $_POST['password'];
+            // sanitize input before login
+            $email = sanitizeInput($_POST['email']);
+
             if (sizeof($errors) <= 0) {
-                if (login($_POST['email'], $_POST['password'])) {
+                if (login($email, $password)) {
 
                 } else {
                     $errors["invalid_login"] = "The Username and/or Password provided is incorrect.";

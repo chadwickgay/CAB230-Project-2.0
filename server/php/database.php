@@ -47,19 +47,19 @@ function generate_rand_string() {
 }
 
 //Inserts a review into the database with the given parameters
-function submitReview($UserID, $ParkID, $Description, $Rating) {
+function submitReview($userID, $parkID, $description, $rating) {
     try {
         global $pdo;
         $stmt = $pdo->prepare("DELETE FROM reviews WHERE UserID=:UserID AND ParkID=:ParkID");
-        $stmt->bindValue(':ParkID', $ParkID);
-        $stmt->bindValue(':UserID', $UserID);
+        $stmt->bindValue(':ParkID', $parkID);
+        $stmt->bindValue(':UserID', $userID);
         $stmt->execute();
         $stmt = $pdo->prepare("INSERT INTO reviews (ParkID, UserID, DatePosted, Rating, Description) VALUES (:ParkID, :UserID, :Date, :Rating, :Description)");
-        $stmt->bindValue(':ParkID', $ParkID);
-        $stmt->bindValue(':UserID', $UserID);
+        $stmt->bindValue(':ParkID', $parkID);
+        $stmt->bindValue(':UserID', $userID);
         $stmt->bindValue(':Date', date('Y-m-d', time()));
-        $stmt->bindValue(':Rating', $Rating);
-        $stmt->bindValue(':Description', $Description);
+        $stmt->bindValue(':Rating', $rating);
+        $stmt->bindValue(':Description', $description);
         $stmt->execute();
 
         return true;
@@ -295,6 +295,43 @@ function displayMapResults($results) {
 
     echo '</div>';
 
+}
+
+function createAccount($email, $firstName, $lastName, $dob, $gender){
+    global $pdo;
+
+    try {
+        $stmt = $pdo->prepare('SELECT Email FROM members WHERE Email=:email');
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        if ($stmt != false && $stmt->rowCount()) {
+            $errors['email'] = "An account with this email address already exists!<br>Email: \"" . $email . "\"";
+            $errors['password'] = "Please re-enter your password.";
+            redisplayForm($errors);
+        } else {
+            $stmt = $pdo->prepare('INSERT INTO members (Email, Salt, Password, FirstName, LastName, DOB, Gender) VALUES (:email, :salt, SHA2(CONCAT(:password, :salt), 0), :firstname, :lastname, :dob, :genderid)');
+            $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':salt', generate_rand_string());
+            $stmt->bindValue(':password', $_POST['password']);
+            $stmt->bindValue(':firstname', $firstName);
+            $stmt->bindValue(':lastname', $lastName);
+            $tmp_dob = explode('/', $dob);
+            $tmp_dob = '' . $tmp_dob[2] . '-' . $tmp_dob[1] . '-' . $tmp_dob[0];
+            $stmt->bindValue(':dob', $tmp_dob);
+            $stmt->bindValue(':genderid', $gender);
+            $stmt->execute();
+
+            if (login($_POST['email'], $_POST['password'])) {
+                echo 'You have successfully logged in!';
+                echo "<script>redirectToPage('/');</script>";
+            } else {
+                echo 'Internal Error #789h';
+            }
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        echo 'Internal Error #b67d';
+    }
 }
 
 ?>

@@ -1,5 +1,6 @@
 <?php
 include("server/PHP/database.php");
+include "server/includes/validate.inc";
 ?>
 
 <!DOCTYPE html>
