@@ -220,34 +220,6 @@ function searchParkByRating($rating) {
     return $results;
 }
 
-//gets all the parks containing the 1st string given as part of its name and 2nd as part of its suburb.
-function searchForParks($parkName, $suburb) {
-
-    global $pdo;
-
-    // Add ratings to the search
-    // Join reviews table
-
-    try {
-        $sql = 'SELECT DISTINCT ParkCode, Name, Street, Suburb
-                FROM items
-                WHERE Suburb LIKE CONCAT("%", :suburb, "%") AND Name LIKE CONCAT("%", :name, "%")';
-        $query = $pdo->prepare($sql);
-        $query->bindParam(':suburb', $suburb);
-        $query->bindParam(':name', $parkName);
-        $query->execute();
-        $results = $query->fetchAll();
-
-        // Call outputSearchResults to output results table
-        outputSearchResults($results);
-
-    } catch (PDOException $ex) {
-        echo $ex->getMessage();
-    }
-
-    return $results;
-}
-
 //a helper function for rendering the search results from sql queries on a html page.
 function outputSearchResults($results) {
     if (!empty($results)) {
