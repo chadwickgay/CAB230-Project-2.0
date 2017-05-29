@@ -12,11 +12,9 @@
 
 	// Create and assign the value attribute with the appropriate POST name
 	function createPostedValue($name) {
-		if (isset($_POST["$name"])) {
-			return "" . htmlspecialchars($_POST[$name]);
-		} else {
-			return "";
-		}
+		if (isset($_POST["$name"]))
+			return htmlspecialchars($_POST[$name]);
+		return '';
 	}
 
 	// Create an input field with appropriate attributes for a HTML5 form
@@ -34,9 +32,10 @@
 
 		echo "<select id=\"$id\" name=\"$name\" onChange=\"resetErrorState('$name', '$errorSpanID', '$formName')\">";
 		echo "<option selected value='DEFAULT' disabled class=\"hidden\">select</option>";
-
+		
 		for ($i = 0; $i < count($options); $i++) {
-			echo "<option value='$i'>$options[$i]</option>";
+			$selected = $i == (ctype_digit(createPostedValue($name)) ? intval(createPostedValue($name)) : -1) ? 'selected' : '';
+			echo "<option $selected value='$i'>$options[$i]</option>";
 		}
 
 		echo "</select>";
