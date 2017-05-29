@@ -1,4 +1,4 @@
-<form name="createAccount" method="POST" action="create-account.php">
+<?php createFormOpeningTag("POST", "create-account.php", "createAccount", ""); ?>
     <div class="row">
         <div class="two columns">
             <?php

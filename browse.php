@@ -1,5 +1,6 @@
 <?php
 include("server/PHP/database.php");
+include("server/PHP/formFunctions.php");
 include "server/includes/validate.inc";
 ?>
 

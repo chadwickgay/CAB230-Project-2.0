@@ -25,7 +25,7 @@ function createInputField($type, $placeholder, $name, $id, $labelName, $errorMes
     createErrorLabel($errorMessageBox);
 }
 
-// Create an option list with the select tag and appropriate attributes
+// Create a option list with the select tag and appropriate attributes
 function createSelectField($id, $labelName, $name, $errorSpanID, $options, $formName) {
     createLabel($id, $labelName);
 
@@ -39,7 +39,9 @@ function createSelectField($id, $labelName, $name, $errorSpanID, $options, $form
 
     echo "</select>";
     echo "<br>";
-    echo "<span id=\"$errorSpanID\"></span>";
+	if ($errorSpanID != "") {
+		echo "<span id=\"$errorSpanID\"></span>";
+	}
 }
 
 // Create the star ratings field on the addReview.inc and park.php pages
@@ -50,6 +52,17 @@ function createRatingsField() {
         echo isset($_SESSION['logged']) ? '' : ' disabled>';
         createLabel("rating" . $i, "&#9733;");
     }
+}
+
+// Create the opening tag for a HTML form elemnt
+function createFormOpeningTag($method, $action, $name, $onSubmit) {
+	if ($onSubmit == "") {
+		echo "<form method=\"$method\" action=\"$action\" name=\"$name\">";
+	} else {
+		echo "<form method=\"$method\" action=\"$action\" name=\"$name\" onsubmit=\"$onSubmit\">";
+	}
+	
+	
 }
 
 ?>

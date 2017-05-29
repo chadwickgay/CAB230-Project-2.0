@@ -29,7 +29,7 @@
 
                 <textarea cols="50" rows="4" name="txtcomment" id="txtcomment"
                           placeholder="Enter your review here." <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>></textarea>
-                <span id="txtcommentErr"></span>
+                <?php createErrorLabel("txtcommentErr"); ?>
             </div>
 
             <input type="submit" value="<?php echo isset($_SESSION['logged']) ? 'Submit' : 'Login' ?>">
