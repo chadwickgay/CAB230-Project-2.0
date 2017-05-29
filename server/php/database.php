@@ -28,10 +28,10 @@ global $db_password;
 
 $db_host = "localhost";
 $db_name = 'parksearch';
-//$db_username = 'parkuser';
-//$db_password = 'password';
-$db_username = 'root';
-$db_password = '';
+$db_username = 'parkuser';
+$db_password = 'password';
+//$db_username = 'root';
+//$db_password = '';
 
 //Whatever includes this file will have a sql database connection setup and ready to be used.
 try {
@@ -255,12 +255,11 @@ function outputSearchResults($results) {
         echo '<table>';
 
         echo '<tr>';
-        echo '<th>PARK CODE</th><th>PARK NAME</th><th>STREET</th><th>SUBURB</th><th>Rating</th>';
+        echo '<th>PARK NAME</th><th>STREET</th><th>SUBURB</th><th>Rating</th>';
         echo '</tr>';
 
         foreach ($results as $park) {
             echo '<tr>';
-            echo "<td>{$park['ParkCode']}</td>";
             echo "<td><a href='park.php?ParkCode={$park['ParkCode']}'>{$park['Name']}</a>";
             echo "</td><td>{$park['Street']}</td>";
             echo "<td>{$park['Suburb']}</td>";
