@@ -9,6 +9,7 @@
                 if (session_status() == PHP_SESSION_NONE) {
                     session_start();
                 }
+				
                 if (isset($_SESSION['logged'])) {
                     echo "<li><a href='logout.php'>Logout</a></li>";
                 } else {

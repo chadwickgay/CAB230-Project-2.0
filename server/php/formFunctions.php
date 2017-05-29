@@ -28,7 +28,6 @@ function createInputField($type, $placeholder, $name, $id, $labelName, $errorMes
 // Create a option list with the select tag and appropriate attributes
 function createSelectField($id, $labelName, $name, $errorSpanID, $options, $formName) {
     createLabel($id, $labelName);
-
     echo "<select id=\"$id\" name=\"$name\" onChange=\"resetErrorState('$name', '$errorSpanID', '$formName')\">";
     echo "<option selected value='DEFAULT' disabled class=\"hidden\">select</option>";
 
@@ -39,6 +38,7 @@ function createSelectField($id, $labelName, $name, $errorSpanID, $options, $form
 
     echo "</select>";
     echo "<br>";
+	
 	if ($errorSpanID != "") {
 		echo "<span id=\"$errorSpanID\"></span>";
 	}
@@ -47,6 +47,7 @@ function createSelectField($id, $labelName, $name, $errorSpanID, $options, $form
 // Create the star ratings field on the addReview.inc and park.php pages
 function createRatingsField() {
     $minRating = 1;
+	
     for ($i = 5; $i >= $minRating; $i--) {
         echo "<input type=\"checkbox\" id=\"rating" . $i . "\" name=\"rating\" value=\"$i\" onclick='checkboxDeselectOthers(this);'";
         echo isset($_SESSION['logged']) ? '' : ' disabled>';
@@ -60,9 +61,7 @@ function createFormOpeningTag($method, $action, $name, $onSubmit) {
 		echo "<form method=\"$method\" action=\"$action\" name=\"$name\">";
 	} else {
 		echo "<form method=\"$method\" action=\"$action\" name=\"$name\" onsubmit=\"$onSubmit\">";
-	}
-	
-	
+	}	
 }
 
 ?>

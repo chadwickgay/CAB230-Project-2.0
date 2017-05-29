@@ -1,5 +1,4 @@
 <div class="park-review">
-
     <h4>ENTER YOUR REVIEW</h4>
 
     <?php
@@ -17,16 +16,14 @@
           onsubmit="<?php echo isset($_SESSION['logged']) ? 'return validateReview();' : 'return redirectToLogin();' ?>">
         <fieldset>
             <legend>Select a star rating</legend>
-
             <div class="park-review">
                 <div class="rating">
                     <?php createRatingsField(); ?>
-                </div>
-
-                <br>
-
+				</div>
+				
+				<br>
+				
                 <?php createLabel("txtcomment", "Enter review comments"); ?>
-
                 <textarea cols="50" rows="4" name="txtcomment" id="txtcomment"
                           placeholder="Enter your review here." <?php echo isset($_SESSION['logged']) ? '' : 'disabled' ?>></textarea>
                 <?php createErrorLabel("txtcommentErr"); ?>
@@ -35,5 +32,4 @@
             <input type="submit" value="<?php echo isset($_SESSION['logged']) ? 'Submit' : 'Login' ?>">
         </fieldset>
     </form>
-
 </div>

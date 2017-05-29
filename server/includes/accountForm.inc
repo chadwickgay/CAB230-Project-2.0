@@ -2,10 +2,10 @@
     <div class="row">
         <div class="two columns">
             <?php
-            createInputField('text', 'John', 'first-name', 'first-name', 'First Name', 'first-nameErr', 'createAccount');
-            createInputField('text', 'Smith', 'last-name', 'last-name', 'Last Name', 'last-nameErr', 'createAccount');
-            createInputField('text', 'dd/mm/yyyy', 'dob', 'dob', 'Date of Birth (dd/mm/yyyy)', 'dobErr', 'createAccount');
-            createInputField('text', 'Postcode', 'postcode', 'postcode', 'Postcode', 'postcodeErr', 'createAccount');
+			createInputField('text', 'John', 'first-name', 'first-name', 'First Name', 'first-nameErr', 'createAccount');
+			createInputField('text', 'Smith', 'last-name', 'last-name', 'Last Name', 'last-nameErr', 'createAccount');
+			createInputField('text', 'dd/mm/yyyy', 'dob', 'dob', 'Date of Birth (dd/mm/yyyy)', 'dobErr', 'createAccount');
+			createInputField('text', 'Postcode', 'postcode', 'postcode', 'Postcode', 'postcodeErr', 'createAccount');
             ?>
         </div>
 
