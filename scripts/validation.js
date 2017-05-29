@@ -28,7 +28,7 @@ function validateLogin() {
 }
 
 // Calls all neccessary validation functions if password is invalid.
-// returns boolean whether it is valid or not.
+// returns a boolean determined by whether it is valid or not.
 function validateLoginPassword(formName) {
     //Store the password field objects into variables ...
     var passwordObj = document.forms[formName]["password"];
@@ -62,7 +62,7 @@ function redirectToLogin() {
     return false;
 }
 
-// Redirects to page where page is a passed argument
+// Redirects to page where page is a parsed argument
 function redirectToPage(page) {
     var url = window.location.href;
     url = url.substring(0, url.lastIndexOf('/'));
@@ -80,6 +80,7 @@ function checkboxDeselectOthers(currentElement) {
     }
 }
 
+// A helper function to validate any first name fields
 function validateFirstName(formName) {
     // Format for valid name
     // Allows spaces/hyphen/period as part of name
@@ -109,6 +110,7 @@ function validateFirstName(formName) {
     }
 }
 
+// A helper function to validate any last name fields
 function validateLastName(formName) {
     // Format for valid name
     // Allows spaces/hyphen/period as part of name
@@ -138,6 +140,7 @@ function validateLastName(formName) {
     }
 }
 
+// A helper function to validate any postcode fields
 function validatePostcode(formName) {
     // Format for valid name
     // Allows spaces/hyphen/period as part of name
@@ -163,6 +166,7 @@ function validatePostcode(formName) {
     }
 }
 
+// A helper function to validate any email fields
 function validateEmail(formName) {
     // Format for valid email address
     // Allows letters, numbers, hypens, underscores and periods in address
@@ -190,6 +194,7 @@ function validateEmail(formName) {
     }
 }
 
+// A helper function to validate any date of birth fields
 function validateDOB(formName) {
     // Format for valid DOB
     // Checks basic format - e.g 01/01/2010 is valid.
@@ -238,6 +243,7 @@ function validateDOB(formName) {
     }
 }
 
+// A helper function to validate any gender fields
 function validateGender(formName) {
     //Store the gender field objects into variables ...
     var gender = document.forms[formName]["gender"];
@@ -258,6 +264,7 @@ function validateGender(formName) {
 
 }
 
+// A helper function to validate any password fields
 function validatePassword() {
     //Store the password field objects into variables ...
     var pass1 = document.getElementById('password1');
@@ -305,6 +312,7 @@ function validatePassword() {
     }
 }
 
+// A helper function to validate the park review comment field
 function validateComment(formName) {
     // Format for valid comment
     // Allows characters, numbers spaces/hyphen/period as part of comment
@@ -333,13 +341,14 @@ function validateComment(formName) {
     }
 }
 
+// Display an error box around an error returned by a validation function
 function setErrorState(inputName, errorField) {
     inputName.style.borderColor = errorColour;
     inputName.style.borderWidth = "medium";
     errorField.style.color = errorColour;
-
 }
 
+// Reset the error state, used when a form validation error has been corrected
 function resetErrorState(htmlElementName, ErrID, formName) {
     //Store the element name into variable
     var elementName = document.forms[formName][htmlElementName];

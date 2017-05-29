@@ -2,6 +2,8 @@
  * Name: map.js
  * Purpose: Contains the functions related to maps
  */
+
+// Get the location of the user from the browser
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(redirectToForm);
@@ -10,6 +12,7 @@ function getLocation() {
     }
 }
 
+// Redirect to the form
 function redirectToForm(position) {
     document.getElementById('lat').value = position.coords.latitude;
     document.getElementById('long').value = position.coords.longitude;
@@ -19,10 +22,12 @@ function redirectToForm(position) {
     document.getElementById("get-location").style.display = 'none';
 }
 
+// Show the position
 function showPosition(position) {
     x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
 }
 
+// Centre the map on the centre most point between all displayed markers
 function centreMap(locations) {
     var latAvg = 0;
     var lonAvg = 0;
@@ -41,6 +46,7 @@ function centreMap(locations) {
     return latLonCentre;
 }
 
+// Initialise the results map for the browse.php page and 
 function initResultsMap(locations) {
     var centredMarkers = centreMap(locations);
 
@@ -53,10 +59,9 @@ function initResultsMap(locations) {
     var infowindow = new google.maps.InfoWindow();
     var marker, i, contentString;
 
+	// Place the park map markers on the results map, including adding their name and a link
+	// to their individual park page to the marker
     for (i = 0; i < locations.length; i++) {
-        contentString = '<a href="park.php?ParkCode=' + locations[i][0].toString() + '">' + locations[i][1].toString() + '</a>';
-        console.log(contentString);
-
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][2], locations[i][3]),
             map: map
@@ -71,6 +76,7 @@ function initResultsMap(locations) {
     }
 }
 
+// Initialise the map on the individual park page and include a marker at the park's location
 function initMap(lati, long) {
     var location = {
         lat: lati,
