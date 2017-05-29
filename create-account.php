@@ -57,7 +57,7 @@ include("server/PHP/formFunctions.php");
         validateLastName($errors, $_POST, 'last-name');
         validateGender($errors, $_POST, 'gender');
         validateDOB($errors, $_POST, 'dob');
-        validateCreatePassword($errors, $_POST, 'password', 'passwordConfirm');
+        validateCreatePassword($errors, $_POST, 'password', 'confirm-password');
         validatePostcode($errors, $_POST, 'postcode', 'postcodeConfirm');
 
         if ($errors) {

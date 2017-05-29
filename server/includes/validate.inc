@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) { // check if the form is submitted
     $email = sanitizeInput($_POST['email']);
     $gender = $_POST['gender'];
     $password = $_POST['password'];
-    $passwordConfirm = $_POST['password'];
+    $passwordConfirm = $_POST['confirm-password'];
     $reviewComment = sanitizeInput($_POST['txtcomment']);
 }
 
@@ -104,7 +104,7 @@ function validateLoginPassword(&$errors, $field_list, $password) {
 function validateCreatePassword(&$errors, $field_list, $password, $passwordConfirm) {
     if (!isset($field_list[$password]) || empty($field_list[$password]) || !isset($field_list[$passwordConfirm]) || empty($field_list[$passwordConfirm])) {
         $errors[$password] = 'Password & Confirm Password are required';
-    } else if ($field_list[$password] != $field_list[$passwordConfirm]) {
+    } else if (strcmp($field_list[$password], $field_list[$passwordConfirm]) != 0) {
         $errors[$password] = 'Password & Confirm Password must match';
     }
 }
