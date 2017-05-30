@@ -51,11 +51,12 @@ function createRatingsField() {
     for ($i = 5; $i >= $minRating; $i--) {
         echo "<input type=\"checkbox\" id=\"rating" . $i . "\" name=\"rating\" value=\"$i\" onclick='checkboxDeselectOthers(this);'";
         echo isset($_SESSION['logged']) ? '' : ' disabled>';
+        echo '</input>';
         createLabel("rating" . $i, "&#9733;");
     }
 }
 
-// Create the opening tag for a HTML form elemnt
+// Create the opening tag for a HTML form element
 function createFormOpeningTag($method, $action, $name, $onSubmit) {
 	if ($onSubmit == "") {
 		echo "<form method=\"$method\" action=\"$action\" name=\"$name\">";
