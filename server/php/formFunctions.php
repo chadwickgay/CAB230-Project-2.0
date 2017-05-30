@@ -1,21 +1,36 @@
 <?php
 
-// Create a label tag for the name of a form
+// Helper function for creating a label tag for the name of a form
 function createLabel($id, $labelName) {
     echo "<label for='$id'>$labelName</label>";
 }
 
-// Create an error tag using the HTML span tag
+// Helper function to create an error tag using the HTML span tag
 function createErrorLabel($errorMessageBox) {
     echo "<span id=\"$errorMessageBox\"></span>";
 }
 
-// Create and assign the value attribute with the appropriate POST name
+// Helper function to assign the value attribute with the appropriate POST name
 function createPostedValue($name) {
     if (isset($_POST["$name"])) return htmlspecialchars($_POST[$name]);
     return '';
 }
 
+// Helper function to create the opening tag for a HTML form element
+function createFormOpeningTag($method, $action, $name, $onSubmit) {
+	if ($onSubmit == "") {
+		echo "<form method=\"$method\" action=\"$action\" name=\"$name\">";
+	} else {
+		echo "<form method=\"$method\" action=\"$action\" name=\"$name\" onsubmit=\"$onSubmit\">";
+	}	
+}
+
+// Helper function to create a text area for a HTML form element
+function createTextArea($cols, $rows, $name, $id, $placeholder) {
+	echo "<textarea cols=\"$cols\" rows=\"$rows\" name=\"$name\" id=\"$id\" placeholder=\"$placeholder\"";
+	echo isset($_SESSION['logged']) ? "></textarea>" : " disabled></textarea>";
+}
+	
 // Create an input field with appropriate attributes for a HTML5 form
 function createInputField($type, $placeholder, $name, $id, $labelName, $errorMessageBox, $formName) {
     createLabel($id, $labelName);
@@ -56,13 +71,31 @@ function createRatingsField() {
     }
 }
 
-// Create the opening tag for a HTML form element
-function createFormOpeningTag($method, $action, $name, $onSubmit) {
-	if ($onSubmit == "") {
-		echo "<form method=\"$method\" action=\"$action\" name=\"$name\">";
-	} else {
-		echo "<form method=\"$method\" action=\"$action\" name=\"$name\" onsubmit=\"$onSubmit\">";
-	}	
+// Create the addReview form for the addReview include on the park.php page
+function createAddReviewFormOptionOne($parkCode) {
+	echo "<form method=\"POST\" action=\"park.php?ParkCode=".$parkCode."\" name=\"park-review\" ";	
+	echo isset($_SESSION['logged']) ? "onsubmit=\"'return validateReview();'\">" : "onsubmit=\"'return redirectToLogin();'\">";
+	
+	echo "<fieldset>";
+	echo "<legend>Select a star rating</legend>";
+	echo "<div class=\"park-review\">";
+	
+    echo "<div class=\"rating\">";	
+	createRatingsField();	
+	echo "</div>";
+	
+	echo "<br>";
+	
+	createLabel("txtcomment", "Enter review comments");
+	createTextArea("50", "4", "txtcomment", "txtcomment", "Enter your review here.");
+	
+	createErrorLabel("txtcommentErr");
+	echo "</div>";
+	
+	echo "<input type=\"submit\" value=\"";
+	echo isset($_SESSION['logged']) ? "Submit\"" : "Login to leave a review\"";
+	echo "></fieldset>";
+	echo "</form>";	
 }
 
 ?>
