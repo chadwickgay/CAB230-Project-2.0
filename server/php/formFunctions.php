@@ -18,7 +18,7 @@ function createPostedValue($name) {
 
 // Create an input field with appropriate attributes for a HTML5 form
 function createInputField($type, $placeholder, $name, $id, $labelName, $errorMessageBox, $formName) {
-    createLabel($placeholder, $labelName);
+    createLabel($id, $labelName);
     $value = createPostedValue($name);
     echo "<input type=\"$type\" placeholder=\"$placeholder\" name=\"$name\" id=\"$id\" value=\"$value\" ", "onkeypress=\"resetErrorState('$name', '$errorMessageBox', '$formName')\" />";
     echo "<br>";
@@ -50,8 +50,8 @@ function createRatingsField() {
 	
     for ($i = 5; $i >= $minRating; $i--) {
         echo "<input type=\"checkbox\" id=\"rating" . $i . "\" name=\"rating\" value=\"$i\" onclick='checkboxDeselectOthers(this);'";
-        echo isset($_SESSION['logged']) ? '' : ' disabled>';
-        echo '</input>';
+        echo isset($_SESSION['logged']) ? '' : ' disabled';
+        echo '>';
         createLabel("rating" . $i, "&#9733;");
     }
 }

@@ -10,9 +10,9 @@
     }
     ?>
 
-    <?php $ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : ""); ?>
+    <?php $parkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : ""); ?>
 
-    <form method="POST" action="park.php?ParkCode=<?php echo $ParkCode; ?>" name="park-review"
+    <form method="POST" action="park.php?ParkCode=<?php echo $parkCode; ?>" name="park-review"
           onsubmit="<?php echo isset($_SESSION['logged']) ? 'return validateReview();' : 'return redirectToLogin();' ?>">
         <fieldset>
             <legend>Select a star rating</legend>

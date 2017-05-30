@@ -109,7 +109,7 @@ function populateSuburbMenu() {
 	
     echo('
         <select name="suburb" class="suburb-select" id="suburb">
-        <option alue="DEFAULT" disabled selected class="hidden">select</option>
+        <option value="DEFAULT" disabled selected class="hidden">select</option>
     ');
 
     foreach ($result as $suburb) {
@@ -247,11 +247,11 @@ function outputSearchResults($results) {
         }
 		
         echo '</table>';
+
+        echo '</div>';
     } else {
         echo '<h5 class="row center">NO PARKS FOUND...</h5>';
     }
-	
-    echo '</div>';
 }
 
 //renders the google map results in a new google map widget
@@ -262,9 +262,10 @@ function displayMapResults($results) {
         echo '<div class = "row">';
         echo '<script>', "var locations = $encodedLocations;", '</script>';
         echo '<div id="results-map"></div>', '<script type="text/javascript">', 'initResultsMap(locations);', '</script>';
+        echo '</div>';
     }
 
-    echo '</div>';
+
 }
 
 function createAccount($email, $firstName, $lastName, $dob, $gender) {

@@ -48,6 +48,7 @@ include("server/PHP/formFunctions.php");
 			echo '<span class="star">';
 			if ($numberOfStars < 0) {
 				echo "No Rating";
+                echo '</span>';
 			} else {
 				for ($i = $numberOfStars; $i > 0; $i--) {
 					echo "&#9733;";
@@ -63,22 +64,22 @@ include("server/PHP/formFunctions.php");
 			
 		}
 		
-		$ParkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
-		$Park = array('ID' => -1, 'RatingAvg' => -1);
-		$Parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM items WHERE ParkCode=:parkcode");
-		$Parks->bindValue(':parkcode', $ParkCode);
-		$Parks->execute();
-		if ($Parks != false && $Parks->rowCount()) {
-			$temp = $Parks->fetch();
+		$parkCode = htmlspecialchars(isset($_GET['ParkCode']) ? $_GET['ParkCode'] : "");
+		$park = array('ID' => -1, 'RatingAvg' => -1);
+		$parks = $pdo->prepare("SELECT ID, ParkCode, Name, Street, Suburb, Easting, Northing, Latitude, Longitude FROM items WHERE ParkCode=:parkcode");
+		$parks->bindValue(':parkcode', $parkCode);
+		$parks->execute();
+		if ($parks != false && $parks->rowCount()) {
+			$temp = $parks->fetch();
 			if (gettype($temp) == gettype(array())) {
-				$Park = array_merge($Park, $temp);
-				$ParkRatings = $pdo->prepare("SELECT ROUND(Avg(Rating),0) FROM reviews WHERE ParkID=:parkid");
-				$ParkRatings->bindValue(':parkid', $Park['ID']);
-				$ParkRatings->execute();
-				if ($ParkRatings != false && $ParkRatings->rowCount()) {
-					$temp = $ParkRatings->fetch();
+				$park = array_merge($park, $temp);
+				$parkRatings = $pdo->prepare("SELECT ROUND(Avg(Rating),0) FROM reviews WHERE ParkID=:parkid");
+				$parkRatings->bindValue(':parkid', $park['ID']);
+				$parkRatings->execute();
+				if ($parkRatings != false && $parkRatings->rowCount()) {
+					$temp = $parkRatings->fetch();
 					if (ctype_digit($temp[0])) {
-						$Park['RatingAvg'] = intval($temp[0]);
+						$park['RatingAvg'] = intval($temp[0]);
 					}
 				}
 			}
@@ -90,11 +91,11 @@ include("server/PHP/formFunctions.php");
 				<h3>Park information</h3>
 				
 				<div class="park-location">
-					<?php if ($Park['ID'] > 0) { ?>
+					<?php if ($park['ID'] > 0) { ?>
 					<div id="park-map"></div>
 					<script>
-						var latitude = <?php echo $Park['Latitude']; ?>;
-						var longitude = <?php echo $Park['Longitude']; ?>;
+						var latitude = <?php echo $park['Latitude']; ?>;
+						var longitude = <?php echo $park['Longitude']; ?>;
 						
 						initMap(latitude, longitude);
 					</script>
@@ -107,18 +108,18 @@ include("server/PHP/formFunctions.php");
 				<div class="two columns">
 					<div class="park-information" itemscope itemtype="http://schema.org/Place">
 						<?php
-						if ($Park['ID'] > 0) {
-							echo '<h4 itemprop="name">' . $Park['Name'] . '</h4>';
+						if ($park['ID'] > 0) {
+							echo '<h4 itemprop="name">' . $park['Name'] . '</h4>';
 							echo '<h5>Street:</h5>';
-							echo '<p itemprop="address">' . $Park['Street'] . '</p>';
+							echo '<p itemprop="address">' . $park['Street'] . '</p>';
 							echo '<h5>Suburb:</h5>';
-							echo '<p itemprop="address">' . $Park['Suburb'] . '</p>';
+							echo '<p itemprop="address">' . $park['Suburb'] . '</p>';
 							echo '<div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">';
-							echo '<p class="hidden" itemprop="latitude">' . $Park['Latitude'] . '</p>';
-							echo '<p class="hidden" itemprop="longitude">' . $Park['Longitude'] . '</p>';
+							echo '<p class="hidden" itemprop="latitude">' . $park['Latitude'] . '</p>';
+							echo '<p class="hidden" itemprop="longitude">' . $park['Longitude'] . '</p>';
 							echo '</div>';
 							echo '<h5>Average Rating:</h5>';
-							displayAggregateStars($Park['RatingAvg']);
+							displayAggregateStars($park['RatingAvg']);
 						} else {
 							echo '<h4>Unknown Park.</h4>';
 						}
@@ -158,12 +159,12 @@ include("server/PHP/formFunctions.php");
                             // Sanitize input
                             $reviewComment = sanitizeInput($_POST['txtcomment']);
                             $logged = $_SESSION['logged'];
-                            $parkID = $Park['ID'];
+                            $parkID = $park['ID'];
 
                             submitReview($logged, $parkID, $reviewComment, $rating);
 
                             echo "Your review has been submitted.";
-                            echo "<script>redirectToPage('/park.php?ParkCode=" . $Park['ParkCode'] . "');</script>";
+                            echo "<script>redirectToPage('/park.php?ParkCode=" . $park['ParkCode'] . "');</script>";
                         }
 					}
                     else {
@@ -178,30 +179,30 @@ include("server/PHP/formFunctions.php");
 					<div class="park-reviews" itemscope itemtype="http://schema.org/Review">
 						<?php
 						echo '<br /><hr />';
-						echo '<h4 itemprop="itemReviewed">REVIEWS FOR ' . $Park['Name'] . '</h4>';
+						echo '<h4 itemprop="itemReviewed">REVIEWS FOR ' . $park['Name'] . '</h4>';
 						
-						$Reviews = array();
+						$reviews = array();
 						
-						if ($Park['ID'] > 0) {
-							$Reviews2 = $pdo->prepare("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Description FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=:parkid ORDER BY Rating DESC");
-							$Reviews2->bindValue(':parkid', $Park['ID']);
-							$Reviews2->execute();
-							if ($Reviews2 != false && $Reviews2->rowCount()) {
-								$Reviews = $Reviews2;
+						if ($park['ID'] > 0) {
+							$reviews2 = $pdo->prepare("SELECT members.FirstName, members.LastName, reviews.Rating, reviews.Description FROM reviews, members WHERE members.ID = reviews.UserID AND ParkID=:parkid ORDER BY Rating DESC");
+							$reviews2->bindValue(':parkid', $park['ID']);
+							$reviews2->execute();
+							if ($reviews2 != false && $reviews2->rowCount()) {
+								$reviews = $reviews2;
 							}
 						}
-						if (count($Reviews) <= 0) {
+						if (count($reviews) <= 0) {
 							echo '<div><h5>No reviews have been submitted for this park.</h5></div>';
 						} else {
-							foreach ($Reviews as $Review) {
+							foreach ($reviews as $review) {
 								echo '<div>';
-								echo '<h5 itemprop="author">' . $Review['FirstName'] . ' ' . $Review['LastName'] . ' ';
+								echo '<h5 itemprop="author">' . $review['FirstName'] . ' ' . $review['LastName'] . ' ';
 								echo '</h5>';
 								echo '</div>';
 								echo '<div>';
-								echoStars($Review['Rating']);
+								echoStars($review['Rating']);
 								echo '</div>';
-								echo '<p itemprop="reviewBody">' . $Review['Description'] . '</p>';
+								echo '<p itemprop="reviewBody">' . $review['Description'] . '</p>';
 							}
 						}
 						?>
