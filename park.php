@@ -132,40 +132,41 @@ include("server/PHP/formFunctions.php");
 					if (isset($_POST['txtcomment']) && isset($_SESSION['logged'])) {
 						require 'server/includes/validate.inc';
 						validateReview($errors, $_POST, 'txtcomment');
+
+                        if ($errors) {
+                            echo '<div class="validation">';
+                            echo '<h5>Invalid submission, correct the following errors:</h5>';
+                            echo '<ul>';
+
+                            foreach ($errors as $field => $error) {
+                                echo "<li>$error</li>";
+                            }
+
+                            echo '</ul>';
+                            echo '</div>';
+
+                            // redisplay the form
+                            include 'server/includes/addReview.inc';
+                        } else {
+                            $rating = 0;
+
+                            if (isset($_POST['rating'])) {
+                                // Sanitize input
+                                $rating = sanitizeInput($_POST['rating']);
+                            }
+
+                            // Sanitize input
+                            $reviewComment = sanitizeInput($_POST['txtcomment']);
+                            $logged = $_SESSION['logged'];
+                            $parkID = $Park['ID'];
+
+                            submitReview($logged, $parkID, $reviewComment, $rating);
+
+                            echo "Your review has been submitted.";
+                            echo "<script>redirectToPage('/park.php?ParkCode=" . $Park['ParkCode'] . "');</script>";
+                        }
 					}
-					
-					if ($errors) {
-						echo '<div class="validation">';
-						echo '<h5>Invalid submission, correct the following errors:</h5>';
-						echo '<ul>';
-						
-						foreach ($errors as $field => $error) {
-							echo "<li>$error</li>";
-						}
-						
-						echo '</ul>';
-						echo '</div>';
-						
-						// redisplay the form
-						include 'server/includes/addReview.inc';
-					} else {
-						$rating = 0;
-						
-						if (isset($_POST['rating'])) {
-							// Sanitize input
-							$rating = sanitizeInput($_POST['rating']);
-						}
-						
-						// Sanitize input
-						$reviewComment = sanitizeInput($_POST['txtcomment']);
-						$logged = $_SESSION['logged'];
-						$parkID = $Park['ID'];
-						
-						submitReview($logged, $parkID, $reviewComment, $rating);
-						
-						echo "Your review has been submitted.";
-						echo "<script>redirectToPage('/park.php?ParkCode=" . $Park['ParkCode'] . "');</script>";
-					} else {
+                    else {
 						include 'server/includes/addReview.inc';
 					}
 					?>
