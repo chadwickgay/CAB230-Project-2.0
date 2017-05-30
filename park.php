@@ -132,6 +132,7 @@ include("server/PHP/formFunctions.php");
 					$errors = array();
 					if (isset($_POST['txtcomment']) && isset($_SESSION['logged'])) {
 						require 'server/includes/validate.inc';
+
 						validateReview($errors, $_POST, 'txtcomment');
 
                         if ($errors) {

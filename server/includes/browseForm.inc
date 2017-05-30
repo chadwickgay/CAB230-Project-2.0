@@ -16,17 +16,22 @@
     </div>
 
     <div class="four columns">
-		<?php createFormOpeningTag("GET", "browse.php", "browse-distance", ""); ?>
-			<?php createLabel("rating", "Minimum Park Rating"); ?>
-			<select class="rating-select" name="rating" id="rating">
-				<option value="DEFAULT" class="hidden" disabled selected>Select rating</option>
-				<option value="0">0</option>
-				<option value="1">&#9733;</option>
-				<option value="2">&#9733; &#9733;</option>
-				<option value="3">&#9733; &#9733; &#9733;</option>
-				<option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-				<option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-			</select>
+
+		<?php createFormOpeningTag("GET", "browse.php", "browse-rating", ""); ?>
+
+        <?php
+
+        $ratingOptions = array(
+                                "Zero Stars",
+                                "&#9733;",
+                                "&#9733; &#9733;",
+                                "&#9733; &#9733; &#9733;",
+                                "&#9733; &#9733; &#9733; &#9733;",
+                                "&#9733; &#9733; &#9733; &#9733; &#9733;");
+
+        createSelectField("rating", "Minimum Park Rating", "rating", "", $ratingOptions,"rating-search")
+
+        ?>
 			<input type="submit" value="Submit">
 		</form>
     </div>
@@ -39,7 +44,7 @@
             </div>
 			
             <div id="distance-block" class="hidden">
-                <label for="distance">Distance</label>
+                <?php createLabel("distance", "Distance") ?>
                 <select name="distance" id="distance">
                     <option value="DEFAULT" disabled selected class="hidden">Select distance</option>
                     <option value="1">1 Km</option>
