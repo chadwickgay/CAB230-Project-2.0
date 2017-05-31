@@ -44,7 +44,7 @@ function createInputField($type, $placeholder, $name, $id, $labelName, $errorMes
 function createSelectField($id, $labelName, $name, $errorSpanID, $options, $formName) {
     createLabel($id, $labelName);
     echo "<select required id=\"$id\" name=\"$name\" onChange=\"resetErrorState('$name', '$errorSpanID', '$formName')\">";
-    echo "<option selected value='DEFAULT' disabled class=\"hidden\">select</option>";
+    echo "<option selected label = 'select' value='' disabled class=\"hidden\"></option>";
 
     for ($i = 0; $i < count($options); $i++) {
         $selected = $i == (ctype_digit(createPostedValue($name)) ? intval(createPostedValue($name)) : -1) ? 'selected' : '';
@@ -62,12 +62,10 @@ function createSelectField($id, $labelName, $name, $errorSpanID, $options, $form
 // Create a option list with the select tag and appropriate attributes
 function createDistanceDropDown($id, $labelName, $name, $options, $values) {
 
-
-
     createLabel($id, $labelName);
 
     echo "<select required id=\"$id\" name=\"$name\">";
-    echo "<option selected value='DEFAULT' disabled class=\"hidden\">Select distance</option>";
+    echo "<option selected label = 'select' value='' disabled class=\"hidden\">Select distance</option>";
 
     for ($i = 0; $i < count($options); $i++) {
         echo "<option value='$values[$i]'>$options[$i]</option>";

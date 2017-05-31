@@ -109,7 +109,7 @@ function populateSuburbMenu() {
 	
     echo('
         <select required name="suburb" class="suburb-select" id="suburb">
-        <option value="DEFAULT" disabled selected class="hidden">select</option>
+        <option value="" disabled selected class="hidden">select</option>
     ');
 
     foreach ($result as $suburb) {

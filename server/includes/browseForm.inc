@@ -47,16 +47,12 @@
                 <?php
 
                 $values = array(0.5,1,2.5,5,10,20);
-
                 $options = array("≤ 0.5km", "≤ 1km", "≤ 2.5km", "≤ 5km", "≤ 10km", "≤ 20km");
 
                 createDistanceDropDown("distance", "Distance", "distance", $options, $values)
-
                 ?>
                 <input type="submit" value="Submit" id="distance-submit">
             </div>
-
-
 
             <input type="hidden" name="lat" id="lat"/>
             <input type="hidden" name="long" id="long"/>
