@@ -253,7 +253,7 @@ function validateGender(formName) {
 	//Store the Error Message Object ...                
 	var message = document.getElementById('genderErr');
 
-	if (gender.value == "DEFAULT") {
+	if (gender.value == "") {
 		// If no selection has been made
 		gender.style.borderColor = errorColour;
 		gender.style.borderWidth = "medium";
