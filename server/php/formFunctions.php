@@ -32,9 +32,9 @@ function createTextArea($cols, $rows, $name, $id, $placeholder) {
 }
 	
 // Create an input field with appropriate attributes for a HTML5 form
-function createInputField($type, $placeholder, $name, $id, $labelName, $errorMessageBox, $formName) {
+function createInputField($type, $placeholder, $name, $id, $labelName, $errorMessageBox, $formName, $usePost = true) {
     createLabel($id, $labelName);
-    $value = createPostedValue($name);
+    $value = $usePost ? createPostedValue($name) : '';
     echo "<input type=\"$type\" placeholder=\"$placeholder\" name=\"$name\" id=\"$id\" value=\"$value\" ", "onkeypress=\"resetErrorState('$name', '$errorMessageBox', '$formName')\" />";
     echo "<br>";
     createErrorLabel($errorMessageBox);

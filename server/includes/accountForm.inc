@@ -29,10 +29,10 @@
             createInputField('text', 'email@example.com', 'email', 'email', 'Email', 'emailErr', 'createAccount');
 			
             // Generate password field
-            createInputField('password', 'password', 'password', 'password1', 'Password', 'passwordErr', 'createAccount');
+            createInputField('password', 'password', 'password', 'password1', 'Password', 'passwordErr', 'createAccount', false);
 			
             // Generate confirm password field
-            createInputField('password', 'confirm password', 'confirm-password', 'password2', 'Confirm Password', 'confirmPasswordErr', 'createAccount');
+            createInputField('password', 'confirm password', 'confirm-password', 'password2', 'Confirm Password', 'confirmPasswordErr', 'createAccount', false);
             ?>
         </div>
     </div>

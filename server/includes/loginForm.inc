@@ -8,7 +8,7 @@
 		
         <div class="two columns">
             <!-- Generate password field -->
-            <?php createInputField('password', 'password', 'password', 'password', 'Password', 'passwordErr', 'login'); ?>
+            <?php createInputField('password', 'password', 'password', 'password', 'Password', 'passwordErr', 'login', false); ?>
         </div>
     </div>
 
