@@ -73,8 +73,8 @@ function createRatingsField() {
 
 // Create the addReview form for the addReview include on the park.php page
 function createAddReviewFormOptionOne($parkCode) {
-	echo "<form method=\"POST\" action=\"park.php?ParkCode=".$parkCode."\" name=\"park-review\" ";	
-	echo isset($_SESSION['logged']) ? "onsubmit=\"'return validateReview();'\">" : "onsubmit=\"'return redirectToLogin();'\">";
+	echo "<form method='POST' action='park.php?ParkCode=$parkCode' name='park-review' ";	
+	echo isset($_SESSION['logged']) ? "onsubmit='return validateReview();'>" : "onsubmit='return redirectToLogin();'>";
 	
 	echo "<fieldset>";
 	echo "<legend>Select a star rating</legend>";
