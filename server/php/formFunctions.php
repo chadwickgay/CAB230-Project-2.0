@@ -59,6 +59,25 @@ function createSelectField($id, $labelName, $name, $errorSpanID, $options, $form
 	}
 }
 
+// Create a option list with the select tag and appropriate attributes
+function createDistanceDropDown($id, $labelName, $name, $options, $values) {
+
+
+
+    createLabel($id, $labelName);
+
+    echo "<select id=\"$id\" name=\"$name\">";
+    echo "<option selected value='DEFAULT' disabled class=\"hidden\">Select distance</option>";
+
+    for ($i = 0; $i < count($options); $i++) {
+        echo "<option value='$values[$i]'>$options[$i]</option>";
+    }
+
+    echo "</select>";
+    echo "<br>";
+
+}
+
 // Create the star ratings field on the addReview.inc and park.php pages
 function createRatingsField() {
     $minRating = 1;

@@ -44,22 +44,19 @@
             </div>
 			
             <div id="distance-block" class="hidden">
-                <?php createLabel("distance", "Distance") ?>
-                <select name="distance" id="distance">
-                    <option value="DEFAULT" disabled selected class="hidden">Select distance</option>
-                    <option value="1">1 Km</option>
-                    <option value="2">2 Km</option>
-                    <option value="3">3 Km</option>
-                    <option value="4">4 Km</option>
-                    <option value="5">5 Km</option>
-                    <option value="10">10 Km</option>
-                    <option value="15">15 Km</option>
-                    <option value="25">25 Km</option>
-                    <option value="50">50 Km</option>
-                    <option value="100">100 Km</option>
-                </select>
+                <?php
+
+                $values = array(0.5,1,2.5,5,10,20);
+
+                $options = array("≤ 0.5km", "≤ 1km", "≤ 2.5km", "≤ 5km", "≤ 10km", "≤ 20km");
+
+                createDistanceDropDown("distance", "Distance", "distance", $options, $values)
+
+                ?>
                 <input type="submit" value="Submit" id="distance-submit">
             </div>
+
+
 
             <input type="hidden" name="lat" id="lat"/>
             <input type="hidden" name="long" id="long"/>

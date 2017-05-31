@@ -56,7 +56,7 @@ include "server/includes/validate.inc";
 				
 				$results = searchParksByDistance($userLatitude, $userLongitude, $userDistance);
 				
-				echo "<p>Search by parks within \"$userDistance\" Km</p>";
+				echo "<p>Search by parks within \"$userDistance km\"</p>";
 			}
 			
 			// Display results page map with park markers
