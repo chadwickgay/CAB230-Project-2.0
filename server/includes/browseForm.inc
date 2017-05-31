@@ -45,7 +45,7 @@
 			
             <div id="distance-block" class="hidden">
                 <?php createLabel("distance", "Distance") ?>
-                <select name="distance" id="distance">
+                <select required name="distance" id="distance">
                     <option value="DEFAULT" disabled selected class="hidden">Select distance</option>
                     <option value="1">1 Km</option>
                     <option value="2">2 Km</option>

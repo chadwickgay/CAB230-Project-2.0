@@ -43,7 +43,7 @@ function createInputField($type, $placeholder, $name, $id, $labelName, $errorMes
 // Create a option list with the select tag and appropriate attributes
 function createSelectField($id, $labelName, $name, $errorSpanID, $options, $formName) {
     createLabel($id, $labelName);
-    echo "<select id=\"$id\" name=\"$name\" onChange=\"resetErrorState('$name', '$errorSpanID', '$formName')\">";
+    echo "<select required id=\"$id\" name=\"$name\" onChange=\"resetErrorState('$name', '$errorSpanID', '$formName')\">";
     echo "<option selected value='DEFAULT' disabled class=\"hidden\">select</option>";
 
     for ($i = 0; $i < count($options); $i++) {
